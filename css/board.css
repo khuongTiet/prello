@@ -26,9 +26,7 @@ html, body{
   text-align: center;
 }
 
-#lists li:first-child {
-  margin-left: 0;
-}
+
 
 
 .box {
@@ -60,9 +58,14 @@ html, body{
   width: 100%;
 }
 
+#listedCard {
+  height: 100%;
+  width: 100%;
+}
+
 #card {
   color: black;
-  
+
 }
 
 

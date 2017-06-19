@@ -5,6 +5,16 @@
 html, body{
   height: 100%;
   margin: 1;
+  border-radius: 5px;
+}
+
+button {
+  padding: 14px 20px;
+  background-color: #223047;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .board {
@@ -15,6 +25,7 @@ html, body{
   vertical-align: middle;
   border-radius: 5px;
   display: inline-block;
+  line-height: 100px;
 }
 
 #boards{
