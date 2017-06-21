@@ -24,6 +24,39 @@ html, body{
   margin: 0 10px;
   border-radius: 10px;
   text-align: center;
+  vertical-align: top;
+}
+
+#cards {
+  list-style-type: none;
+  margin: 2;
+  padding: 0;
+  color: black;
+}
+
+#cards li {
+  display: block;
+  height: 50px;
+  width: 88%;
+  background-color: white;
+  color: black;
+  padding: 2m;
+  margin: 10px 10px;
+  border-radius: 5px;
+  text-align: left;
+  vertical-align: baseline;
+  font-weight: normal;
+}
+
+#cards li a:hover {
+  opacity: 0.8;
+}
+
+
+#cards.licard {
+  display: inline-block;
+  color: black;
+  vertical-align: top;
 }
 
 
@@ -100,6 +133,7 @@ html, body{
   padding: 14px 16px;
   font-weight: bold;
   float: right;
+  display: none;
 }
 
 #sidebar {

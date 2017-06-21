@@ -22,25 +22,51 @@
   <div id="boardContainer">
     <ul id="lists">
       <li>
-        <div class="listedCard">
-          List 1
-        </div>
+        List 1
+        <ul id="cards">
+          <a href="#" id="card1">
+            <li>
+                Card1
+            </li>
+            <div id="card">
+              CARD<br><br>
+              Description<br>
+              Labels<br>
+              Comments<br>
+              <textarea rows="4" cols="30" name="comment"></textarea><br>
+              Users<br>
+            </div>
+          </a>
+
+          <a href="#">
+            <li>
+              Card2
+            </li>
+          </a>
+        </ul>
       </li>
-      <li>List 2</li>
+
+      <li>
+        List 2
+        <ul id="cards">
+          <a href="#">
+            <li>
+              Card3
+            </li>
+          </a>
+
+        </ul>
+      </li>
+
       <li>List 3</li>
+
       <li>List 4</li>
+
       <li>List 5</li>
     </ul>
   </div>
 
-  <div id="card">
-    CARD<br><br>
-    Description<br>
-    Labels<br>
-    Comments<br>
-    <textarea rows="4" cols="30" name="comment"></textarea><br>
-    Users<br>
-  </div>
+  <script src="js/board.js"></script>
 
 </body>
 </html>

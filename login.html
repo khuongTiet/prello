@@ -9,17 +9,17 @@
   <body>
     <div id="container">
 
-      <form>
+      <form id="register-form">
         <div id="registration">
           <h1> Sign Up for Prello </h1>
-          <input type = "text" placeholder="Username" name="username" required><br>
+          <input type = "text" id="username" placeholder="Username" name="username" required><br>
           <br>
-          <input type = "email" placeholder="Email" name="email" required autocomplete="off"><br>
+          <input type = "email" id="email" placeholder="Email" name="email" required autocomplete="off"><br>
           <br>
-          <input type="password" placeholder="Password" name="password"><br>
+          <input type="password" id="password" placeholder="Password" name="password"><br>
           <br>
-          <input type="password" placeholder="Confirm Password" name="confirm"><br>
-          <input type="submit" value="Sign Up">
+          <input type="password" id="confirm" placeholder="Confirm Password" name="confirm"><br>
+          <input type="submit" id="submit-btn" value="Sign Up">
         </div>
       </form>
 
@@ -31,13 +31,15 @@
           <input type = "text" placeholder="Enter Username" name="username" required><br>
           <br>
           <input type="password" placeholder="Enter Password" name="password"><br>
-          <input type="submit" value="Login"><br>
+          <input type="submit" id="login" value="Login"><br>
           <br>
           <input type="checkbox" name="remember" value="rememberme"> Remember Me <br>
         </div>
       </form>
 
     </div>
+
+    <script src="js/login.js"></script>
   </body>
 
 </HTML>

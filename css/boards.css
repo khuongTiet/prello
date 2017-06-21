@@ -59,7 +59,7 @@ button {
   text-align: center;
 }
 
-.topnav a.navbuttons{
+.topnav .navbuttons{
   float: left;
   display: block;
   text-align: center;
@@ -68,18 +68,33 @@ button {
   color: white;
   background: #4f6ca5;
   border-radius: 5px;
-  margin: 5px 0;
+  margin: 5px 5px;
 }
 
-.topnav a.navbuttons#optionbar:hover{
-  height: 30%;
-  width: 15%;
-  position: absolute;
-  float: left;
-
+.topnav #search.navbuttons {
+  background: white;
+  color: black;
 }
 
-.topnav a#home {
+.topnav #main-menu {
+  display: none;
+  height: 40%;
+  width: 20%;
+  position: fixed;
+  background: inherit;
+  padding: 14px 16px;
+  margin: 0;
+  top: 42px;
+  left: 0;
+  border-radius: 5px;
+}
+
+#optionbar {
+  background: green;
+}
+
+
+.topnav #home {
   color: white;
   display: block;
   text-align: center;
