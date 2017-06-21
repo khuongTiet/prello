@@ -1,20 +1,29 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>Board</title>
+  <title>Board | Prello</title>
   <link rel="stylesheet" href="css/board.css">
+  <link rel="icon" href="icon.png" type="image/png" sizes="16x16">
 </head>
 
 <body>
   <div class="topnav" id="nav">
-    <a href="./boards.html">Home</a>
+    <a href="#" class="navbuttons">Home</a>
+    <a href="./boards.html" id="home">Prello</a>
+  </div>
+
+  <div class="welcomenav">
+    Welcome Board
+    <div id="sidebar">
+      Sidebar
+    </div>
   </div>
 
   <div id="boardContainer">
     <ul id="lists">
       <li>
         <div class="listedCard">
-        List 1
+          List 1
         </div>
       </li>
       <li>List 2</li>
@@ -22,20 +31,16 @@
       <li>List 4</li>
       <li>List 5</li>
     </ul>
-
-
   </div>
 
   <div id="card">
-    <form>
-      <input type="text" name="comment">
-    </form>
+    CARD<br><br>
     Description<br>
     Labels<br>
     Comments<br>
-    <textarea rows="4" cols="50" name="comment" form="comment">
-    </textarea>
+    <textarea rows="4" cols="30" name="comment"></textarea><br>
     Users<br>
   </div>
+
 </body>
 </html>

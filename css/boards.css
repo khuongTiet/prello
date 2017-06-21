@@ -4,8 +4,8 @@
 
 html, body{
   height: 100%;
-  margin: 1;
   border-radius: 5px;
+  margin: 0;
 }
 
 button {
@@ -19,13 +19,17 @@ button {
 
 .board {
   height: 100px;
-  width: 100px;
+  width: 250px;
   background: #a0a0a0;
   text-align: center;
   vertical-align: middle;
   border-radius: 5px;
   display: inline-block;
   line-height: 100px;
+}
+
+.board:hover {
+  opacity: 0.8;
 }
 
 #boards{
@@ -43,24 +47,45 @@ button {
 
 
 .topnav{
-  background-color: #041228;
+  background-color: #3a5282;
   overflow: hidden;
+  text-align: center;
 }
 
-.topnav a {
+.topnav a.navbuttons{
   float: left;
   display: block;
   text-align: center;
-  padding: 14px 16px;
+  padding: 6px 8px;
   text-decoration: none;
   color: white;
+  background: #4f6ca5;
+  border-radius: 5px;
+  margin: 5px 0;
 }
 
-#container {
-  background-color: #99ccff;
+.topnav a.navbuttons#optionbar:hover{
+  height: 100%;
+  width: 24%;
+  overflow: scroll;
+
+}
+
+.topnav a#home {
   color: white;
-  font-weight: bold;
+  display: block;
   text-align: center;
-  padding: 16px;
+  text-decoration: none;
+  padding: 6px 8px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+
+#container {
+  background: white;
+  color: #3c3d3f;
+  font-weight: bold;
+  padding: 16px 0 0 140px;
   height: 100%;
 }

@@ -1,28 +1,22 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>Boards</title>
+  <title>Boards | Prello</title>
   <link rel="stylesheet" href="css/boards.css">
+  <link rel="icon" href="icon.png" type="image/png" sizes="32x32">
 </head>
 
 <body>
   <div class="topnav" id="nav">
-    <a href="#">Home</a>
+    <a href="" class="navbuttons" id="optionbar">Home</a>
+    <a href="#" id="home">Prello</a>
   </div>
+
   <div id="container">
-    Add a Board
-    <div id="boardAdder">
-      <br>
-      <button type="button">Add</button>
-    </div>
-
-
-    <br>
-
-
     List of Boards
     <div id="boardList">
       <ul id="boards">
+
         <li>
           <a href="./board.html">
             <div class="board">
@@ -32,12 +26,34 @@
         </li>
 
         <li>
+          <a href="./board.html">
+            <div class="board">
+              Board1
+            </div>
+          </a>
         </li>
 
         <li>
+          <a href="./board.html">
+            <div class="board">
+              Board2
+            </div>
+          </a>
         </li>
+
       </ul>
+
+      <div id="boardAdder">
+        <br>
+        <button type="button">Add</button>
+      </div>
+
     </div>
+
+    <a href="#">Add a Board</a>
+
+    <br>
+
   </div>
 
 </body>
