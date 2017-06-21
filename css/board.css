@@ -58,6 +58,13 @@ html, body{
   margin: 5px 0;
 }
 
+.topnav a.navbuttons#optionbar:hover{
+  height: 30%;
+  width: 15%;
+  position: absolute;
+  float: left;
+}
+
 .topnav a#home {
   color: white;
   display: block;
@@ -66,8 +73,8 @@ html, body{
   padding: 6px 8px;
   font-weight: bold;
   font-size: 24px;
+  position: static;
 }
-
 
 #boardContainer {
   float: left;
@@ -97,7 +104,7 @@ html, body{
 
 #sidebar {
   position: fixed;
-  top: 50px;
+  top: 60px;
   right: 0;
   float: right;
 }
@@ -109,6 +116,21 @@ html, body{
   width: 24%;
   border-radius: 5px;
 }
+
+.welcomenav a{
+  display: block;
+  text-decoration: none;
+  padding: 6px 8px;
+  float: left;
+  margin: 5 0;
+}
+
+.welcomenav a:hover{
+  background: #88b8e8;
+  opacity: 0.8;
+  border-radius: 3px;
+}
+
 
 .list {
   float: left;

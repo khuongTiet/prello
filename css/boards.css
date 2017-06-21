@@ -18,18 +18,25 @@ button {
 }
 
 .board {
-  height: 100px;
+  color: white;
+  height: 60px;
   width: 250px;
-  background: #a0a0a0;
-  text-align: center;
+  background: #a876f2;
   vertical-align: middle;
-  border-radius: 5px;
+  border-radius: 3px;
   display: inline-block;
-  line-height: 100px;
+  padding: 14px 16px;
 }
 
 .board:hover {
   opacity: 0.8;
+}
+
+.board#boardAdder {
+  text-align: center;
+  line-height: 60px;
+  background: #a0a0a0;
+  font-weight: normal;
 }
 
 #boards{
@@ -65,9 +72,10 @@ button {
 }
 
 .topnav a.navbuttons#optionbar:hover{
-  height: 100%;
-  width: 24%;
-  overflow: scroll;
+  height: 30%;
+  width: 15%;
+  position: absolute;
+  float: left;
 
 }
 
@@ -79,6 +87,7 @@ button {
   padding: 6px 8px;
   font-weight: bold;
   font-size: 24px;
+  position: static;
 }
 
 
