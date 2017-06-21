@@ -27,9 +27,9 @@
 
   <div class="welcomenav">
     <a href="#">Welcome Board</a>
-    <div id="sidebar">
+    <span id="sidebar">
       Sidebar
-    </div>
+    </span>
   </div>
 
   <div id="boardContainer">
@@ -40,14 +40,6 @@
 
             <li>
                 Card1
-                <div id="card">
-                  CARD<br><br>
-                  Description<br>
-                  Labels<br>
-                  Comments<br>
-                  <textarea rows="4" cols="30" name="comment"></textarea><br>
-                  Users<br>
-                </div>
             </li>
 
             <li>
@@ -71,10 +63,15 @@
 
       <li>List 3</li>
 
-      <li>List 4</li>
-
-      <li>List 5</li>
     </ul>
+    <div id="card" style="display: none">
+      CARD<br><br>
+      Description<br>
+      Labels<br>
+      Comments<br>
+      <textarea rows="4" cols="30" name="comment"></textarea><br>
+      Users<br>
+    </div>
   </div>
 
   <script src="js/board.js"></script>
