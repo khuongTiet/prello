@@ -1,6 +1,8 @@
 var main_menu = document.querySelector('#optionbar');
 var side_menu = document.querySelector('#sidebar');
 var menu = document.querySelector('#main-menu');
+var outside = document.querySelector('#container');
+var navbar = document.querySelector('#nav');
 
 main_menu.addEventListener("click", function() {
   if (menu.style.display === 'none') {
@@ -10,8 +12,8 @@ main_menu.addEventListener("click", function() {
   }
 });
 
-document.addEventListener("click", function() {
+outside.addEventListener("click", function() {
   if (menu.style.display === 'block') {
     menu.style.display = 'none';
   }
-});
+})

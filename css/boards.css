@@ -8,6 +8,11 @@ html, body{
   margin: 0;
 }
 
+a#logolink {
+  text-decoration: none;
+  color: white;
+}
+
 button {
   padding: 14px 20px;
   background-color: #223047;
@@ -91,6 +96,7 @@ button {
 
 #optionbar {
   background: green;
+  cursor: pointer;
 }
 
 

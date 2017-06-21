@@ -3,6 +3,27 @@
   color: white;
 }
 
+a#logolink {
+  text-decoration: none;
+  color: white;
+}
+
+#modal {
+  display: none;
+  opacity: 0.1;
+  background: grey;
+  height: 100%;
+  width: 100%;
+}
+
+#bg {
+  opacity: 0.6;
+  background: grey;
+  height: 100%;
+  width: 100%;
+  display: block;
+}
+
 html, body{
   height: 100%;
   wdith: 100%;
@@ -20,7 +41,7 @@ html, body{
   display: inline-block;
   height: 300px;
   width: 15%;
-  background-color: #969ca5;
+  background-color: #dee4ed;
   margin: 0 10px;
   border-radius: 10px;
   text-align: center;
@@ -48,8 +69,10 @@ html, body{
   font-weight: normal;
 }
 
-#cards li a:hover {
+#cards li:hover {
   opacity: 0.8;
+  background: #cbd2db;
+  cursor: pointer;
 }
 
 
@@ -65,21 +88,21 @@ html, body{
   height: 100%;
 }
 
+.welcomenav{
+  overflow: hidden;
+  background: #749bdb;
+  padding: 10px 16px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .topnav{
   background-color: #3a5282;
   overflow: hidden;
   text-align: center;
 }
 
-.welcomenav{
-  overflow: hidden;
-  background: #99ccff;
-  padding: 10px 16px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.topnav a.navbuttons{
+.topnav .navbuttons{
   float: left;
   display: block;
   text-align: center;
@@ -88,17 +111,33 @@ html, body{
   color: white;
   background: #4f6ca5;
   border-radius: 5px;
-  margin: 5px 0;
+  margin: 5px 5px;
 }
 
-.topnav a.navbuttons#optionbar:hover{
-  height: 30%;
-  width: 15%;
-  position: absolute;
-  float: left;
+.topnav #search.navbuttons {
+  background: white;
+  color: black;
 }
 
-.topnav a#home {
+.topnav #main-menu {
+  display: none;
+  height: 40%;
+  width: 20%;
+  position: fixed;
+  background: inherit;
+  padding: 14px 16px;
+  margin: 0;
+  top: 42px;
+  left: 0;
+  border-radius: 5px;
+}
+
+#optionbar {
+  background: green;
+  cursor: pointer;
+}
+
+.topnav #home {
   color: white;
   display: block;
   text-align: center;
@@ -111,7 +150,7 @@ html, body{
 
 #boardContainer {
   float: left;
-  background-color: #99ccff;
+  background-color: #749bdb;
   color: white;
   font-weight: bold;
   padding: 16px;

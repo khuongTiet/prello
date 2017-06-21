@@ -7,9 +7,22 @@
 </head>
 
 <body>
+  <div id="modal" style="display: none">
+    <div id="bg">
+    </div>
+    <div id="fg">
+    </div>
+  </div>
+
   <div class="topnav" id="nav">
-    <a href="#" class="navbuttons" id="optionbar">Home</a>
-    <a href="./boards.html" id="home">Prello</a>
+    <div class="navbuttons" id="optionbar">
+      Boards
+      <div id="main-menu" style="display: none">
+      </div>
+    </div>
+
+    <div class="navbuttons" id="search">Search</div>
+    <div id="home"><a href="boards.html" id="logolink">Prello</a></div>
   </div>
 
   <div class="welcomenav">
@@ -24,25 +37,23 @@
       <li>
         List 1
         <ul id="cards">
-          <a href="#" id="card1">
+
             <li>
                 Card1
+                <div id="card">
+                  CARD<br><br>
+                  Description<br>
+                  Labels<br>
+                  Comments<br>
+                  <textarea rows="4" cols="30" name="comment"></textarea><br>
+                  Users<br>
+                </div>
             </li>
-            <div id="card">
-              CARD<br><br>
-              Description<br>
-              Labels<br>
-              Comments<br>
-              <textarea rows="4" cols="30" name="comment"></textarea><br>
-              Users<br>
-            </div>
-          </a>
 
-          <a href="#">
             <li>
               Card2
             </li>
-          </a>
+
         </ul>
       </li>
 
