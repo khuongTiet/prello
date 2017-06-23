@@ -31,6 +31,8 @@ html, body{
   width: 100%;
   margin: 0;
   white-space: nowrap;
+  overflow-y: auto;
+  overflow-x: scroll;
 }
 
 .lists {
@@ -61,6 +63,7 @@ html, body{
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   line-height: 35px;
+  position: relative;
 }
 
 #list-adder-container {
@@ -163,6 +166,11 @@ html, body{
   text-align: left;
   vertical-align: baseline;
   font-weight: normal;
+  margin: 10px 5px;
+}
+
+.cards li:hover {
+  cursor: pointer;
 }
 
 .card-adder-container {
@@ -216,6 +224,21 @@ html, body{
 .add-card-name {
   width: 86%;
   margin-top: 10px;
+  color: black;
+}
+
+.option-button {
+  font-size: 20px;
+  height: 36%;
+  width: 12%;
+  display: block;
+  text-decoration: none;
+  border: none;
+  position: absolute;
+  top: 60%;
+  right: 0;
+  line-height: 38%;
+  background: #dee4ed;
 }
 
 /*#cards li:hover{
@@ -224,11 +247,6 @@ html, body{
   cursor: pointer;
 }*/
 
-ul.individual-card:hover {
-  opacity: 1.0;
-  cursor: default;
-  background: red;
-}
 
 #cards.licard {
   display: inline-block;
@@ -331,19 +349,26 @@ ul.individual-card:hover {
   z-index: 2;
 }
 
-#sidebar {
-  position: fixed;
-  top: 60px;
-  right: 0;
-  float: right;
+.welcomenav {
+  position: relative;
 }
 
-#sidebar:hover {
+.sidebar-button {
+  display: block;
+  text-decoration: none;
+  padding: 6px 8px;
+  float: left;
+  margin: 5 0;
+  position: absolute;
+  right: 0;
+}
+
+.sidebar {
+  position: absolute;
   height: 100%;
-  padding: 14px 16px;
-  background: #3c3d3f;
-  width: 24%;
-  border-radius: 5px;
+  background: #88b8e8;
+  opacity: 0.8;
+  border-radius: 3px;
 }
 
 .welcomenav a{
@@ -371,7 +396,7 @@ ul.individual-card:hover {
   height: 90%;
 }
 
-.individual-card {
+.card {
   color: white;
   height: 40%;
   width: 30%;
@@ -385,3 +410,10 @@ ul.individual-card:hover {
   left: 32%;
   z-index: 2;
 }
+
+.individual-card .name{
+  position: absolute;
+  width: 100%;
+}
+
+.individual-card .

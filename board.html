@@ -35,37 +35,46 @@
 
   <div class="welcomenav">
     <a href="#">Welcome Board</a>
-    <span id="sidebar">
-      Sidebar
-    </span>
+    <div class="sidebar-button">
+      Show menu
+      <div class="sidebar" style="display: none">
+      </div>
+    </div>
   </div>
 
   <div id="boardContainer">
     <ul class="lists">
       <li>
-        <div class="indv-list">List 1</div>
+        <div class="indv-list">
+          List 1
+        </div>
         <ul class="cards">
             <li class="listed-card" style="opacity: 1.0">
                 Example card
-                <ul class="individual-card" id="card1" style="display: none">
-                  <li class="card-name" style="display: none">name</li>
-                  <li class="card-desc" style="display: none">description</li>
-                  <li class="card-members" style="display: none">members</li>
-                  <li class="card-tags" style="display: none">tags</li>
-                </ul>
-
+                <div class="card" style="display: none">
+                  <ul class="individual-card">
+                    <div class="card-information">
+                      <li class="card-name">name</li>
+                      <li class="card-desc">description</li>
+                      <li class="card-members">members</li>
+                      <li class="card-tags">tags</li>
+                    </div>
+                  </ul>
+                </div>
+            </li>
+            <li class="listed-card">
+              Test Card
             </li>
         </ul>
         <div class="card-adder-container">
           <div class="card-adder-button">
             Add a card...
           </div>
-          <div class="card-adder" style="display: none">
-            <textarea rows="3" col="50" class="add-card-name">
-            </textarea>
+          <div class="card-adder" id="adder1" style="display: none">
+            <textarea rows="3" col="50" class="add-card-name"></textarea>
             <input type="button" value="Add" class="add-button">
             <input type="button" class="cancel-button" value='&#10005;'>
-            <input type="button" class="option-button">
+            <input type="button" class="option-button" value='&hellip;'>
           </div>
 
         </div>
@@ -78,6 +87,9 @@
           <a href="#">
             <li>
               Card3
+              <ul class="cards">
+
+              </ul>
             </li>
           </a>
 
@@ -86,6 +98,12 @@
         <div class="card-adder-container">
           <div class="card-adder-button">
             Add a card...
+          </div>
+          <div class="card-adder" id="adder2" style="display: none">
+            <textarea rows="3" col="50" class="add-card-name"></textarea>
+            <input type="button" value="Add" class="add-button">
+            <input type="button" class="cancel-button" value='&#10005;'>
+            <input type="button" class="option-button" value='&hellip;'>
           </div>
 
         </div>
@@ -98,12 +116,11 @@
           <div class="card-adder-button">
             Add a card...
           </div>
-          <div class="card-adder" style="display: none">
-            <textarea rows="3" col="50">
-            </textarea>
+          <div class="card-adder" id="adder3" style="display: none">
+            <textarea rows="3" col="50" class="add-card-name"></textarea>
             <input type="button" value="Add" class="add-button">
             <input type="button" class="cancel-button" value='&#10005;'>
-            <input type="button" class="option-button">
+            <input type="button" class="option-button" value='&hellip;'>
           </div>
 
         </div>
@@ -124,7 +141,10 @@
     </ul>
   </div>
 
+  <script src="js/jquery-3.2.1.min.js"></script>
   <script src="js/board.js"></script>
+
+
 
 </body>
 </html>
