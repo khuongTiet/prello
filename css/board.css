@@ -33,50 +33,202 @@ html, body{
   white-space: nowrap;
 }
 
-#lists {
+.lists {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-#lists li {
+.lists li {
   display: inline-block;
-  height: 300px;
-  width: 15%;
+  height: auto;
+  min-height: 70px;
+  width: 20%;
   background-color: #dee4ed;
-  margin: 0 10px;
-  border-radius: 10px;
+  margin: 0 5px;
+  border-radius: 5px;
   text-align: center;
   vertical-align: top;
 }
 
-#cards {
+.indv-list {
+  height: 35px;
+  width: auto;
+  display: block;
+  color: #393a3a;
+  text-align: left;
+  padding-left: 0.8em;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  line-height: 35px;
+}
+
+#list-adder-container {
+  min-height: 40px;
+  position: relative;
+}
+
+.list-adder-button {
+  min-height: 40px;
+  background: #393a3a;
+  font-weight: normal;
+  line-height: 40px;
+  text-align: left;
+  padding-left: 0.8em;
+  opacity: 0.6;
+  border-radius: 5px;
+}
+
+.list-adder-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.list-adder {
+  height: 80px;
+  width: 100%;
+  border-radius: 5px;
+  line-height: 40px;
+  font-weight: normal;
+  text-align: left;
+  padding-left: 0.8em;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #393a3a;
+}
+
+.namer-text {
+  display: block;
+  width: 96%;
+  padding-top: 10px;
+  margin-top: 5px;
+  padding-left: 0.1em;
+  color: black;
+}
+
+.add-button {
+  height: 38%;
+  width: 30%;
+  display: block;
+  background: #3ed898;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 6%;
+  font-weight: bold;
+}
+
+.add-button:hover {
+  cursor: pointer;
+}
+
+.cancel-button {
+  font-size: 20px;
+  height: 38%;
+  width: 12%;
+  display: block;
+  text-decoration: none;
+  border: none;
+  background: #393a3a;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+}
+
+.cancel-button:hover {
+  cursor: pointer;
+}
+
+.cards {
   list-style-type: none;
   margin: 2;
   padding: 0;
   color: black;
 }
 
-#cards li {
+.cards li {
   display: block;
-  height: 50px;
-  width: 88%;
-  background-color: white;
+  height: auto;
+  min-height: 40px;
+  width: 86%;
+  background: white;
   color: black;
-  padding: 2m;
-  margin: 10px 10px;
+  padding-left: 0.8em;
+  margin: 0px 5px;
   border-radius: 5px;
   text-align: left;
   vertical-align: baseline;
   font-weight: normal;
 }
 
-#cards li:hover {
+.card-adder-container {
+  position: relative;
+}
+
+.card-adder-button {
+  height: 35px;
+  width: auto;
+  background: #dee4ed;
+  color: #8b8d8e;
+  text-align: left;
+  padding-left: 0.8em;
+  position: relative;
+  top: 50%;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  line-height: 35px;
+  font-weight: normal;
+}
+
+.card-adder-button:hover {
+  opacity: 0.8;
+  background: #c9d0db;
+  color: #757777;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.card-adder {
+  height: 100px;
+  width: 100%;
+  background: #dee4ed;
+  position: absolute;
+  top: 0;
+}
+
+.card-adder .add-button {
+  height: 26%;
+  position: absolute;
+  top: 70%;
+}
+
+.card-adder .cancel-button {
+  height: 26%;
+  background: #dee4ed;
+  width: 12%;
+  top: 70%;
+}
+
+.add-card-name {
+  width: 86%;
+  margin-top: 10px;
+}
+
+/*#cards li:hover{
   opacity: 0.8;
   background: #cbd2db;
   cursor: pointer;
-}
+}*/
 
+ul.individual-card:hover {
+  opacity: 1.0;
+  cursor: default;
+  background: red;
+}
 
 #cards.licard {
   display: inline-block;
@@ -91,6 +243,7 @@ html, body{
 }
 
 .welcomenav{
+  width: auto;
   overflow: hidden;
   background: #749bdb;
   padding: 10px 16px;
@@ -99,9 +252,11 @@ html, body{
 }
 
 .topnav{
+  width: auto;
   background-color: #3a5282;
   overflow: hidden;
   text-align: center;
+  opacity: 0.9;
 }
 
 .topnav .navbuttons{
@@ -214,5 +369,19 @@ html, body{
   padding: 14px 16px;
   margin-right: 10px;
   height: 90%;
+}
 
+.individual-card {
+  color: white;
+  height: 40%;
+  width: 30%;
+  background: #c7d8e8;
+  border-radius: 5px;
+  padding: 14px 16px;
+  font-weight: bold;
+  display: none;
+  position: fixed;
+  top: 28%;
+  left: 32%;
+  z-index: 2;
 }

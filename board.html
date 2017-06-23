@@ -11,6 +11,14 @@
     <div id="bg">
     </div>
     <div id="fg">
+      <div id="card" style="display: none">
+        CARD<br><br>
+        Description<br>
+        Labels<br>
+        Comments<br>
+        <textarea rows="4" cols="30" name="comment"></textarea><br>
+        Users<br>
+      </div>
     </div>
   </div>
 
@@ -33,25 +41,40 @@
   </div>
 
   <div id="boardContainer">
-    <ul id="lists">
+    <ul class="lists">
       <li>
-        List 1
-        <ul id="cards">
+        <div class="indv-list">List 1</div>
+        <ul class="cards">
+            <li class="listed-card" style="opacity: 1.0">
+                Example card
+                <ul class="individual-card" id="card1" style="display: none">
+                  <li class="card-name" style="display: none">name</li>
+                  <li class="card-desc" style="display: none">description</li>
+                  <li class="card-members" style="display: none">members</li>
+                  <li class="card-tags" style="display: none">tags</li>
+                </ul>
 
-            <li>
-                Card1
             </li>
-
-            <li>
-              Card2
-            </li>
-
         </ul>
+        <div class="card-adder-container">
+          <div class="card-adder-button">
+            Add a card...
+          </div>
+          <div class="card-adder" style="display: none">
+            <textarea rows="3" col="50" class="add-card-name">
+            </textarea>
+            <input type="button" value="Add" class="add-button">
+            <input type="button" class="cancel-button" value='&#10005;'>
+            <input type="button" class="option-button">
+          </div>
+
+        </div>
+
       </li>
 
       <li>
-        List 2
-        <ul id="cards">
+        <div class="indv-list">List 2</div>
+        <ul class="cards">
           <a href="#">
             <li>
               Card3
@@ -59,19 +82,46 @@
           </a>
 
         </ul>
+
+        <div class="card-adder-container">
+          <div class="card-adder-button">
+            Add a card...
+          </div>
+
+        </div>
       </li>
 
-      <li>List 3</li>
+      <li>
+        <div class="indv-list">List 3</div>
+
+        <div class="card-adder-container">
+          <div class="card-adder-button">
+            Add a card...
+          </div>
+          <div class="card-adder" style="display: none">
+            <textarea rows="3" col="50">
+            </textarea>
+            <input type="button" value="Add" class="add-button">
+            <input type="button" class="cancel-button" value='&#10005;'>
+            <input type="button" class="option-button">
+          </div>
+
+        </div>
+
+      </li>
+
+      <li id="list-adder-container">
+        <div class="list-adder-button">
+          Add a list...
+        </div>
+        <div class="list-adder" style="display: none">
+          <input type="text" placeholder="Add a list..." class="namer-text" id="new-list-name">
+          <input type="button" value="Save" class="add-button" onclick="addList()">
+          <input type="button" class="cancel-button" value='&#10005;' onclick="closeAddList()">
+        </div>
+      </li>
 
     </ul>
-    <div id="card" style="display: none">
-      CARD<br><br>
-      Description<br>
-      Labels<br>
-      Comments<br>
-      <textarea rows="4" cols="30" name="comment"></textarea><br>
-      Users<br>
-    </div>
   </div>
 
   <script src="js/board.js"></script>
