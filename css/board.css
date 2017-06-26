@@ -138,6 +138,14 @@ html, body{
   position: relative;
 }
 
+.indv-list .cancel-button {
+  height: 10%;
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: 0;
+}
+
 #list-adder-container {
   min-height: 40px;
   position: relative;

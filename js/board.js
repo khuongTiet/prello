@@ -39,30 +39,63 @@ var cardList = {
   }
 };
 
+var boardCards = [
+  {
+    "_id" : 0,
+    "title" : "List 1",
+    "key" : "developer",
+    "listed" : false,
+    "cards" : [
+      {"_id" : 0, "description" : "Example Card"},
+      {"_id" : 1, "description" : "Test Card"},
+      {"_id" : 2, "description" : "Dummy Card"}
+    ]
+  },
+  {
+    "_id" : 1,
+    "title" : "List 2",
+    "key" : "kt35",
+    "listed" : false,
+    "cards" : [
+      {"_id" : 0, "description" : "Card3"},
+      {"_id" : 1, "description" : "Delete Me"}
+    ]
+  },
+  {
+    "_id" : 2,
+    "title" : "List 3",
+    "key" : "developer",
+    "listed" : false,
+    "cards" : []
+  }
+]
+
 console.log(cardList[0]);
 
-function populateCards(cardList) {
+function populateBoard(boardCards) {
+  console.log(boardCards);
   var currentList = $('.lists');
-  console.log(Object.keys(cardList).length);
-  currentList.attr('data-numberoflists', Object.keys(cardList).length);
-  for (plists in cardList) {
-    var listItem = cardList[plists];
-    if (!listItem.added) {
+  var listCounter = 0;
+  currentList.attr('data-numberoflists', boardCards.length);
+  for (indvList of boardCards) {
+    if (!indvList.added) {
       $('<li><div class="indv-list">'
-        + listItem.name + '</div><ul class="cards" data-numCards="'
-        + Object.keys(listItem.cards).length +'">\
-        <div class="card-adder-container" id="card-adder-' + plists + '"><div class="card-adder-button">Add a card...\
+        + indvList.title + '<input type="button" class="cancel-button" value="&#10005;"> </div><ul class="cards" data-numCards="'
+        + indvList.cards.length +'">\
+        <div class="card-adder-container" id="card-adder-' + listCounter + '"><div class="card-adder-button">Add a card...\
           </div><div class="card-adder" id="adder1" style="display: none">\
             <textarea rows="3" col="50" class="add-card-name"></textarea>\
             <input type="button" value="Add" class="add-button">\
             <input type="button" class="cancel-button" value="&#10005;">\
             <input type="button" class="option-button" value="&hellip;">\
           </div></div></ul>').insertBefore($('#list-adder-container'));
-      listItem.added = true;
-      for (c in listItem.cards) {
-        var listCard = listItem.cards[c];
+      indvList.added = true;
+      var cardCounter = 0;
+      for (c of indvList.cards) {
+        console.log(c);
         $('<li class="listed-card">'
-          + listCard.name + '<div class="card" data-name="Example Card" data-cardid="1" style="display: none">\
+          + c.description + '\
+          <div class="card" data-name="Example Card" data-cardid="1" style="display: none">\
             <ul class="individual-card"><div class="card-name">name</div>\
               <div class="card-information">\
                 <li class="card-members">members</li>\
@@ -83,12 +116,12 @@ function populateCards(cardList) {
                   <li>Copy</li>\
                   <li>Subscribe</li>\
                   <li>Archive</li>\
-                </div></div></ul></div>').insertBefore($('#card-adder-' + plists));
+                </div></div></ul></div>').insertBefore($('#card-adder-' + listCounter));
       }
     }
+    listCounter++;
   }
 }
-
 
 function addList() {
   var new_list_name = document.querySelector('#new-list-name');
@@ -104,10 +137,18 @@ function closeAddList() {
   list_adder.style.display = 'none';
 }
 
+function getData() {
+
+}
+
 
 $(function() {
 
-  populateCards(cardList);
+  $.ajax({
+    url : "http://thiman.me:1337/kt35/list",
+    type : "GET",
+    dataType : "json",
+  }).done(populateBoard(json));
 
   main_menu.addEventListener("click", function() {
     if (menu.style.display === 'none') {
@@ -158,20 +199,22 @@ function closeAddCard(e) {
   $(e.target).parent()[0].style.display = 'none';
 }
 
-$('.card-adder').on('click', '.cancel-button', function(e) {
+$('.lists').on('click', '.cards .card-adder .cancel-button', function(e) {
   closeAddCard(e);
 });
 
 // go up one more level
-$('.card-adder').on('click', '.add-button', function(e) {
+$('.lists').on('click', '.cards .card-adder .add-button', function(e) {
+  console.log($(this).parent().parent().siblings());
   var new_card_name = $(e.target).siblings('.add-card-name')[0];
-  var container = $(this).parent().parent().siblings('.cards')[0];
+  var container = $(this).parent().parent().siblings();
   if (new_card_name.value.length > 0) {
     var newCard = document.createElement("LI");
     newCard.setAttribute("class", "listed-card");
     newCard.innerHTML = new_card_name.value;
-    if (container.children.length > 0) {
-      container.insertBefore(newCard, container.children[-1]);
+    if (container.parent().children.length > 0) {
+      container.insertBefore(newCard, container[-1]);
+      console.log($(this).parent().parent().siblings());
     } else {
       container.append(newCard);
     }
