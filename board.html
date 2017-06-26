@@ -29,40 +29,59 @@
       </div>
     </div>
 
-    <div class="navbuttons" id="search">Search</div>
+    <input type="search" class="topnav-search" name="searchbar" placeholder="Search...">
     <div id="home"><a href="boards.html" id="logolink">Prello</a></div>
   </div>
 
   <div class="welcomenav">
     <a href="#">Welcome Board</a>
-    <div class="sidebar-button">
-      Show menu
-      <div class="sidebar" style="display: none">
+    <div class="sidebar-container">
+      <div class="sidebar-button">
+        Show menu
       </div>
     </div>
   </div>
 
   <div id="boardContainer">
-    <ul class="lists">
+    <ul class="lists" data-numberoflists="3">
       <li>
         <div class="indv-list">
           List 1
         </div>
-        <ul class="cards">
-            <li class="listed-card" style="opacity: 1.0">
+        <ul class="cards" data-numberofcards = "2">
+            <li class="listed-card">
                 Example card
-                <div class="card" style="display: none">
+                <div class="card" data-name="Example Card" data-cardid="1" style="display: none">
                   <ul class="individual-card">
+                    <div class="card-name">name</div>
                     <div class="card-information">
-                      <li class="card-name">name</li>
-                      <li class="card-desc">description</li>
                       <li class="card-members">members</li>
-                      <li class="card-tags">tags</li>
+                      <li class="card-labels">tags</li>
+                      <li class="card-desc">description</li>
+                      <li class="card-comment">comments</li>
+                      <li class="card-activity">activity</li>
+                    </div>
+
+                    <div class="card-operators">
+                      <div class="card-adds">
+                        <li>Add member</li>
+                        <li>Add label</li>
+                        <li>Add checklist</li>
+                        <li>Add due date</li>
+                        <li>Add attachment</li>
+                      </div>
+                      <div class="card-actions">
+                        <li>Move</li>
+                        <li>Copy</li>
+                        <li>Subscribe</li>
+                        <li>Archive</li>
+                      </div>
                     </div>
                   </ul>
                 </div>
             </li>
-            <li class="listed-card">
+
+            <li class="listed-card" data-cardid="2">
               Test Card
             </li>
         </ul>
@@ -139,6 +158,9 @@
       </li>
 
     </ul>
+
+    <div class="sidebar" style="display: none">
+    </div>
   </div>
 
   <script src="js/jquery-3.2.1.min.js"></script>

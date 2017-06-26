@@ -1,3 +1,7 @@
+/*---------------------------------------------------------------
+                               GENERAL
+----------------------------------------------------------------*/
+
 * {
   font-family: "Arial";
   color: white;
@@ -28,17 +32,83 @@ a#logolink {
 
 html, body{
   height: 100%;
-  width: 100%;
-  margin: 0;
-  white-space: nowrap;
-  overflow-y: auto;
-  overflow-x: scroll;
+  max-width: 100%;
+  margin: auto;
+  overflow: hidden;
 }
+
+#boardContainer {
+  background-color: #749bdb;
+  color: white;
+  font-weight: bold;
+  padding: 0px;
+  height: 88%;
+  width: 100%;
+  position: relative;
+}
+
+
+.add-button {
+  height: 38%;
+  width: 30%;
+  display: block;
+  background: #3ed898;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 6%;
+  font-weight: bold;
+}
+
+.add-button:hover {
+  cursor: pointer;
+}
+
+.cancel-button {
+  font-size: 20px;
+  height: 38%;
+  width: 12%;
+  display: block;
+  text-decoration: none;
+  border: none;
+  background: #393a3a;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+}
+
+.cancel-button:hover {
+  cursor: pointer;
+}
+
+.namer-text {
+  display: block;
+  width: 96%;
+  padding-top: 10px;
+  margin-top: 5px;
+  padding-left: 0.1em;
+  color: black;
+  border-radius: 3px;
+  line-height: 10px;
+}
+
+/*---------------------------------------------------------------
+                               GENERAL END
+----------------------------------------------------------------*/
+
+/*---------------------------------------------------------------
+                               LISTS
+----------------------------------------------------------------*/
 
 .lists {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  white-space: nowrap;
+  height: 100%;
+  overflow: auto;
 }
 
 .lists li {
@@ -51,6 +121,7 @@ html, body{
   border-radius: 5px;
   text-align: center;
   vertical-align: top;
+  max-height: auto;
 }
 
 .indv-list {
@@ -60,6 +131,7 @@ html, body{
   color: #393a3a;
   text-align: left;
   padding-left: 0.8em;
+  padding-right: 0.8em;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   line-height: 35px;
@@ -102,49 +174,23 @@ html, body{
   background: #393a3a;
 }
 
-.namer-text {
-  display: block;
-  width: 96%;
-  padding-top: 10px;
-  margin-top: 5px;
-  padding-left: 0.1em;
-  color: black;
+.list {
+  float: left;
+  border-color: white;
+  width: 20%;
+  background-color: gray;
+  padding: 14px 16px;
+  margin-right: 10px;
+  height: 90%;
 }
 
-.add-button {
-  height: 38%;
-  width: 30%;
-  display: block;
-  background: #3ed898;
-  text-decoration: none;
-  border: none;
-  border-radius: 5px;
-  position: absolute;
-  top: 50%;
-  left: 6%;
-  font-weight: bold;
-}
+/*---------------------------------------------------------------
+                               LISTS END
+----------------------------------------------------------------*/
 
-.add-button:hover {
-  cursor: pointer;
-}
-
-.cancel-button {
-  font-size: 20px;
-  height: 38%;
-  width: 12%;
-  display: block;
-  text-decoration: none;
-  border: none;
-  background: #393a3a;
-  position: absolute;
-  top: 50%;
-  left: 40%;
-}
-
-.cancel-button:hover {
-  cursor: pointer;
-}
+/*---------------------------------------------------------------
+                               CARDS
+----------------------------------------------------------------*/
 
 .cards {
   list-style-type: none;
@@ -157,16 +203,16 @@ html, body{
   display: block;
   height: auto;
   min-height: 40px;
-  width: 86%;
+  width: 88%;
   background: white;
   color: black;
   padding-left: 0.8em;
-  margin: 0px 5px;
+  padding-right: 0.8em;
   border-radius: 5px;
   text-align: left;
   vertical-align: baseline;
   font-weight: normal;
-  margin: 10px 5px;
+  margin: 10px auto 10px auto;
 }
 
 .cards li:hover {
@@ -254,20 +300,79 @@ html, body{
   vertical-align: top;
 }
 
+/*---------------------------------------------------------------
+                               CARDS END
+----------------------------------------------------------------*/
 
-.box {
-  display: flex;
-  height: 100%;
-}
+/*---------------------------------------------------------------
+                               INDIVIDUAL CARD
+----------------------------------------------------------------*/
 
-.welcomenav{
-  width: auto;
-  overflow: hidden;
-  background: #749bdb;
-  padding: 10px 16px;
-  font-size: 18px;
+.card {
+  color: white;
+  height: 72%;
+  width: 44%;
+  background: #c7d8e8;
+  border-radius: 5px;
+  padding: 14px 16px;
   font-weight: bold;
+  display: none;
+  position: fixed;
+  top: 6%;
+  left: 26%;
+  z-index: 2;
 }
+
+.card:hover {
+  cursor: default;
+}
+
+.individual-card .card-name{
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  float: left;
+}
+
+.individual-card .card-information {
+  position: absolute;
+  top: 10%;
+  left: 2%;
+  float: left;
+  height: 100%;
+  width: 80%;
+}
+
+.individual-card .card-operators {
+  position: absolute;
+  top: 10%;
+  right: 2%;
+  float: right;
+  height: 100%;
+  width: 20%;
+}
+
+.individual-card .card-operators .card-adds {
+  position: absolute;
+  top: 0;
+  height: 50%;
+  width: 100%;
+}
+
+.individual-card .card-operators .card-actions {
+  position: absolute;
+  top: 50%;
+  height: 50%;
+  width: 100%;
+}
+
+/*---------------------------------------------------------------
+                               INDIVIDUAL CARD END
+----------------------------------------------------------------*/
+
+/*---------------------------------------------------------------
+                               TOPNAV
+----------------------------------------------------------------*/
 
 .topnav{
   width: auto;
@@ -275,6 +380,27 @@ html, body{
   overflow: hidden;
   text-align: center;
   opacity: 0.9;
+}
+
+.topnav .topnav-search {
+  float: left;
+  display: block;
+  padding: 6px 8px;
+  text-decoration: none;
+  background: white;
+  width: 130px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  position: absolute;
+  /* Fix these*/
+  top: 0.5%;
+  left: 5%;
+  border-radius: 3px;
+  color: black;
+}
+
+.topnav .topnav-search:focus {
+  width: 20%;
 }
 
 .topnav .navbuttons{
@@ -324,51 +450,28 @@ html, body{
   left: 44%;
 }
 
-#boardContainer {
-  float: left;
-  background-color: #749bdb;
-  color: white;
-  font-weight: bold;
-  padding: 0px 10px;
+.box {
+  display: flex;
   height: 100%;
-  width: 100%;
 }
 
-#card {
-  color: white;
-  height: 40%;
-  width: 30%;
-  background: #c7d8e8;
-  border-radius: 5px;
-  padding: 14px 16px;
+/*---------------------------------------------------------------
+                               TOPNAV END
+----------------------------------------------------------------*/
+
+/*---------------------------------------------------------------
+                               WELCOMENAV
+----------------------------------------------------------------*/
+
+.welcomenav{
+  width: auto;
+  overflow: hidden;
+  background: #749bdb;
+  padding: 10px 16px;
+  font-size: 18px;
   font-weight: bold;
-  display: none;
-  position: fixed;
-  top: 28%;
-  left: 32%;
-  z-index: 2;
-}
-
-.welcomenav {
+  white-space: nowrap;
   position: relative;
-}
-
-.sidebar-button {
-  display: block;
-  text-decoration: none;
-  padding: 6px 8px;
-  float: left;
-  margin: 5 0;
-  position: absolute;
-  right: 0;
-}
-
-.sidebar {
-  position: absolute;
-  height: 100%;
-  background: #88b8e8;
-  opacity: 0.8;
-  border-radius: 3px;
 }
 
 .welcomenav a{
@@ -385,35 +488,45 @@ html, body{
   border-radius: 3px;
 }
 
+/*---------------------------------------------------------------
+                               WELCOMENAV END
+----------------------------------------------------------------*/
 
-.list {
-  float: left;
-  border-color: white;
-  width: 20%;
-  background-color: gray;
-  padding: 14px 16px;
-  margin-right: 10px;
-  height: 90%;
-}
+/*---------------------------------------------------------------
+                               SIDEBAR
+----------------------------------------------------------------*/
 
-.card {
-  color: white;
-  height: 40%;
-  width: 30%;
-  background: #c7d8e8;
-  border-radius: 5px;
-  padding: 14px 16px;
-  font-weight: bold;
-  display: none;
-  position: fixed;
-  top: 28%;
-  left: 32%;
-  z-index: 2;
-}
-
-.individual-card .name{
-  position: absolute;
+.sidebar-container {
+  position: relative;
+  height: 100%;
   width: 100%;
 }
 
-.individual-card .
+.sidebar-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  text-decoration: none;
+  padding: 6px 8px;
+  margin: 5 0;
+  z-index: 1;
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: auto;
+  height: 100%;
+  width: 20%;
+  /*background: #88b8e8;*/
+  background: red;
+  opacity: 0.8;
+  border-radius: 3px;
+  z-index: 2;
+}
+
+/*---------------------------------------------------------------
+                               SIDEBAR END
+----------------------------------------------------------------*/
