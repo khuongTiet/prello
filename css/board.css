@@ -139,11 +139,12 @@ html, body{
 }
 
 .indv-list .cancel-button {
-  height: 10%;
+  height: 100%;
   position: absolute;
   top: 0;
   left: auto;
   right: 0;
+  background: #dee4ed;
 }
 
 #list-adder-container {
@@ -205,6 +206,7 @@ html, body{
   margin: 2;
   padding: 0;
   color: black;
+  position: relative;
 }
 
 .cards li {
@@ -372,6 +374,12 @@ html, body{
   top: 50%;
   height: 50%;
   width: 100%;
+}
+
+.listed-card .cancel-button {
+  position: relative;
+  top: 0;
+  right: 0;
 }
 
 /*---------------------------------------------------------------
