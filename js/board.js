@@ -14,21 +14,87 @@ var card_adder_buttons = document.querySelectorAll('.card-adder-button');
 var card_adders = document.querySelectorAll('.card-adder');
 var all_cards = document.querySelectorAll('.cards');
 
+var cardList = {
+  0 : {
+    "name" : "List 1",
+    "added" : false,
+    "cards" : {
+      0 : {"name" : "Example Card"},
+      1 : {"name" : "Test Card"},
+      2 : {"name" : "Dummy Card"}
+    }
+  },
+  1 : {
+    "name" : "List 2",
+    "added" : false,
+    "cards" : {
+      0 : {"name" : "Card3"},
+      1 : {"name" : "Delete Me"}
+    }
+  },
+  2 : {
+    "name" : "List 3",
+    "added" : false,
+    "cards" : {}
+  }
+};
+
+console.log(cardList[0]);
+
+function populateCards(cardList) {
+  var currentList = $('.lists');
+  console.log(Object.keys(cardList).length);
+  currentList.attr('data-numberoflists', Object.keys(cardList).length);
+  for (plists in cardList) {
+    var listItem = cardList[plists];
+    if (!listItem.added) {
+      $('<li><div class="indv-list">'
+        + listItem.name + '</div><ul class="cards" data-numCards="'
+        + Object.keys(listItem.cards).length +'">\
+        <div class="card-adder-container" id="card-adder-' + plists + '"><div class="card-adder-button">Add a card...\
+          </div><div class="card-adder" id="adder1" style="display: none">\
+            <textarea rows="3" col="50" class="add-card-name"></textarea>\
+            <input type="button" value="Add" class="add-button">\
+            <input type="button" class="cancel-button" value="&#10005;">\
+            <input type="button" class="option-button" value="&hellip;">\
+          </div></div></ul>').insertBefore($('#list-adder-container'));
+      listItem.added = true;
+      for (c in listItem.cards) {
+        var listCard = listItem.cards[c];
+        $('<li class="listed-card">'
+          + listCard.name + '<div class="card" data-name="Example Card" data-cardid="1" style="display: none">\
+            <ul class="individual-card"><div class="card-name">name</div>\
+              <div class="card-information">\
+                <li class="card-members">members</li>\
+                <li class="card-labels">tags</li>\
+                <li class="card-desc">description</li>\
+                <li class="card-comment">comments</li>\
+                <li class="card-activity">activity</li>\
+              </div><div class="card-operators">\
+                <div class="card-adds">\
+                  <li>Add member</li>\
+                  <li>Add label</li>\
+                  <li>Add checklist</li>\
+                  <li>Add due date</li>\
+                  <li>Add attachment</li>\
+                </div>\
+                <div class="card-actions">\
+                  <li>Move</li>\
+                  <li>Copy</li>\
+                  <li>Subscribe</li>\
+                  <li>Archive</li>\
+                </div></div></ul></div>').insertBefore($('#card-adder-' + plists));
+      }
+    }
+  }
+}
+
+
 function addList() {
   var new_list_name = document.querySelector('#new-list-name');
   if (new_list_name.value.length > 0 ) {
-    var newList = document.createElement("LI");
-    newList.innerHTML = '<div class="indv-list">' + new_list_name.value + '</div><div class="card-adder-container">\
-    <div class="card-adder-button">\
-        Add a card...\
-      </div>\
-      <div class="card-adder" style="display: none">\
-        <textarea rows="3" col="50" class="add-card-name"></textarea>\
-        <input type="button" value="Add" class="add-button">\
-        <input type="button" class="cancel-button" value="&#10005";>\
-        <input type="button" class="option-button" value="&hellip;">\
-        </div></div>';
-    lists.insertBefore(newList, document.querySelector('#list-adder-container'));
+    cardList[$('.lists')[0].dataset.numberoflists += 1] = {"name" : new_list_name.value, "added" : false, "cards" : {}};
+    populateCards(cardList);
     closeAddList();
   }
 }
@@ -41,7 +107,7 @@ function closeAddList() {
 
 $(function() {
 
-
+  populateCards(cardList);
 
   main_menu.addEventListener("click", function() {
     if (menu.style.display === 'none') {
@@ -100,7 +166,6 @@ $('.card-adder').on('click', '.cancel-button', function(e) {
 $('.card-adder').on('click', '.add-button', function(e) {
   var new_card_name = $(e.target).siblings('.add-card-name')[0];
   var container = $(this).parent().parent().siblings('.cards')[0];
-  console.log(new_card_name);
   if (new_card_name.value.length > 0) {
     var newCard = document.createElement("LI");
     newCard.setAttribute("class", "listed-card");
