@@ -23,10 +23,9 @@
   </div>
 
   <div class="topnav" id="nav">
-    <div class="navbuttons" id="optionbar">
-      Boards
-      <div id="main-menu" style="display: none">
-      </div>
+    <div id="main-menu-container">
+      <div id="main-menu-button">Boards</div>
+      <div id="main-menu" style="display: none"></div>
     </div>
 
     <input type="search" class="topnav-search" name="searchbar" placeholder="Search...">
@@ -35,8 +34,8 @@
 
   <div class="welcomenav">
     <a href="#">Welcome Board</a>
-    <div class="sidebar-container">
-      <div class="sidebar-button">
+    <div id="sidebar-container">
+      <div id="sidebar-button">
         Show menu
       </div>
     </div>
@@ -45,13 +44,13 @@
   <div id="boardContainer">
     <ul class="lists" data-numberoflists="0">
       <li id="list-adder-container">
-        <div class="list-adder-button">
+        <div id="list-adder-button">
           Add a list...
         </div>
-        <div class="list-adder" style="display: none">
+        <div id="list-adder" style="display: none">
           <input type="text" placeholder="Add a list..." class="namer-text" id="new-list-name">
-          <input type="button" value="Save" class="add-button" onclick="addList()">
-          <input type="button" class="cancel-button" value="&#10005;" onclick="closeAddList()">
+          <input type="button" value="Save" class="add-button" onclick="addNewList()">
+          <input type="button" class="cancel-button" value="&#10005;" onclick="closeAddNewList()">
         </div>
       </li>
 

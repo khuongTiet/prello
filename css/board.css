@@ -152,7 +152,7 @@ html, body{
   position: relative;
 }
 
-.list-adder-button {
+#list-adder-button {
   min-height: 40px;
   background: #393a3a;
   font-weight: normal;
@@ -163,12 +163,12 @@ html, body{
   border-radius: 5px;
 }
 
-.list-adder-button:hover {
+#list-adder-button:hover {
   opacity: 0.8;
   cursor: pointer;
 }
 
-.list-adder {
+#list-adder {
   height: 80px;
   width: 100%;
   border-radius: 5px;
@@ -376,10 +376,20 @@ html, body{
   width: 100%;
 }
 
-.listed-card .cancel-button {
+.listed-card {
   position: relative;
+  width: 100%;
+}
+
+.listed-card .cancel-button {
+  position: absolute;
   top: 0;
-  right: 0;
+  left: 90%;
+  height: 100%;
+  width: 10%;
+  color: #dee4ed;
+  background: white;
+  border-radius: 5px;
 }
 
 /*---------------------------------------------------------------
@@ -420,7 +430,7 @@ html, body{
   width: 20%;
 }
 
-.topnav .navbuttons{
+#main-menu-button{
   float: left;
   display: block;
   text-align: center;
@@ -513,13 +523,13 @@ html, body{
                                SIDEBAR
 ----------------------------------------------------------------*/
 
-.sidebar-container {
+#sidebar-container {
   position: relative;
   height: 100%;
   width: 100%;
 }
 
-.sidebar-button {
+#sidebar-button {
   position: absolute;
   top: 0;
   right: 0;
@@ -530,7 +540,7 @@ html, body{
   z-index: 1;
 }
 
-.sidebar {
+#sidebar {
   position: absolute;
   top: 0;
   right: 0;
