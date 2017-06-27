@@ -53,18 +53,26 @@ var boardList = [
 
 function populateBoard(boardCards) {
   var listCounter = 0;
+  var boardHTML = '';
   console.log(boardCards);
   $('.lists').attr('data-numberoflists', boardCards.length);
   for (indvList of boardCards) {
-    if (!display.has(indvList._id)) {
-      addList(indvList, listCounter);
-      var cardCounter = 0;
-      for (c of indvList.cards) {
-        addCard(c, listCounter);
-      }
+    display.add(indvList._id);
+    if (display.has(indvList._id)) {
+      boardHTML = addList(indvList, listCounter, boardHTML);
     }
     listCounter++;
   }
+  $('.lists').html(boardHTML);
+  $('.lists').append('<li id="list-adder-container">\
+    <div id="list-adder-button">\
+      Add a list...\
+    </div>\
+    <div id="list-adder" style="display: none">\
+      <input type="text" placeholder="Add a list..." class="namer-text" id="new-list-name">\
+      <input type="button" value="Save" class="add-button" onclick="addNewList()">\
+      <input type="button" class="cancel-button" value="&#10005;" onclick="closeAddNewList()">\
+    </div></li>');
 }
 
 function createList(listTitle) {
@@ -80,23 +88,31 @@ function createList(listTitle) {
   })
 }
 
-function addList(indvList, listCounter) {
-  $('<li><div class="indv-list">'
+function addList(indvList, listCounter, boardHTML) {
+  boardHTML = boardHTML + '<li><div class="indv-list">'
     + indvList.title + '<input type="button" class="cancel-button" value="&#10005;"> </div><ul class="cards" data-numCards="'
-    + indvList.cards.length +'" data-indexlist="' + listCounter +'">\
-    <div class="card-adder-container" id="card-adder-' + listCounter + '"><div class="card-adder-button">Add a card...\
+    + indvList.cards.length +'" data-indexlist="' + listCounter +'">';
+
+  for (c of indvList.cards) {
+    boardHTML = addCard(c, listCounter, boardHTML);
+  }
+  boardHTML = boardHTML + '<div class="card-adder-container" id="card-adder-' + listCounter + '">\
+    <div class="card-adder-button">Add a card...\
       </div><div class="card-adder" id="adder1" style="display: none">\
         <textarea rows="3" col="50" class="add-card-name"></textarea>\
         <input type="button" value="Add" class="add-button">\
         <input type="button" class="cancel-button" value="&#10005;">\
         <input type="button" class="option-button" value="&hellip;">\
-      </div></div></ul>').insertBefore($('#list-adder-container'));
+      </div>\
+    </div></ul>';
   display.add(indvList._id);
+  return boardHTML;
 }
 
-function addCard(indvCard, listCounter) {
-  $('<li class="listed-card">'
-    + c.description + '<input type="button" class="cancel-button" value="&#10005;">\
+function addCard(indvCard, listCounter, boardHTML) {
+  console.log(indvCard.description);
+  boardHTML = boardHTML + '<li class="listed-card">'
+    + indvCard.description + '<input type="button" class="cancel-button" value="&#10005;">\
     <div class="card" data-name="Example Card" data-cardid="1" style="display: none">\
       <ul class="individual-card"><div class="card-name">name</div>\
         <div class="card-information">\
@@ -118,7 +134,8 @@ function addCard(indvCard, listCounter) {
             <li>Copy</li>\
             <li>Subscribe</li>\
             <li>Archive</li>\
-        </div></div></ul></div>').insertBefore($('#card-adder-' + listCounter));
+        </div></div></ul></div></li>';
+  return boardHTML;
 }
 
 function closeAddCard(e) {

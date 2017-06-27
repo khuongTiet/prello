@@ -124,6 +124,10 @@ html, body{
   max-height: auto;
 }
 
+#lists-container {
+  display: inline-block;
+}
+
 .indv-list {
   height: 35px;
   width: auto;
