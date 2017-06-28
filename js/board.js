@@ -192,11 +192,11 @@ function closeAddNewList() {
 
 function deleteList(listIndex) {
   $.ajax({
-    url: "http://thiman.me:1337/kt35/list/" + boardList[listIndex]._id,
-    type: "DELETE",
-    data: {},
-    dataType: "json",
+    url: 'http://thiman.me:1337/kt35/list/' + boardList[listIndex]._id,
+    type: 'DELETE',
+    dataType: 'json',
   }).done(function() {
+    console.log('deleted');
     display.delete(boardList.splice(listIndex, 1)._id);
     populateBoard(boardList);
     getBoard();
@@ -216,7 +216,6 @@ function deleteCard(listIndex, cardIndex) {
     getBoard();
   });
 
-  //console.log(boardList);
 }
 
 $(function() {
@@ -267,8 +266,6 @@ $(function() {
     }
   });
 
-
-
   $('#modal').on('click', '#bg', function(e) {
     if ($('#modal')[0].style.display === 'block') {
       $('#modal')[0].style.display = 'none';
@@ -279,8 +276,6 @@ $(function() {
       }
     }
   });
-
-
 
   $('.lists').on('click', '.indv-list .cancel-button', function(e) {
     deleteList($(this).parent().siblings('.cards')[0].dataset.indexlist);
@@ -298,5 +293,12 @@ $('#main-menu-container').on('click', '#main-menu-button', function(e) {
 });
 
 $('#change-background').on('click', '.change-color', function(e) {
+  var newColor = $(e.target).attr('data-color');
+  $('body').removeClass();
+  $('body').addClass(newColor);
+  $('#topnav').removeClass();
+  $('#topnav').addClass(newColor);
+  $('#list-adder-button').removeClass();
+  $('#list-adder-button').addClass(newColor);
 
 });

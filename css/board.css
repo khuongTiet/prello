@@ -38,6 +38,30 @@ html, body{
   background: #749bdb;
 }
 
+body.red {
+  background: #801515;
+}
+
+body.green {
+  background: #116611;
+}
+
+body.blue {
+  background: #142F54;
+}
+
+body.orange {
+  background: #FF9741;
+}
+
+body.purple {
+  background: #860FB5;
+}
+
+body.pink {
+  background: #DC0969;
+}
+
 #boardContainer {
   color: white;
   font-weight: bold;
@@ -155,6 +179,7 @@ html, body{
 #list-adder-container {
   min-height: 40px;
   position: relative;
+  border-radius: 5px;
 }
 
 #list-adder-button {
@@ -164,7 +189,6 @@ html, body{
   line-height: 40px;
   text-align: left;
   padding-left: 0.8em;
-  opacity: 0.8;
   border-radius: 5px;
 }
 
@@ -172,6 +196,31 @@ html, body{
   opacity: 0.6;
   cursor: pointer;
 }
+
+#list-adder-button.red {
+  background: #550000;
+}
+
+#list-adder-button.blue {
+  background: #061539;
+}
+
+#list-adder-button.green {
+  background: #004400;
+}
+
+#list-adder-button.orange {
+  background: #D86200;
+}
+
+#list-adder-button.purple {
+  background: #68058F;
+}
+
+#list-adder-button.pink {
+  background: #B50052;
+}
+
 
 #list-adder {
   height: 80px;
@@ -185,7 +234,7 @@ html, body{
   position: absolute;
   top: 0;
   left: 0;
-  background: #393a3a;
+  background: #dee4ed;
   display: none;
 }
 
@@ -420,7 +469,7 @@ html, body{
                                TOPNAV
 ----------------------------------------------------------------*/
 
-.topnav{
+#topnav {
   width: auto;
   background-color: #3a5282;
   overflow: hidden;
@@ -428,7 +477,31 @@ html, body{
   opacity: 0.9;
 }
 
-.topnav .topnav-search {
+#topnav.red {
+  background: #550000;
+}
+
+#topnav.blue {
+  background: #061539;
+}
+
+#topnav.green {
+  background: #004400;
+}
+
+#topnav.orange {
+  background: #D86200;
+}
+
+#topnav.purple {
+  background: #68058F;
+}
+
+#topnav.pink {
+  background: #B50052;
+}
+
+.topnav-search {
   float: left;
   display: block;
   padding: 6px 8px;
@@ -446,7 +519,7 @@ html, body{
 
 }
 
-.topnav .topnav-search:focus {
+.topnav-search:focus {
   width: 20%;
 }
 
@@ -462,12 +535,12 @@ html, body{
   margin: 5px 5px;
 }
 
-.topnav #search.navbuttons {
+#topnav #search.navbuttons {
   background: white;
   color: black;
 }
 
-.topnav #main-menu {
+#topnav #main-menu {
   display: none;
   height: 40%;
   width: 20%;
@@ -485,7 +558,7 @@ html, body{
   cursor: pointer;
 }
 
-.topnav #home {
+#topnav #home {
   color: white;
   display: block;
   text-align: center;
@@ -557,6 +630,17 @@ html, body{
   padding: 6px 8px;
   margin: 5 0;
   z-index: 1;
+  display: block;
+  text-decoration: none;
+  padding: 6px 8px;
+}
+
+
+
+#sidebar-button:hover {
+  opacity: 0.8;
+  border-radius: 3px;
+  background: #88b8e8;
 }
 
 #sidebar {
@@ -594,27 +678,27 @@ html, body{
 }
 
 #color1 {
-  background: red;
+  background: #801515;
 }
 
 #color2 {
-  background: green;
+  background: #116611;
 }
 
 #color3 {
-  background: yellow;
+  background: #142F54;
 }
 
 #color4 {
-  background: purple;
+  background: #860FB5;
 }
 
 #color5 {
-  background: orange;
+  background: #FF9741;
 }
 
 #color6 {
-  background: pink;
+  background: #DC0969;
 }
 
 
