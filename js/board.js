@@ -3,58 +3,57 @@ var display = new Set();
 
 
 // Use if no  internet connection
-var boardList = [
-  {
-      "_id": "5951452ad2b587532a2f4812",
-      "title": "First List",
-      "key": "kt35",
-      "cards": [
-          {
-              "description": "Example Card",
-              "_id": "59514627d2b587532a2f4826"
-          },
-          {
-              "description": "Test Card",
-              "_id": "59514633d2b587532a2f4828"
-          },
-          {
-              "description": "Dummy Card",
-              "_id": "59514640d2b587532a2f4829"
-          }
-      ]
-  },
-  {
-      "_id": "595162f0fa8c1e6457084142",
-      "title": "Last List",
-      "key": "kt35",
-      "cards": [
-          {
-              "description": "Final Card",
-              "_id": "59516363fa8c1e6457084146"
-          }
-      ]
-  },
-  {
-      "_id": "59516265fa8c1e6457084139",
-      "title": "Middle List",
-      "key": "kt35",
-      "cards": [
-          {
-              "description": "Delete Me",
-              "_id": "595162d5fa8c1e645708413f"
-          },
-          {
-              "description": "Haha",
-              "_id": "595162e2fa8c1e6457084141"
-          }
-      ]
-  }
-];
+// var boardList = [
+//   {
+//       "_id": "5951452ad2b587532a2f4812",
+//       "title": "First List",
+//       "key": "kt35",
+//       "cards": [
+//           {
+//               "description": "Example Card",
+//               "_id": "59514627d2b587532a2f4826"
+//           },
+//           {
+//               "description": "Test Card",
+//               "_id": "59514633d2b587532a2f4828"
+//           },
+//           {
+//               "description": "Dummy Card",
+//               "_id": "59514640d2b587532a2f4829"
+//           }
+//       ]
+//   },
+//   {
+//       "_id": "595162f0fa8c1e6457084142",
+//       "title": "Last List",
+//       "key": "kt35",
+//       "cards": [
+//           {
+//               "description": "Final Card",
+//               "_id": "59516363fa8c1e6457084146"
+//           }
+//       ]
+//   },
+//   {
+//       "_id": "59516265fa8c1e6457084139",
+//       "title": "Middle List",
+//       "key": "kt35",
+//       "cards": [
+//           {
+//               "description": "Delete Me",
+//               "_id": "595162d5fa8c1e645708413f"
+//           },
+//           {
+//               "description": "Haha",
+//               "_id": "595162e2fa8c1e6457084141"
+//           }
+//       ]
+//   }
+// ];
 
 function populateBoard(boardCards) {
   var listCounter = 0;
   var boardHTML = '';
-  console.log(boardCards);
   $('.lists').attr('data-numberoflists', boardCards.length);
   for (indvList of boardCards) {
     display.add(indvList._id);
@@ -76,6 +75,7 @@ function populateBoard(boardCards) {
 }
 
 function createList(listTitle) {
+  console.log(listTitle);
   $.ajax({
     url : "http://thiman.me:1337/kt35/list/",
     data : {
@@ -84,8 +84,9 @@ function createList(listTitle) {
     type : "POST",
     dataType : "json",
   }).done(function(json) {
-    addList(json, boardList.length);
-  })
+    console.log("done");
+    populateBoard(boardList);
+  });
 }
 
 function addList(indvList, listCounter, boardHTML) {
@@ -93,8 +94,10 @@ function addList(indvList, listCounter, boardHTML) {
     + indvList.title + '<input type="button" class="cancel-button" value="&#10005;"> </div><ul class="cards" data-numCards="'
     + indvList.cards.length +'" data-indexlist="' + listCounter +'">';
 
+  var cardCounter = 0;
   for (c of indvList.cards) {
-    boardHTML = addCard(c, listCounter, boardHTML);
+    boardHTML = addCard(c, listCounter, cardCounter, boardHTML);
+    cardCounter++;
   }
   boardHTML = boardHTML + '<div class="card-adder-container" id="card-adder-' + listCounter + '">\
     <div class="card-adder-button">Add a card...\
@@ -109,12 +112,11 @@ function addList(indvList, listCounter, boardHTML) {
   return boardHTML;
 }
 
-function addCard(indvCard, listCounter, boardHTML) {
-  console.log(indvCard.description);
+function addCard(indvCard, listCounter, cardCounter, boardHTML) {
   boardHTML = boardHTML + '<li class="listed-card">'
     + indvCard.description + '<input type="button" class="cancel-button" value="&#10005;">\
-    <div class="card" data-name="Example Card" data-cardid="1" style="display: none">\
-      <ul class="individual-card"><div class="card-name">name</div>\
+    <div class="card" data-indexCard="' + cardCounter + '" style="display: none">\
+      <ul class="individual-card"><div class="card-name">' + indvCard.description + '</div>\
         <div class="card-information">\
           <li class="card-members">members</li>\
           <li class="card-labels">tags</li>\
@@ -138,6 +140,19 @@ function addCard(indvCard, listCounter, boardHTML) {
   return boardHTML;
 }
 
+function getBoard() {
+  $.ajax({
+    url : "http://thiman.me:1337/kt35/list/",
+    type : "GET",
+    data : {},
+    dataType : "json",
+  }).done(function(json) {
+    boardList = [];
+    boardList = json;
+    populateBoard(json);
+  });
+}
+
 function closeAddCard(e) {
   $(e.target).siblings('.add-card-name')[0].value = '';
   $(e.target).parent()[0].style.display = 'none';
@@ -145,13 +160,29 @@ function closeAddCard(e) {
 
 function addNewList() {
   var new_list_name = $('#new-list-name')[0].value;
-  console.log(new_list_name.length);
-  // createList(new_list_name.value);
   if (new_list_name.length > 0 ) {
-    boardList[$('.lists')[0].dataset.numberoflists] = {"title" : new_list_name, "_id" : 0, "cards" : []};
+    // No connection
+    // boardList[$('.lists')[0].dataset.numberoflists] = {"title" : new_list_name, "_id" : 0, "cards" : []};
+    // Connection
+    createList(new_list_name);
     populateBoard(boardList);
+    getBoard();
     closeAddNewList();
   }
+}
+
+function addNewCard(listIndex, name) {
+  $.ajax({
+    url: 'http://thiman.me:1337/kt35/list/' + boardList[listIndex]._id + '/card/',
+    type: 'POST',
+    data: {
+      'description' : name,
+    },
+    dataType: 'json'
+  }).done(function() {
+    populateBoard(boardList);
+    getBoard();
+  });
 }
 
 function closeAddNewList() {
@@ -160,23 +191,40 @@ function closeAddNewList() {
 }
 
 function deleteList(listIndex) {
-  display.delete(boardList.splice(listIndex, 1)._id);
-  console.log(boardList);
-  populateBoard(boardList);
+  $.ajax({
+    url: "http://thiman.me:1337/kt35/list/" + boardList[listIndex]._id,
+    type: "DELETE",
+    data: {},
+    dataType: "json",
+  }).done(function() {
+    display.delete(boardList.splice(listIndex, 1)._id);
+    populateBoard(boardList);
+    getBoard();
+  });
+}
+
+function deleteCard(listIndex, cardIndex) {
+  $.ajax({
+    url: 'http://thiman.me:1337/kt35/list/' + boardList[listIndex]._id
+          + '/card/' + boardList[listIndex].cards[cardIndex]._id,
+    type: 'DELETE',
+    data: {},
+    dataType: 'json',
+  }).done(function() {
+    boardList[listIndex].cards.splice(cardIndex, 1);
+    populateBoard(boardList);
+    getBoard();
+  });
+
+  //console.log(boardList);
 }
 
 $(function() {
-  // var json = $.ajax({
-  //   url : "http://thiman.me:1337/kt35/list",
-  //   type : "GET",
-  //   data : "{}",
-  //   dataType : "json",
-  // }).done(function(json) {
-  //   boardList = json;
-  //   populateBoard(json);
-  // }).fail(function() {
-  //   populateBoard(noWifi);
-  // });
+  getBoard();
+
+  $('.lists').on('click', '#list-adder-button', function(e) {
+    $(e.target).siblings()[0].style.display = 'block';
+  });
 
 
 
@@ -190,25 +238,32 @@ $(function() {
 
   // go up one more level
   $('.lists').on('click', '.cards .card-adder .add-button', function(e) {
-    console.log($(this).parents('.cards')[0]);
-    var new_card_name = $(e.target).siblings('.add-card-name')[0];
-    var container = $(this).parents('.cards')[0];
-    var selectedList = boardList[container.dataset.listid]
-    console.log(selectedList.cards);
-    selectedList.cards.push({"description" : new_card_name.value, "_id" : selectedList.cards.length})
+    var listIndex = $(this).parents('.cards')[0].dataset.indexlist;
+    //var cardIndex = $(this).parents('.cards')[0].dataset.numcards;
+    var new_card_name = $(e.target).siblings('.add-card-name')[0].value;
+    //boardList[listIndex].cards.push({"description" : new_card_name, "_id" : cardIndex});
+    addNewCard(listIndex, new_card_name);
     populateBoard(boardList);
     closeAddCard(e);
   })
 
+  $('.lists').on('click', '.cards .listed-card .cancel-button', function(e) {
+    var cardIndex = $(this).siblings('.card')[0].dataset.indexcard;
+    var listIndex = $(this).parents('.cards')[0].dataset.indexlist;
+    deleteCard(listIndex, cardIndex);
+  })
 
-  $('.lists').on('click', '.cards li', function(e) {
-    var card = $(e.target).children(".card")[0];
-    if (card.style.display === 'none') {
-      card.style.display = 'block';
-      modal.style.display = 'block';
-    } else {
-      card.style.display = 'none';
-      modal.style.display = 'none';
+
+  $('.lists').on('click', '.cards .listed-card', function(e) {
+    if ($(e.target).attr('class') !== 'cancel-button') {
+      var card = $(e.target).children('.card')[0];
+      if (card.style.display === 'none') {
+        card.style.display = 'block';
+        modal.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+        modal.style.display = 'none';
+      }
     }
   });
 
@@ -224,11 +279,15 @@ $(function() {
       }
     }
   });
+
+
+
+  $('.lists').on('click', '.indv-list .cancel-button', function(e) {
+    deleteList($(this).parent().siblings('.cards')[0].dataset.indexlist);
+  })
+
 });
 
-$('#list-adder-button').on('click', function(e) {
-  $('#list-adder').toggle();
-});
 
 $('#sidebar-button').on('click', function(e) {
   $('#sidebar').toggle();
@@ -238,8 +297,6 @@ $('#main-menu-container').on('click', '#main-menu-button', function(e) {
   $('#main-menu').toggle();
 });
 
-$('.lists').on('click', '.indv-list .cancel-button', function(e) {
-  deleteList($(this).parent().siblings('.cards')[0].dataset.indexlist);
-})
+$('#change-background').on('click', '.change-color', function(e) {
 
-populateBoard(boardList);
+});
