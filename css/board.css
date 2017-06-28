@@ -675,6 +675,7 @@ body.pink {
 .change-color {
   height: 10%;
   width: 10%;
+  position: relative;
 }
 
 #color1 {
