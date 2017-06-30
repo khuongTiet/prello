@@ -113,7 +113,9 @@ function addList(indvList, listCounter, boardHTML) {
 }
 
 function addCard(indvCard, listCounter, cardCounter, boardHTML) {
-  boardHTML = boardHTML + '<li class="listed-card"><div class="card-labels"></div>'
+  boardHTML = boardHTML + '<li class="listed-card"><ul class="card-labels">\
+      <li class="indv-card-label"></li>\
+    </ul>'
     + indvCard.description + '<input type="button" class="cancel-button" value="&#10005;">\
     <div class="card" data-indexCard="' + cardCounter + '" style="display: none">\
       <ul class="individual-card"><div class="card-name">' + indvCard.description + '</div>\
@@ -131,7 +133,10 @@ function addCard(indvCard, listCounter, cardCounter, boardHTML) {
         </div><div class="card-operators">\
           <div class="card-adds">\
             <li>Add member</li>\
-            <li>Labels</li>\
+            <li class="addLabel">\
+              Labels\
+              <div class="label-adder"></div>\
+            </li>\
             <li>Add checklist</li>\
             <li>Add due date</li>\
             <li>Add attachment</li>\
@@ -284,6 +289,10 @@ $(function() {
 
   $('.lists').on('click', '.indv-list .cancel-button', function(e) {
     deleteList($(this).parent().siblings('.cards')[0].dataset.indexlist);
+  })
+
+  $('.card').on('click', '.card-adds .addLabel', function(e) {
+    // Display label shower;
   })
 
 });

@@ -1,11 +1,55 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<%- include('./header'); %>
+  <div id="modal" style="display: none">
+    <div id="bg">
+    </div>
+    <div id="fg">
+      <div id="card" style="display: none">
+        CARD<br><br>
+        Description<br>
+        Labels<br>
+        Comments<br>
+        <textarea rows="4" cols="30" name="comment"></textarea><br>
+        Users<br>
+      </div>
+    </div>
+  </div>
+
+  <div id="topnav">
+    <div id="main-menu-container">
+      <div id="main-menu-button">Boards</div>
+      <div id="main-menu" style="display: none"></div>
+    </div>
+
+    <input type="search" class="topnav-search" name="searchbar" placeholder="Search...">
+    <div id="home"><a href="boards.ejs" id="logolink">Prello</a></div>
+  </div>
+
+  <div class="welcomenav">
+    <a href="#">Welcome Board</a>
+    <div id="sidebar-container">
+      <div id="sidebar-button">
+        Show menu
+      </div>
+    </div>
+  </div>
+
+  <div id="boardContainer" class="main-color">
+    <ul class="lists" data-numberoflists="0">
+    </ul>
+
+    <div id="sidebar" style="display: none">
+      <div id="change-background-container">
+        <div id="change-background-button">Change background color</div>
+        <div id="change-background">
+          <div class="change-color" id="default" data-color="default"></div>
+          <div class="change-color" id="color1" data-color="red"></div>
+          <div class="change-color" id="color2" data-color="green"></div>
+          <div class="change-color" id="color3" data-color="blue"></div>
+          <div class="change-color" id="color4" data-color="purple"></div>
+          <div class="change-color" id="color5" data-color="orange"></div>
+          <div class="change-color" id="color6" data-color="pink"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include('./footer'); %>

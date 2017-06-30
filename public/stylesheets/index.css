@@ -96,6 +96,7 @@ body.pink {
 
 .cancel-button {
   font-size: 20px;
+  font-weight: bold;
   height: 38%;
   width: 12%;
   display: block;
@@ -276,7 +277,7 @@ body.pink {
 .cards li {
   display: block;
   height: auto;
-  min-height: 30px;
+  min-height: 28px;
   width: 88%;
   background: white;
   color: black;
@@ -499,6 +500,26 @@ body.pink {
 
 .listed-card .card-labels {
   white-space: nowrap;
+  padding: 0;
+  height: 1em;
+  min-height: 1em;
+  line-height: 1em;
+}
+
+.listed-card .card-labels .indv-card-label {
+  display: inline-block;
+  min-height: 0.5em;
+  height: auto;
+  background: green;
+  width: 6%;
+  margin: 0;
+}
+
+.label-adder {
+  position: absolute;
+  top: 0;
+  height: 80%;
+  width: 100%;
 }
 
 .listed-card .cancel-button {
