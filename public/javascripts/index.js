@@ -263,8 +263,10 @@ $(function() {
   })
 
 
-  $('.lists').on('click', '.cards .listed-card', function(e) {
-    if ($(e.target).attr('class') !== 'cancel-button') {
+  $('.lists').on('click', '.cards .listed-card ', function(e) {
+    // check if the target is a class
+    if ($(e.target).attr('class') !== 'cancel-button' &&
+        $(e.target).parents('.individual-card')[0] === undefined) {
       var card = $(e.target).children('.card')[0];
       if (card.style.display === 'none') {
         card.style.display = 'block';
@@ -292,6 +294,7 @@ $(function() {
   })
 
   $('.card').on('click', '.card-adds .addLabel', function(e) {
+    $('#label-adder').toggle();
     // Display label shower;
   })
 
@@ -314,5 +317,4 @@ $('#change-background').on('click', '.change-color', function(e) {
   $('#topnav').addClass(newColor);
   $('#list-adder-button').removeClass();
   $('#list-adder-button').addClass(newColor);
-
 });
