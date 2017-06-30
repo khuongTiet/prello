@@ -113,7 +113,7 @@ function addList(indvList, listCounter, boardHTML) {
 }
 
 function addCard(indvCard, listCounter, cardCounter, boardHTML) {
-  boardHTML = boardHTML + '<li class="listed-card">'
+  boardHTML = boardHTML + '<li class="listed-card"><div class="card-labels"></div>'
     + indvCard.description + '<input type="button" class="cancel-button" value="&#10005;">\
     <div class="card" data-indexCard="' + cardCounter + '" style="display: none">\
       <ul class="individual-card"><div class="card-name">' + indvCard.description + '</div>\

@@ -1,21 +1,10 @@
 var express = require('express');
 var mongoose = require('mongoose'); // used to create a model
 
+var List = require('../models/list');
+var Card = require('../models/card')
+
 var router = express.Router();
-
-
-var List = mongoose.model('List',
- {
-   title: String,
-   cards: Array
- }
-);
-
-var Card = mongoose.model('Card',
- {
-   description: String
- }
-);
 
 //next = middleware support 99% dont need
 router.get('/', function(req, res, next) {
@@ -51,16 +40,16 @@ router.delete('/*', function(req, res) {
   });
 });
 
+// :LISTID params.LISTID
 
 router.post('/*/card', function(req, res) {
-  console.log(req.body.description);
   var newCard = new Card(
-    { description: req.body.description }
+    { description: req.body.description,
+      name: req.body.name
+    }
   );
-  console.log(newCard);
   // first error, second newly created document
-  List.findByIdAndUpdate(req.params[0], { $push: {"cards": newCard} }, function(err, listed) {
-  });
+  List.findByIdAndUpdate(req.params[0], { $push: {"cards": newCard} }, function(err, listed) {});
   newCard.save(function (err, card) {
     if (err) {
       console.log(err);
@@ -70,8 +59,20 @@ router.post('/*/card', function(req, res) {
   });
 });
 
+router.patch('/*/card/*', function(req, res) {
+  Card.findByIdAndUpdate(req.params[1], {description: req.body.description}, function(err, carded) {
+    res.json(carded);
+  })
+  List.findByIdAndUpdate(req.params[0], { title: req.body.title, cards: req.body.cards }, function(err, listed) {
+    res.json(listed);
+  })
+});
+
 router.delete('/*/card/*', function(req, res) {
-  console.log("hello");
+  Card.findByIdAndRemove(req.params[1], function(err) {
+    res.json();
+  });
+  List.findByIdAndUpdate(req.params[0], { $pull: {"cards": req.params[1]} }, function(err, listed) {});
 });
 
 module.exports = router;
