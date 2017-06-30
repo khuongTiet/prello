@@ -38,6 +38,10 @@ html, body{
   background: #749bdb;
 }
 
+body.default {
+  background: #749bdb;
+}
+
 body.red {
   background: #801515;
 }
@@ -195,6 +199,10 @@ body.pink {
 #list-adder-button:hover {
   opacity: 0.6;
   cursor: pointer;
+}
+
+#list-adder-button.default {
+  background: #3a5282;
 }
 
 #list-adder-button.red {
@@ -394,6 +402,10 @@ body.pink {
   cursor: default;
 }
 
+.individual-card {
+  background: #dee4ed;
+}
+
 .individual-card .card-name{
   display: inline-block;
   position: absolute;
@@ -415,7 +427,39 @@ body.pink {
 }
 
 .individual-card .card-information .card-labels {
-  display: none;
+  position: absolute;
+  top: 0;
+  height: 10%;
+}
+
+.individual-card .card-information .card-labels .color-label {
+  list-style-type: none;
+  white-space: nowrap;
+}
+
+.individual-card .card-information .card-labels .color-label li {
+  display: inline-block;
+  width: 10%;
+  background: black;
+  height: 1em;
+  min-height: 1em;
+}
+
+.individual-card .card-information .card-desc {
+  position: absolute;
+  top: 12%;
+}
+
+.individual-card .card-information .card-comment {
+  position: absolute;
+  top: 26%;
+}
+
+.individual-card .card-information .card-activity {
+  position: absolute;
+  top: 56%;
+  height: auto;
+  min-height: 20%;
 }
 
 .individual-card .card-operators {
@@ -427,15 +471,17 @@ body.pink {
   width: 20%;
 }
 
+.card-operators li {
+  min-height: 1em;
+  height: 1.5em;
+  line-height: 1.5em;
+}
+
 .individual-card .card-operators .card-adds {
   position: absolute;
   top: 0;
   height: 50%;
   width: 100%;
-}
-
-.individual-card .card-operators .card-adds li {
-  height: 3%;
 }
 
 .individual-card .card-operators .card-actions {
@@ -475,6 +521,10 @@ body.pink {
   overflow: hidden;
   text-align: center;
   opacity: 0.9;
+}
+
+#topnav.default {
+  background: #3a5282;
 }
 
 #topnav.red {
@@ -530,9 +580,9 @@ body.pink {
   padding: 6px 8px;
   text-decoration: none;
   color: white;
-  background: #4f6ca5;
   border-radius: 5px;
   margin: 5px 5px;
+  opacity: 0.7;
 }
 
 #topnav #search.navbuttons {
@@ -666,6 +716,7 @@ body.pink {
   display: block;
   height: 40px;
   position: relative;
+  color: white;
 }
 
 #change-background {
@@ -676,6 +727,10 @@ body.pink {
   height: 10%;
   width: 10%;
   position: relative;
+}
+
+#color-default {
+  background: #749bdb;
 }
 
 #color1 {

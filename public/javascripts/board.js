@@ -77,7 +77,7 @@ function populateBoard(boardCards) {
 function createList(listTitle) {
   console.log(listTitle);
   $.ajax({
-    url : "http://thiman.me:1337/kt35/list/",
+    url : "http://localhost:3000/list/",
     data : {
       "title" : listTitle,
     },
@@ -119,14 +119,19 @@ function addCard(indvCard, listCounter, cardCounter, boardHTML) {
       <ul class="individual-card"><div class="card-name">' + indvCard.description + '</div>\
         <div class="card-information">\
           <li class="card-members">members</li>\
-          <li class="card-labels">tags</li>\
+          <li class="card-labels">\
+            <ul class="color-label">\
+              <li class="blue-label"></li>\
+              <li class="green-label"></li>\
+            </ul>\
+          </li>\
           <li class="card-desc">description</li>\
           <li class="card-comment">comments</li>\
           <li class="card-activity">activity</li>\
         </div><div class="card-operators">\
           <div class="card-adds">\
             <li>Add member</li>\
-            <li>Add label</li>\
+            <li>Labels</li>\
             <li>Add checklist</li>\
             <li>Add due date</li>\
             <li>Add attachment</li>\
@@ -142,7 +147,7 @@ function addCard(indvCard, listCounter, cardCounter, boardHTML) {
 
 function getBoard() {
   $.ajax({
-    url : "http://thiman.me:1337/kt35/list/",
+    url : "http://localhost:3000/list/",
     type : "GET",
     data : {},
     dataType : "json",
@@ -173,7 +178,7 @@ function addNewList() {
 
 function addNewCard(listIndex, name) {
   $.ajax({
-    url: 'http://thiman.me:1337/kt35/list/' + boardList[listIndex]._id + '/card/',
+    url: 'http://localhost:3000/list/' + boardList[listIndex]._id + '/card/',
     type: 'POST',
     data: {
       'description' : name,
@@ -192,7 +197,7 @@ function closeAddNewList() {
 
 function deleteList(listIndex) {
   $.ajax({
-    url: 'http://thiman.me:1337/kt35/list/' + boardList[listIndex]._id,
+    url: 'http://localhost:3000/list/' + boardList[listIndex]._id,
     type: 'DELETE',
     dataType: 'json',
   }).done(function() {
@@ -205,7 +210,7 @@ function deleteList(listIndex) {
 
 function deleteCard(listIndex, cardIndex) {
   $.ajax({
-    url: 'http://thiman.me:1337/kt35/list/' + boardList[listIndex]._id
+    url: 'http://localhost:3000/list/' + boardList[listIndex]._id
           + '/card/' + boardList[listIndex].cards[cardIndex]._id,
     type: 'DELETE',
     data: {},

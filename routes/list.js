@@ -39,6 +39,7 @@ router.post('/', function(req, res) {
 });
 
 router.patch('/*', function(req, res) {
+  console.log(req.params[0]);
   List.findByIdAndUpdate(req.params[0], { title: req.body.title, cards: req.body.cards }, function(err, listed) {
     res.json(listed);
   })
@@ -52,9 +53,11 @@ router.delete('/*', function(req, res) {
 
 
 router.post('/*/card', function(req, res) {
+  console.log(req.body.description);
   var newCard = new Card(
     { description: req.body.description }
   );
+  console.log(newCard);
   // first error, second newly created document
   List.findByIdAndUpdate(req.params[0], { $push: {"cards": newCard} }, function(err, listed) {
   });
