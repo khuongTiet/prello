@@ -3,53 +3,53 @@ var display = new Set();
 
 
 // Use if no  internet connection
-// var boardList = [
-//   {
-//       "_id": "5951452ad2b587532a2f4812",
-//       "title": "First List",
-//       "key": "kt35",
-//       "cards": [
-//           {
-//               "description": "Example Card",
-//               "_id": "59514627d2b587532a2f4826"
-//           },
-//           {
-//               "description": "Test Card",
-//               "_id": "59514633d2b587532a2f4828"
-//           },
-//           {
-//               "description": "Dummy Card",
-//               "_id": "59514640d2b587532a2f4829"
-//           }
-//       ]
-//   },
-//   {
-//       "_id": "595162f0fa8c1e6457084142",
-//       "title": "Last List",
-//       "key": "kt35",
-//       "cards": [
-//           {
-//               "description": "Final Card",
-//               "_id": "59516363fa8c1e6457084146"
-//           }
-//       ]
-//   },
-//   {
-//       "_id": "59516265fa8c1e6457084139",
-//       "title": "Middle List",
-//       "key": "kt35",
-//       "cards": [
-//           {
-//               "description": "Delete Me",
-//               "_id": "595162d5fa8c1e645708413f"
-//           },
-//           {
-//               "description": "Haha",
-//               "_id": "595162e2fa8c1e6457084141"
-//           }
-//       ]
-//   }
-// ];
+var fail = [
+  {
+      "_id": "5951452ad2b587532a2f4812",
+      "title": "First List",
+      "key": "kt35",
+      "cards": [
+          {
+              "description": "Example Card",
+              "_id": "59514627d2b587532a2f4826"
+          },
+          {
+              "description": "Test Card",
+              "_id": "59514633d2b587532a2f4828"
+          },
+          {
+              "description": "Dummy Card",
+              "_id": "59514640d2b587532a2f4829"
+          }
+      ]
+  },
+  {
+      "_id": "595162f0fa8c1e6457084142",
+      "title": "Last List",
+      "key": "kt35",
+      "cards": [
+          {
+              "description": "Final Card",
+              "_id": "59516363fa8c1e6457084146"
+          }
+      ]
+  },
+  {
+      "_id": "59516265fa8c1e6457084139",
+      "title": "Middle List",
+      "key": "kt35",
+      "cards": [
+          {
+              "description": "Delete Me",
+              "_id": "595162d5fa8c1e645708413f"
+          },
+          {
+              "description": "Haha",
+              "_id": "595162e2fa8c1e6457084141"
+          }
+      ]
+  }
+];
 
 function populateBoard(boardCards) {
   var listCounter = 0;
@@ -63,7 +63,8 @@ function populateBoard(boardCards) {
     listCounter++;
   }
   $('.lists').html(boardHTML);
-  $('.lists').append('<li id="list-adder-container">\
+  $('.lists').append('\
+  <li id="list-adder-container">\
     <div id="list-adder-button">\
       Add a list...\
     </div>\
@@ -71,7 +72,8 @@ function populateBoard(boardCards) {
       <input type="text" placeholder="Add a list..." class="namer-text" id="new-list-name">\
       <input type="button" value="Save" class="add-button" onclick="addNewList()">\
       <input type="button" class="cancel-button" value="&#10005;" onclick="closeAddNewList()">\
-    </div></li>');
+    </div>\
+  </li>');
 }
 
 function createList(listTitle) {
@@ -90,8 +92,11 @@ function createList(listTitle) {
 }
 
 function addList(indvList, listCounter, boardHTML) {
-  boardHTML = boardHTML + '<li><div class="indv-list">'
-    + indvList.title + '<input type="button" class="cancel-button" value="&#10005;"> </div><ul class="cards" data-numCards="'
+  boardHTML = boardHTML +
+  '<li><div class="indv-list">'
+    + indvList.title +
+    '<input type="button" class="cancel-button" value="&#10005;"> \
+    </div><ul class="cards" data-numCards="'
     + indvList.cards.length +'" data-indexlist="' + listCounter +'">';
 
   var cardCounter = 0;
@@ -99,7 +104,8 @@ function addList(indvList, listCounter, boardHTML) {
     boardHTML = addCard(c, listCounter, cardCounter, boardHTML);
     cardCounter++;
   }
-  boardHTML = boardHTML + '<div class="card-adder-container" id="card-adder-' + listCounter + '">\
+  boardHTML = boardHTML +
+  '<div class="card-adder-container" id="card-adder-' + listCounter + '">\
     <div class="card-adder-button">Add a card...\
       </div><div class="card-adder" id="adder1" style="display: none">\
         <textarea rows="3" col="50" class="add-card-name"></textarea>\
@@ -113,12 +119,17 @@ function addList(indvList, listCounter, boardHTML) {
 }
 
 function addCard(indvCard, listCounter, cardCounter, boardHTML) {
-  boardHTML = boardHTML + '<li class="listed-card"><ul class="card-labels">\
-      <li class="indv-card-label"></li>\
+  boardHTML = boardHTML +
+  '<li class="listed-card">\
+    <ul class="card-labels">\
+      <li class="blue-label"></li>\
+      <li class="green-label"></li>\
     </ul>'
-    + indvCard.description + '<input type="button" class="cancel-button" value="&#10005;">\
+    + indvCard.description +
+    '<input type="button" class="cancel-button" value="&#10005;">\
     <div class="card" data-indexCard="' + cardCounter + '" style="display: none">\
-      <ul class="individual-card"><div class="card-name">' + indvCard.description + '</div>\
+      <ul class="modal-card">\
+        <div class="card-name">' + indvCard.description + '</div>\
         <div class="card-information">\
           <li class="card-members">members</li>\
           <li class="card-labels">\
@@ -130,12 +141,24 @@ function addCard(indvCard, listCounter, cardCounter, boardHTML) {
           <li class="card-desc">description</li>\
           <li class="card-comment">comments</li>\
           <li class="card-activity">activity</li>\
-        </div><div class="card-operators">\
+        </div>\
+        <div class="card-operators">\
           <div class="card-adds">\
             <li>Add member</li>\
-            <li class="addLabel">\
+            <li class="label-adder-container">\
               Labels\
-              <div class="label-adder"></div>\
+              <div class="label-adder-button"></div>\
+              <div class="label-adder" style="display: none">\
+                Labels\
+                <ul class="add-labels">\
+                  <li class="blue-label"></li>\
+                  <li class="green-label"></li>\
+                  <li class="red-label"></li>\
+                  <li class="yellow-label"></li>\
+                  <li class="purple-label"></li>\
+                  <li class="add-label-orange"></li>\
+                </ul>\
+              </div>\
             </li>\
             <li>Add checklist</li>\
             <li>Add due date</li>\
@@ -146,7 +169,11 @@ function addCard(indvCard, listCounter, cardCounter, boardHTML) {
             <li>Copy</li>\
             <li>Subscribe</li>\
             <li>Archive</li>\
-        </div></div></ul></div></li>';
+          </div>\
+        </div>\
+      </ul>\
+    </div>\
+  </li>';
   return boardHTML;
 }
 
@@ -159,7 +186,10 @@ function getBoard() {
   }).done(function(json) {
     boardList = [];
     boardList = json;
-    populateBoard(json);
+    populateBoard(boardList);
+  }).fail(function() {
+    boardList = fail;
+    populateBoard(boardList);
   });
 }
 
@@ -225,8 +255,8 @@ function deleteCard(listIndex, cardIndex) {
     populateBoard(boardList);
     getBoard();
   });
-
 }
+
 
 $(function() {
   getBoard();
@@ -234,8 +264,6 @@ $(function() {
   $('.lists').on('click', '#list-adder-button', function(e) {
     $(e.target).siblings()[0].style.display = 'block';
   });
-
-
 
   $('.lists').on('click', '.card-adder-button', function(e) {
     $(e.target).next().toggle();
@@ -264,9 +292,9 @@ $(function() {
 
 
   $('.lists').on('click', '.cards .listed-card ', function(e) {
-    // check if the target is a class
+    // check if the target is a child of the .cards flass
     if ($(e.target).attr('class') !== 'cancel-button' &&
-        $(e.target).parents('.individual-card')[0] === undefined) {
+        $(e.target).parents('.modal-card')[0] === undefined) {
       var card = $(e.target).children('.card')[0];
       if (card.style.display === 'none') {
         card.style.display = 'block';
@@ -293,10 +321,19 @@ $(function() {
     deleteList($(this).parent().siblings('.cards')[0].dataset.indexlist);
   })
 
-  $('.card').on('click', '.card-adds .addLabel', function(e) {
-    $('#label-adder').toggle();
-    // Display label shower;
-  })
+
+  $('.lists').on('click', '.modal-card .label-adder-container .label-adder-button', function(e) {
+    console.log($(e.target).siblings('.label-adder').toggle());
+  });
+
+  $('.lists').on('click', '.modal-card .label-adder-container .label-adder', function(e) {
+    console.log($(e.target));
+    console.log($(e.target).parents('.modal-card').children('.card-information').find('.color-label'));
+    var modalLabels = $(e.target).parents('.modal-card').children('.card-information').find('.color-label');
+    var newLabel = $(e.target)[0];
+    modalLabels.append(newLabel);
+  });
+
 
 });
 
