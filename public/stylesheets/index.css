@@ -35,11 +35,11 @@ html, body{
   max-width: 100%;
   margin: auto;
   overflow: hidden;
-  background: #749bdb;
+  background: #007AC3;
 }
 
 body.default {
-  background: #749bdb;
+  background: #007AC3;
 }
 
 body.red {
@@ -145,7 +145,7 @@ body.pink {
   height: auto;
   min-height: 70px;
   width: 16%;
-  background-color: #ededed;
+  background-color: #E3E4E6;
   margin: 0 5px;
   border-radius: 5px;
   text-align: center;
@@ -178,7 +178,7 @@ body.pink {
   top: 0;
   left: auto;
   right: 0;
-  background: #ededed;
+  background: #E3E4E6;
   border-radius: 5px;
 }
 
@@ -190,7 +190,7 @@ body.pink {
 
 #list-adder-button {
   min-height: 40px;
-  background: #3a5282;
+  background: #0067A2;
   font-weight: normal;
   line-height: 40px;
   text-align: left;
@@ -204,7 +204,7 @@ body.pink {
 }
 
 #list-adder-button.default {
-  background: #3a5282;
+  background: #0067A2;
 }
 
 #list-adder-button.red {
@@ -244,7 +244,7 @@ body.pink {
   position: absolute;
   top: 0;
   left: 0;
-  background: #ededed;
+  background: #E3E4E6;
   display: none;
 }
 
@@ -303,7 +303,7 @@ body.pink {
 .card-adder-button {
   height: 35px;
   width: auto;
-  background: #ededed;
+  background: #E3E4E6;
   color: #8b8d8e;
   text-align: left;
   padding-left: 0.8em;
@@ -326,7 +326,7 @@ body.pink {
 .card-adder {
   height: 100px;
   width: 100%;
-  background: #ededed;
+  background: #E3E4E6;
   position: absolute;
   top: 0;
 }
@@ -339,7 +339,7 @@ body.pink {
 
 .card-adder .cancel-button {
   height: 26%;
-  background: #ededed;
+  background: #E3E4E6;
   width: 12%;
   top: 70%;
 }
@@ -361,7 +361,7 @@ body.pink {
   top: 60%;
   right: 0;
   line-height: 38%;
-  background: #ededed;
+  background: #E3E4E6;
 }
 
 /*#cards li:hover{
@@ -389,7 +389,7 @@ body.pink {
   color: white;
   height: 72%;
   width: 44%;
-  background: #ededed;
+  background: #E3E4E6;
   border-radius: 5px;
   padding: 14px 16px;
   font-weight: bold;
@@ -405,7 +405,7 @@ body.pink {
 }
 
 .modal-card {
-  background: #ededed;
+  background: #E3E4E6;
 }
 
 .modal-card .card-name{
@@ -434,19 +434,21 @@ body.pink {
   position: absolute;
   top: 0;
   height: 10%;
+  background: #E3E4E6;
 }
 
 .modal-card .card-information .card-labels .color-label {
   list-style-type: none;
   white-space: nowrap;
+  padding: 0;
 }
 
 .modal-card .card-information .card-labels .color-label li {
   display: inline-block;
   width: 10%;
-  background: black;
   height: 1.2em;
   min-height: 1.2em;
+  margin-right: 3px;
 }
 
 .modal-card .card-information .card-desc {
@@ -457,6 +459,12 @@ body.pink {
 .modal-card .card-information .card-comment {
   position: absolute;
   top: 26%;
+  background: #E3E4E6;
+  color: black;
+}
+
+.modal-card .card-information .card-comment .add-card-comment {
+  color: black;
 }
 
 .modal-card .card-information .card-activity {
@@ -517,6 +525,7 @@ body.pink {
   width: auto;
   min-width: 5%;
   margin: 0;
+  margin-right: 3px;
 }
 
 .listed-card .blue-label {
@@ -574,7 +583,7 @@ body.pink {
   left: 90%;
   height: 100%;
   width: 10%;
-  color: #ededed;
+  color: #E3E4E6;
   background: white;
   border-radius: 5px;
 }
@@ -605,14 +614,14 @@ body.pink {
 
 #topnav {
   width: auto;
-  background-color: #3a5282;
+  background-color: #0067A2;
   overflow: hidden;
   text-align: center;
   opacity: 0.9;
 }
 
 #topnav.default {
-  background: #3a5282;
+  background: #0067A2;
 }
 
 #topnav.red {
@@ -701,11 +710,35 @@ body.pink {
   display: block;
   text-align: center;
   text-decoration: none;
-  padding: 6px 8px;
+  padding: 0;
   font-weight: bold;
   font-size: 24px;
   position: absolute;
   left: 44%;
+}
+
+#topnav #home a {
+  font-family: "Brush Script MT", cursive;
+  font-size: 1.5em;
+  padding: 0;
+}
+
+#topnav #log-out {
+  postion: absolute;
+  right: 0;
+  display: block;
+  text-align: center;
+  padding: 6px 8px;
+  text-decoration: none;
+  color: white;
+  border-radius: 5px;
+  margin: 5px 5px;
+  float: right;
+}
+
+#topnav #log-out:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .box {
@@ -788,7 +821,7 @@ body.pink {
   overflow: auto;
   height: 100%;
   width: 20%;
-  background: #ededed;
+  background: #E3E4E6;
   opacity: 0.8;
   border-radius: 3px;
   z-index: 2;
@@ -817,8 +850,8 @@ body.pink {
   position: relative;
 }
 
-#color-default {
-  background: #749bdb;
+#default {
+  background: #0079be;
 }
 
 #color1 {

@@ -2,7 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose'); // used to create a model
 
 var List = require('../models/list');
-var Card = require('../models/card')
+var Card = require('../models/card');
 
 var router = express.Router();
 

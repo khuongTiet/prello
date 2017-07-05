@@ -1,10 +1,42 @@
-var password = document.querySelector('#password');
-var confirm = document.querySelector('#confirm');
+function registerUser(name, email, password) {
+  $.ajax({
+    url : 'http://localhost:3000/signup/',
+    type : 'POST',
+    data : {
+      'name': name,
+      'email': email,
+      'password': password
+    },
+    dataType : 'json',
+  }).done(function(json) {
+    console.log(json);
+  });
+}
 
-var register_form = document.querySelector('#register-form');
+function loginUser(email, password) {
+  $.ajax({
+    url : 'http://localhost:3000/login/',
+    type : 'POST',
+    data : {
+      'email': email,
+      'password': password
+    },
+    dataType : 'json',
+  }).done(function(json) {
+    console.log(json);
+  });
+}
 
-register_form.addEventListener('submit', function(e) {
-  if (password.value !== confirm.value) {
-    e.preventDefault();
-  }
+$(function() {
+  $('#submit-btn').on('click', function(e) {
+    console.log($(e.target));
+    console.log($('#register-password').val());
+    if ($('#register-password').val() === $('#register-password-confirm').val()) {
+      registerUser($('#register-name').val(), $('#register-email').val(), $('#register-password').val());
+    }
+  });
+
+  $('#login-btn').on('click', function(e) {
+    loginUser($('#login-email').val(), $('#login-password').val());
+  })
 });

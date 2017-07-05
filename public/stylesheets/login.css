@@ -3,7 +3,7 @@
 }
 
 #container {
-  background-color: #99ccff;
+  background-color: #007AC3;
   color: white;
   font-weight: bold;
   text-align: center;
@@ -20,7 +20,7 @@ input[type=text], input[type=email], input[type=password]{
 }
 
 
-input[type=submit] {
+input[type=button] {
   padding: 14px 20px;
   background-color: #223047;
   color: white;
@@ -29,7 +29,7 @@ input[type=submit] {
   border-radius: 5px;
 }
 
-input[type=submit]:hover {
+input[type=button]:hover {
   opacity: 0.8;
 }
 

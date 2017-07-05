@@ -1,33 +1,15 @@
 <%- include('./header');%>
-    <div id="container">
-
-      <form id="register-form">
-        <div id="registration">
-          <h1> Sign Up for Prello </h1>
-          <input type = "text" id="username" placeholder="Username" name="username" required><br>
-          <br>
-          <input type = "email" id="email" placeholder="Email" name="email" required autocomplete="off"><br>
-          <br>
-          <input type="password" id="password" placeholder="Password" name="password"><br>
-          <br>
-          <input type="password" id="confirm" placeholder="Confirm Password" name="confirm"><br>
-          <input type="submit" id="submit-btn" value="Sign Up">
-        </div>
-      </form>
-
-      <br><br>
-
-      <form>
-        <div id="login">
-          <h2> Login </h2>
-          <input type = "text" placeholder="Enter Username" name="username" required><br>
-          <br>
-          <input type="password" placeholder="Enter Password" name="password"><br>
-          <input type="submit" id="login" value="Login"><br>
-          <br>
-          <input type="checkbox" name="remember" value="rememberme"> Remember Me <br>
-        </div>
-      </form>
-
-    </div>
+  <div id="container">
+    <form>
+      <div id="login">
+        <h2> Login </h2>
+        <input type = "text" id="login-email" placeholder="Enter email" name="email" required><br>
+        <br>
+        <input type="password" id = "login-password" placeholder="Enter Password" name="password"><br>
+        <input type="button" id="login-btn" value="Login"><br>
+        <br>
+        <input type="checkbox" name="remember" value="rememberme"> Remember Me <br>
+      </div>
+    </form>
+  </div>
 <%- include('./footer');%>

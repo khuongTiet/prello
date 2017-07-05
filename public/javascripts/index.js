@@ -121,9 +121,7 @@ function addList(indvList, listCounter, boardHTML) {
 function addCard(indvCard, listCounter, cardCounter, boardHTML) {
   boardHTML = boardHTML +
   '<li class="listed-card">\
-    <ul class="card-labels">\
-      <li class="blue-label"></li>\
-      <li class="green-label"></li>\
+    <ul class="card-labels" style="display: none">\
     </ul>'
     + indvCard.description +
     '<input type="button" class="cancel-button" value="&#10005;">\
@@ -134,12 +132,10 @@ function addCard(indvCard, listCounter, cardCounter, boardHTML) {
           <li class="card-members">members</li>\
           <li class="card-labels">\
             <ul class="color-label">\
-              <li class="blue-label"></li>\
-              <li class="green-label"></li>\
             </ul>\
           </li>\
           <li class="card-desc">description</li>\
-          <li class="card-comment">comments</li>\
+          <li class="card-comment"><textarea rows="5" col="80" class="add-card-comment"></textarea></li>\
           <li class="card-activity">activity</li>\
         </div>\
         <div class="card-operators">\
@@ -330,8 +326,19 @@ $(function() {
     console.log($(e.target));
     console.log($(e.target).parents('.modal-card').children('.card-information').find('.color-label'));
     var modalLabels = $(e.target).parents('.modal-card').children('.card-information').find('.color-label');
-    var newLabel = $(e.target)[0];
-    modalLabels.append(newLabel);
+    var listLabels = modalLabels.parents('.card').siblings('.card-labels');
+    $(e.target).clone().appendTo(modalLabels);
+    listLabels.toggle();
+    $(e.target).clone().appendTo(listLabels);
+
+  });
+
+  $('#log-out').on('click', function(e) {
+    $.ajax({
+      url: 'http://localhost:3000/logout',
+      type: 'GET',
+      dataType: 'json'
+    });
   });
 
 
