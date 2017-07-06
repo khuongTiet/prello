@@ -8,26 +8,30 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res) {
-  var newUser = new User( {
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password
-  });
+  if (req.body.name !== "") {
+    alert("registering");
+    var newUser = new User( {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password
+    });
 
-  User.findOne({ email: req.body.email }, function(err, user) {
-    if (!user) {
-      newUser.save(function(err, user) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.json(user);
-          res.redirect('login');
-        }
-      });
-    } else {
-      res.render('signup', { error: 'Email already in use.' });
-    }
-  });
+    User.findOne({ email: req.body.email }, function(err, user) {
+      if (!user) {
+        newUser.save(function(err, user) {
+          if (err) {
+            console.log(err);
+          } else {
+            res.json(user);
+            res.redirect('login');
+          }
+        });
+      } else {
+        res.render('signup', { error: 'Email already in use.' });
+      }
+    });
+  }
+
 });
 
 module.exports = router;

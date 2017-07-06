@@ -11,25 +11,41 @@ function requireLogin(req, res, next) {
   }
 };
 
-router.get('/', function(req, res) {
-  if (req.session && req.session.user) { // Check if session exists
-    // lookup the user in the DB by pulling their email from the session
-    User.findOne({ email: req.session.user.email }, function (err, user) {
-      if (!user) {
-        // if the user isn't found in the DB, reset the session info and
-        // redirect the user to the login page
-        req.session.reset();
-        res.redirect('/login');
-      } else {
-        // expose the user to the template
-        res.locals.user = user;
+router.get('/', requireLogin, function(req, res) {
+  res.render('index', {title: 'Boards | Prello', style: "/stylesheets/boards.css", jscript: "/javascripts/boards.js"});
+});
 
-        res.render('index', { title: 'Welcome Board | Prello', style: "/stylesheets/index.css", jscript: "/javascripts/index.js" });
-      }
-    });
+router.get('/login', function(req, res) {
+  if (req.user) {
+    res.redirect('/');
   } else {
-    res.redirect('/login');
+    res.render('login', {title: 'Login | Prello', style: "/stylesheets/login.css", jscript: "/javascripts/login.js"});
   }
+});
+
+
+router.post('/login', function(req, res) {
+  // make separate one for registering
+  var newUser = new User( {
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password
+  });
+
+  User.findOne({ email: req.body.email }, function(err, user) {
+    if (!user) {
+      newUser.save(function(err, user) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.json(user);
+          res.redirect('login');
+        }
+      });
+    } else {
+      res.render('signup', { error: 'Email already in use.' });
+    }
+  });
 });
 
 router.get('/logout', function(req, res) {

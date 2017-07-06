@@ -2,11 +2,9 @@ var mongoose = require('mongoose');
 
 var schema = mongoose.Schema({
   name: String,
-  labels: Array,
+  creator: Array,
   members: Array,
-  description: String,
-  author: String,
-  comments: Array
+  lists: Array
 });
 
 module.exports = mongoose.model('Card', schema);

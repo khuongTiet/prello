@@ -2,7 +2,7 @@
   font-family: "Arial";
 }
 
-#container {
+#landing-container {
   background-color: #007AC3;
   color: white;
   font-weight: bold;
@@ -20,7 +20,7 @@ input[type=text], input[type=email], input[type=password]{
 }
 
 
-input[type=button] {
+input[type=submit] {
   padding: 14px 20px;
   background-color: #223047;
   color: white;
@@ -29,10 +29,10 @@ input[type=button] {
   border-radius: 5px;
 }
 
-input[type=button]:hover {
+input[type=submit]:hover {
   opacity: 0.8;
 }
 
-#login{
+#login-information{
   border-top-style: solid;
 }

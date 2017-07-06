@@ -58,7 +58,7 @@ app.use('/login', login);
 app.use('/signup', signup);
 app.use('/boards', boards);
 app.use('/', index);
-app.use('/index', index);
+
 app.use('/users', users);
 app.use('/list', list);
 

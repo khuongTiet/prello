@@ -10,12 +10,12 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res) {
   User.findOne({ email: req.body.email }, function(err, user) {
     if (!user) {
-      res.render('login.ejs', { error: 'Invalid email or password.' });
+      res.render('login.ejs', { title: 'Login | Prello', style: "/stylesheets/login.css", jscript: "/javascripts/login.js", error: 'Invalid email or password.' });
     } else {
       if (req.body.password === user.password) {
         console.log("passwords match");
         req.session.user = user;
-        res.redirect('/index');
+        res.redirect('/');
       } else {
         res.render('login.ejs', { error: 'Invalid email or password.' });
       }
