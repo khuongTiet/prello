@@ -270,6 +270,7 @@ $(function() {
     var cardIndex = $(this).siblings('.card')[0].dataset.indexcard;
     var listIndex = $(this).parents('.cards')[0].dataset.indexlist;
     deleteCard(listIndex, cardIndex);
+    $(this).parent().remove();
   })
 
 
@@ -301,6 +302,7 @@ $(function() {
 
   $('.lists').on('click', '.indv-list .cancel-button', function(e) {
     deleteList($(this).parent().siblings('.cards')[0].dataset.indexlist);
+    $(this).parent().parent().remove();
   })
 
 
