@@ -1,59 +1,56 @@
-<%- include('./header'); %>
-  <div id="modal" style="display: none">
-    <div id="bg">
-    </div>
-    <div id="fg">
-      <div id="card" style="display: none">
-        CARD<br><br>
-        Description<br>
-        Labels<br>
-        Comments<br>
-        <textarea rows="4" cols="30" name="comment"></textarea><br>
-        Users<br>
+<%- include('./header');%>
+  <div class="topnav" id="nav">
+    <div class="navbuttons" id="optionbar">
+      Boards
+      <div id="main-menu" style="display: none">
       </div>
     </div>
+
+    <div class="navbuttons" id="search">Search</div>
+    <div id="home"><a href="#" id="logolink">Prello</a></div>
   </div>
 
-  <div id="topnav">
-    <div id="main-menu-container">
-      <div id="main-menu-button">Boards</div>
-      <div id="main-menu" style="display: none"></div>
+  <div id="container">
+    Personal Boards
+    <div id="boardList">
+      <ul id="boards">
+
+        <li>
+          <a href="./board">
+            <div class="board">
+              Welcome
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a href="./board">
+            <div class="board">
+              Board1
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <div class="board" id="boardAdder">
+            Create new board ...
+            <div id="boardAddMenu" style="display: none">
+              <span>Create Board</span>
+              <span id="line-divider"></span><br>
+              <span>Title</span><br>
+              <input type="text">
+            </div>
+          </div>
+
+        </li>
+
+      </ul>
+
     </div>
 
-    <input type="search" class="topnav-search" name="searchbar" placeholder="Search...">
-    <div id="home"><a href="boards" id="logolink">Prello</a></div>
+    <a href="#">Create a new team ...</a>
 
-    <div id="log-out">
-      Log Out
-    </div>
+    <br>
+
   </div>
-
-  <div class="welcomenav">
-    <a href="#">Welcome Board</a>
-    <div id="sidebar-container">
-      <div id="sidebar-button">
-        Show menu
-      </div>
-    </div>
-  </div>
-
-  <div id="boardContainer" class="main-color">
-    <ul class="lists" data-numberoflists="0">
-    </ul>
-
-    <div id="sidebar" style="display: none">
-      <div id="change-background-container">
-        <div id="change-background-button">Change background color</div>
-        <div id="change-background">
-          <div class="change-color" id="default" data-color="default"></div>
-          <div class="change-color" id="color1" data-color="red"></div>
-          <div class="change-color" id="color2" data-color="green"></div>
-          <div class="change-color" id="color3" data-color="blue"></div>
-          <div class="change-color" id="color4" data-color="purple"></div>
-          <div class="change-color" id="color5" data-color="orange"></div>
-          <div class="change-color" id="color6" data-color="pink"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-<%- include('./footer'); %>
+<%- include('./footer');%>

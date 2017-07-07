@@ -7,7 +7,7 @@ function requireLogin(req, res, next) {
   if (!req.user) {
     res.redirect('/login');
   } else {
-    next();
+    res.render('index', {title: 'Boards | Prello', style: "/stylesheets/boards.css", jscript: "/javascripts/boards.js"});
   }
 };
 
@@ -23,27 +23,44 @@ router.get('/login', function(req, res) {
   }
 });
 
-
-router.post('/login', function(req, res) {
-  // make separate one for registering
-  var newUser = new User( {
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password
-  });
-
-  User.findOne({ email: req.body.email }, function(err, user) {
+router.post('/signup', function(req, res) {
+  var body = req.body;
+  User.findOne({ email: body.register_email }, function(err, user) {
     if (!user) {
+      var newUser = new User( {
+        name: body.register_name,
+        email: body.register_email,
+        password: body.register_password
+      });
       newUser.save(function(err, user) {
         if (err) {
           console.log(err);
         } else {
-          res.json(user);
-          res.redirect('login');
+          res.redirect('/');
         }
       });
     } else {
-      res.render('signup', { error: 'Email already in use.' });
+      res.render('login.ejs', { error: 'Email already in use.' });
+    }
+  });
+
+});
+
+
+router.post('/login', function(req, res) {
+  // make separate one for registering
+  var body = req.body;
+
+  User.findOne({ email: body.email }, function(err, user) {
+    if (!user) {
+      res.render('login.ejs', { title: 'Login | Prello', style: "/stylesheets/login.css", jscript: "/javascripts/login.js", error: 'Invalid email or password.' });
+    } else {
+      if (user && body.password === user.password) {
+        req.session.user = user;
+        res.redirect('/');
+      } else {
+        res.render('login.ejs', { error: 'Invalid email or password.' });
+      }
     }
   });
 });
@@ -52,11 +69,5 @@ router.get('/logout', function(req, res) {
   req.session.reset();
   res.redirect('/login');
 });
-
-/* GET home page. */
-// router.get('/', requireLogin, function(req, res, next) {
-//   res.render('index', { title: 'Welcome Board | Prello', style: "/stylesheets/index.css", jscript: "/javascripts/index.js" });
-// });
-
 
 module.exports = router;

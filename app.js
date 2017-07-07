@@ -8,8 +8,7 @@ var mongoose = require('mongoose');
 var session = require('client-sessions');
 
 var login = require('./routes/login');
-var signup = require('./routes/signup');
-var boards = require('./routes/boards');
+var board = require('./routes/board');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var list = require('./routes/list');
@@ -46,17 +45,31 @@ app.use(function(req, res, next) {
 
 app.use(session({
   cookieName: 'session',
-  secret: 'adfjkl239',
+  secret: 'prelloCookieBrownie',
   duration: 30 * 60 * 1000,
   activeDuration: 5 * 60 * 1000,
   httpOnly: true,
   secure: true,
-  ephemeral: true
 }));
 
+app.use(function(req, res, next) {
+  if (req.session && req.session.user) {
+    User.findOne({ email: req.session.user.email }, function(err, user) {
+      if (user) {
+        req.user = user;
+        delete req.user.password;
+        req.session.user = user;
+        res.locals.user = user;
+      }
+      next();
+    });
+  } else {
+    next();
+  }
+});
+
 app.use('/login', login);
-app.use('/signup', signup);
-app.use('/boards', boards);
+app.use('/board', board);
 app.use('/', index);
 
 app.use('/users', users);

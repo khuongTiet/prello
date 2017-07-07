@@ -1,16 +1,16 @@
 <%- include('./header');%>
 <div id="landing-container">
   <div id="registration-container">
-    <form id="register-form" method="POST">
+    <form id="register-form" method="POST" action="/signup">
       <div id="registration-information">
         <h1> Sign Up for Prello </h1>
-        <input type = "text" id="register-name" placeholder="John Doe" name="register-name"><br>
+        <input type = "text" id="register-name" placeholder="John Doe" name="register_name"><br>
         <br>
-        <input type = "email" id="register-email" placeholder="john.doe@gmail.com" name="register-email" required autocomplete="off"><br>
+        <input type = "email" id="register-email" placeholder="john.doe@gmail.com" name="register_email" required autocomplete="off"><br>
         <br>
-        <input type="password" id="register-password" placeholder="Password" name="register-password" required><br>
+        <input type="password" id="register-password" placeholder="Password" name="register_password" required><br>
         <br>
-        <input type="password" id="register-password-confirm" placeholder="Confirm Password" name="register-confirm" required><br>
+        <input type="password" id="register-password-confirm" placeholder="Confirm Password" name="register_confirm" required><br>
         <input type="submit" id="submit-btn" value="Sign Up">
       </div>
     </form>

@@ -27,29 +27,29 @@ router.post('/', function(req, res) {
   });
 });
 
-router.patch('/*', function(req, res) {
+router.patch('/:listid', function(req, res) {
   console.log(req.params[0]);
-  List.findByIdAndUpdate(req.params[0], { title: req.body.title, cards: req.body.cards }, function(err, listed) {
+  List.findByIdAndUpdate(req.params.listid, { title: req.body.title, cards: req.body.cards }, function(err, listed) {
     res.json(listed);
   })
 });
 
-router.delete('/*', function(req, res) {
-  List.findByIdAndRemove(req.params[0], function(err){
+router.delete('/:listid', function(req, res) {
+  List.findByIdAndRemove(req.params.listid, function(err){
     res.json();
   });
 });
 
 // :LISTID params.LISTID
 
-router.post('/*/card', function(req, res) {
+router.post('/:listid/card', function(req, res) {
   var newCard = new Card(
     { description: req.body.description,
       name: req.body.name
     }
   );
   // first error, second newly created document
-  List.findByIdAndUpdate(req.params[0], { $push: {"cards": newCard} }, function(err, listed) {});
+  List.findByIdAndUpdate(req.params.listid, { $push: {"cards": newCard} }, function(err, listed) {});
   newCard.save(function (err, card) {
     if (err) {
       console.log(err);
@@ -59,20 +59,20 @@ router.post('/*/card', function(req, res) {
   });
 });
 
-router.patch('/*/card/*', function(req, res) {
-  Card.findByIdAndUpdate(req.params[1], {description: req.body.description}, function(err, carded) {
+router.patch('/:listid/card/:cardid', function(req, res) {
+  Card.findByIdAndUpdate(req.params.cardid, {description: req.body.description}, function(err, carded) {
     res.json(carded);
   })
-  List.findByIdAndUpdate(req.params[0], { title: req.body.title, cards: req.body.cards }, function(err, listed) {
+  List.findByIdAndUpdate(req.params.listid, { title: req.body.title, cards: req.body.cards }, function(err, listed) {
     res.json(listed);
   })
 });
 
-router.delete('/*/card/*', function(req, res) {
-  Card.findByIdAndRemove(req.params[1], function(err) {
+router.delete('/:listid/card/:cardid', function(req, res) {
+  Card.findByIdAndRemove(req.params.cardid, function(err) {
     res.json();
   });
-  List.findByIdAndUpdate(req.params[0], { $pull: {"cards": req.params[1]} }, function(err, listed) {});
+  List.findByIdAndUpdate(req.params.listid, { $pull: {"cards": req.params.cardid} }, function(err, listed) {});
 });
 
 module.exports = router;

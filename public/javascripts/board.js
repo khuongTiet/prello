@@ -1,6 +1,4 @@
 var boardList;
-var display = new Set();
-
 
 // Use if no  internet connection
 var fail = [
@@ -56,10 +54,7 @@ function populateBoard(boardCards) {
   var boardHTML = '';
   $('.lists').attr('data-numberoflists', boardCards.length);
   for (indvList of boardCards) {
-    display.add(indvList._id);
-    if (display.has(indvList._id)) {
-      boardHTML = addList(indvList, listCounter, boardHTML);
-    }
+    boardHTML = addList(indvList, listCounter, boardHTML);
     listCounter++;
   }
   $('.lists').html(boardHTML);
@@ -86,8 +81,7 @@ function createList(listTitle) {
     type : "POST",
     dataType : "json",
   }).done(function(json) {
-    console.log("done");
-    populateBoard(boardList);
+    getBoard();
   });
 }
 
@@ -114,7 +108,6 @@ function addList(indvList, listCounter, boardHTML) {
         <input type="button" class="option-button" value="&hellip;">\
       </div>\
     </div></ul>';
-  display.add(indvList._id);
   return boardHTML;
 }
 
@@ -201,7 +194,6 @@ function addNewList() {
     // boardList[$('.lists')[0].dataset.numberoflists] = {"title" : new_list_name, "_id" : 0, "cards" : []};
     // Connection
     createList(new_list_name);
-    populateBoard(boardList);
     getBoard();
     closeAddNewList();
   }
@@ -216,7 +208,6 @@ function addNewCard(listIndex, name) {
     },
     dataType: 'json'
   }).done(function() {
-    populateBoard(boardList);
     getBoard();
   });
 }
@@ -232,9 +223,6 @@ function deleteList(listIndex) {
     type: 'DELETE',
     dataType: 'json',
   }).done(function() {
-    console.log('deleted');
-    display.delete(boardList.splice(listIndex, 1)._id);
-    populateBoard(boardList);
     getBoard();
   });
 }
@@ -247,8 +235,6 @@ function deleteCard(listIndex, cardIndex) {
     data: {},
     dataType: 'json',
   }).done(function() {
-    boardList[listIndex].cards.splice(cardIndex, 1);
-    populateBoard(boardList);
     getBoard();
   });
 }

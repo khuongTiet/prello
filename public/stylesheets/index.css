@@ -1,10 +1,12 @@
-/*---------------------------------------------------------------
-                               GENERAL
-----------------------------------------------------------------*/
-
 * {
   font-family: "Arial";
-  color: white;
+}
+
+html, body{
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  margin: 0;
 }
 
 a#logolink {
@@ -12,682 +14,92 @@ a#logolink {
   color: white;
 }
 
-#modal {
-  display: none;
-  opacity: 0.7;
-  background: grey;
-  height: 100%;
-  width: 100%;
-  z-index: 2;
-  position: fixed;
-}
-
-#bg {
-  opacity: 0.6;
-  background: grey;
-  height: 100%;
-  width: 100%;
-  display: block;
-}
-
-html, body{
-  height: 100%;
-  max-width: 100%;
-  margin: auto;
-  overflow: hidden;
-  background: #007AC3;
-}
-
-body.default {
-  background: #007AC3;
-}
-
-body.red {
-  background: #801515;
-}
-
-body.green {
-  background: #116611;
-}
-
-body.blue {
-  background: #142F54;
-}
-
-body.orange {
-  background: #FF9741;
-}
-
-body.purple {
-  background: #860FB5;
-}
-
-body.pink {
-  background: #DC0969;
-}
-
-#boardContainer {
+button {
+  padding: 14px 20px;
+  background-color: #223047;
   color: white;
-  font-weight: bold;
-  padding: 0px;
-  height: 88%;
-  width: 100%;
-  position: relative;
-}
-
-
-.add-button {
-  height: 38%;
-  width: 30%;
-  display: block;
-  background: #3ed898;
-  text-decoration: none;
   border: none;
+  cursor: pointer;
   border-radius: 5px;
-  position: absolute;
-  top: 50%;
-  left: 6%;
-  font-weight: bold;
 }
 
-.add-button:hover {
-  cursor: pointer;
-}
-
-.cancel-button {
-  font-size: 20px;
-  font-weight: bold;
-  height: 38%;
-  width: 12%;
-  display: block;
-  text-decoration: none;
-  border: none;
-  background: #393a3a;
-  position: absolute;
-  top: 50%;
-  left: 40%;
-}
-
-.cancel-button:hover {
-  cursor: pointer;
-}
-
-.namer-text {
-  display: block;
-  width: 96%;
-  padding-top: 10px;
-  margin-top: 5px;
-  padding-left: 0.1em;
-  color: black;
+.board {
+  color: white;
+  height: 60px;
+  width: 250px;
+  background: #a876f2;
+  vertical-align: middle;
   border-radius: 3px;
-  line-height: 10px;
-}
-
-/*---------------------------------------------------------------
-                               GENERAL END
-----------------------------------------------------------------*/
-
-/*---------------------------------------------------------------
-                               LISTS
-----------------------------------------------------------------*/
-
-.lists {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  white-space: nowrap;
-  height: 100%;
-  overflow: auto;
-}
-
-.lists li {
   display: inline-block;
-  height: auto;
-  min-height: 70px;
-  width: 16%;
-  background-color: #E3E4E6;
-  margin: 0 5px;
-  border-radius: 5px;
-  text-align: center;
-  vertical-align: top;
-  max-height: auto;
-}
-
-#lists-container {
-  display: inline-block;
-}
-
-.indv-list {
-  height: 35px;
-  width: auto;
-  display: block;
-  color: #393a3a;
-  text-align: left;
-  padding-left: 0.8em;
-  padding-right: 0.8em;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  line-height: 35px;
-  position: relative;
-  font-size: 14px;
-}
-
-.indv-list .cancel-button {
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: auto;
-  right: 0;
-  background: #E3E4E6;
-  border-radius: 5px;
-}
-
-#list-adder-container {
-  min-height: 40px;
-  position: relative;
-  border-radius: 5px;
-}
-
-#list-adder-button {
-  min-height: 40px;
-  background: #0067A2;
-  font-weight: normal;
-  line-height: 40px;
-  text-align: left;
-  padding-left: 0.8em;
-  border-radius: 5px;
-}
-
-#list-adder-button:hover {
-  opacity: 0.6;
-  cursor: pointer;
-}
-
-#list-adder-button.default {
-  background: #0067A2;
-}
-
-#list-adder-button.red {
-  background: #550000;
-}
-
-#list-adder-button.blue {
-  background: #061539;
-}
-
-#list-adder-button.green {
-  background: #004400;
-}
-
-#list-adder-button.orange {
-  background: #D86200;
-}
-
-#list-adder-button.purple {
-  background: #68058F;
-}
-
-#list-adder-button.pink {
-  background: #B50052;
-}
-
-
-#list-adder {
-  height: 80px;
-  width: 100%;
-  border-radius: 5px;
-  line-height: 40px;
-  font-weight: normal;
-  text-align: left;
-  padding-left: 0.8em;
-  z-index: 10;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #E3E4E6;
-  display: none;
-}
-
-.list {
-  float: left;
-  border-color: white;
-  width: 20%;
-  background-color: gray;
   padding: 14px 16px;
-  margin-right: 10px;
-  height: 90%;
 }
 
-/*---------------------------------------------------------------
-                               LISTS END
-----------------------------------------------------------------*/
-
-/*---------------------------------------------------------------
-                               CARDS
-----------------------------------------------------------------*/
-
-.cards {
-  list-style-type: none;
-  margin: 2;
-  padding: 0;
-  color: black;
-  position: relative;
-}
-
-.cards li {
-  display: block;
-  height: auto;
-  min-height: 28px;
-  width: 88%;
-  background: white;
-  color: black;
-  padding-left: 0.8em;
-  padding-right: 0.8em;
-  border-radius: 5px;
-  text-align: left;
-  vertical-align: baseline;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 30px;
-  margin: 10px auto 10px auto;
-}
-
-.cards li:hover {
-  cursor: pointer;
-}
-
-.card-adder-container {
-  position: relative;
-}
-
-.card-adder-button {
-  height: 35px;
-  width: auto;
-  background: #E3E4E6;
-  color: #8b8d8e;
-  text-align: left;
-  padding-left: 0.8em;
-  position: relative;
-  top: 50%;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  line-height: 35px;
-  font-weight: normal;
-}
-
-.card-adder-button:hover {
+.board:hover {
   opacity: 0.8;
-  background: #c9d0db;
-  color: #757777;
-  cursor: pointer;
-  text-decoration: underline;
 }
 
-.card-adder {
-  height: 100px;
-  width: 100%;
-  background: #E3E4E6;
-  position: absolute;
-  top: 0;
-}
-
-.card-adder .add-button {
-  height: 26%;
-  position: absolute;
-  top: 70%;
-}
-
-.card-adder .cancel-button {
-  height: 26%;
-  background: #E3E4E6;
-  width: 12%;
-  top: 70%;
-}
-
-.add-card-name {
-  width: 86%;
-  margin-top: 10px;
-  color: black;
-}
-
-.option-button {
-  font-size: 20px;
-  height: 36%;
-  width: 12%;
-  display: block;
-  text-decoration: none;
-  border: none;
-  position: absolute;
-  top: 60%;
-  right: 0;
-  line-height: 38%;
-  background: #E3E4E6;
-}
-
-/*#cards li:hover{
-  opacity: 0.8;
-  background: #cbd2db;
-  cursor: pointer;
-}*/
-
-
-#cards.licard {
-  display: inline-block;
-  color: black;
-  vertical-align: top;
-}
-
-/*---------------------------------------------------------------
-                               CARDS END
-----------------------------------------------------------------*/
-
-/*---------------------------------------------------------------
-                               INDIVIDUAL CARD
-----------------------------------------------------------------*/
-
-.card {
-  color: white;
-  height: 72%;
-  width: 44%;
-  background: #E3E4E6;
-  border-radius: 5px;
-  padding: 14px 16px;
-  font-weight: bold;
-  display: none;
-  position: fixed;
-  top: 6%;
-  left: 26%;
-  z-index: 3;
-}
-
-.card:hover {
-  cursor: default;
-}
-
-.modal-card {
-  background: #E3E4E6;
-}
-
-.modal-card .card-name{
-  display: inline-block;
-  position: absolute;
-  left: 0;
-  width: 100%;
-  float: left;
-
-}
-
-.modal-card .card-information {
-  position: absolute;
-  top: 12%;
-  left: 2%;
-  float: left;
-  height: 100%;
-  width: 76%;
-}
-
-.modal-card .card-information .card-members {
-  display: none;
-}
-
-.modal-card .card-information .card-labels {
-  position: absolute;
-  top: 0;
-  height: 10%;
-  background: #E3E4E6;
-}
-
-.modal-card .card-information .card-labels .color-label {
-  list-style-type: none;
-  white-space: nowrap;
-  padding: 0;
-}
-
-.modal-card .card-information .card-labels .color-label li {
-  display: inline-block;
-  width: 10%;
-  height: 1.2em;
-  min-height: 1.2em;
-  margin-right: 3px;
-}
-
-.modal-card .card-information .card-desc {
-  position: absolute;
-  top: 12%;
-}
-
-.modal-card .card-information .card-comment {
-  position: absolute;
-  top: 26%;
-  background: #E3E4E6;
-  color: black;
-}
-
-.modal-card .card-information .card-comment .add-card-comment {
-  color: black;
-}
-
-.modal-card .card-information .card-activity {
-  position: absolute;
-  top: 56%;
-  height: auto;
-  min-height: 20%;
-}
-
-.modal-card .card-operators {
-  position: absolute;
-  top: 12%;
-  right: 2%;
-  float: right;
-  height: 100%;
-  width: 20%;
-}
-
-.card-operators li {
-  min-height: 1em;
-  height: 1.5em;
-  line-height: 1.5em;
-}
-
-.modal-card .card-operators .card-adds {
-  position: absolute;
-  top: 0;
-  height: 50%;
-  width: 100%;
-}
-
-.modal-card .card-operators .card-actions {
-  position: absolute;
-  top: 50%;
-  height: 50%;
-  width: 100%;
-}
-
-.listed-card {
-  position: relative;
-  width: 100%;
-}
-
-.listed-card .card-labels {
-  list-style-type: none;
-  white-space: nowrap;
-  padding: 0;
-  height: 1em;
-  min-height: 1em;
-  line-height: 1em;
-}
-
-
-.listed-card .card-labels li {
-  display: inline-block;
-  min-height: 0.5em;
-  height: auto;
-  width: auto;
-  min-width: 5%;
-  margin: 0;
-  margin-right: 3px;
-}
-
-.listed-card .blue-label {
-  background: DodgerBlue;
-}
-
-.listed-card .green-label {
-  background: LimeGreen;
-}
-
-.listed-card .red-label {
-  background: FireBrick;
-}
-
-.listed-card .yellow-label {
-  background: Gold;
-}
-
-.listed-card .purple-label {
-  background: MediumOrchid;
-}
-
-.listed-card .orange-label {
-  background: DarkOrange;
-}
-
-.label-adder-container {
-  position: relative;
-}
-
-.label-adder-button {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.label-adder {
-  position: absolute;
-  top: 150%;
-  left: 0;
-  height: 1200%;
-  width: 150%;
-  background: white;
-  color: black;
+.board#boardAdder {
   text-align: center;
-  border-radius: 4px;
-  z-index: 1;
+  line-height: 60px;
+  background: #a0a0a0;
+  font-weight: normal;
+  cursor: pointer;
+  position: relative;
 }
 
-.listed-card .cancel-button {
+#boardAddMenu {
+  text-align: center;
+  height: 300%;
+  width: 100%;
+  background: white;
+  margin: inherit;
   position: absolute;
   top: 0;
-  left: 90%;
+  left: 0;
+  border-radius: 3px;
+  box-shadow: 0px 0px 5px #888888;
+  color: black;
+}
+
+#boards{
+  list-style-type: none;
+}
+
+#boards li {
+  display: inline-block;
+}
+
+.box {
+  display: flex;
   height: 100%;
-  width: 10%;
-  color: #E3E4E6;
-  background: white;
-  border-radius: 5px;
 }
 
-.add-labels {
-  padding: 0;
-  position: relative;
-}
 
-.add-labels li {
-  position: relative;
-  left: -5%;
-  width: 70%;
-  border-radius: 4px;
-  display: block;
-  text-align: left;
-  height: 2em;
-  z-index: 1;
-}
-
-/*---------------------------------------------------------------
-                               INDIVIDUAL CARD END
-----------------------------------------------------------------*/
-
-/*---------------------------------------------------------------
-                               TOPNAV
-----------------------------------------------------------------*/
-
-#topnav {
-  width: auto;
-  background-color: #0067A2;
+.topnav{
+  background-color: #3a5282;
   overflow: hidden;
   text-align: center;
-  opacity: 0.9;
+  width: 100%;
 }
 
-#topnav.default {
-  background: #0067A2;
-}
-
-#topnav.red {
-  background: #550000;
-}
-
-#topnav.blue {
-  background: #061539;
-}
-
-#topnav.green {
-  background: #004400;
-}
-
-#topnav.orange {
-  background: #D86200;
-}
-
-#topnav.purple {
-  background: #68058F;
-}
-
-#topnav.pink {
-  background: #B50052;
-}
-
-.topnav-search {
-  float: left;
-  display: block;
-  padding: 6px 8px;
-  text-decoration: none;
-  background: white;
-  width: 130px;
-  -webkit-transition: width 0.4s ease-in-out;
-  transition: width 0.4s ease-in-out;
-  position: absolute;
-  /* Fix these*/
-  top: 0.5%;
-  left: 5%;
-  border-radius: 3px;
-  color: black;
-
-}
-
-.topnav-search:focus {
-  width: 20%;
-}
-
-#main-menu-button{
+.topnav .navbuttons{
   float: left;
   display: block;
   text-align: center;
   padding: 6px 8px;
   text-decoration: none;
   color: white;
+  background: #4f6ca5;
   border-radius: 5px;
   margin: 5px 5px;
-  opacity: 0.7;
 }
 
-#topnav #search.navbuttons {
+.topnav #search.navbuttons {
   background: white;
   color: black;
 }
 
-#topnav #main-menu {
+.topnav #main-menu {
   display: none;
   height: 40%;
   width: 20%;
@@ -705,181 +117,23 @@ body.pink {
   cursor: pointer;
 }
 
-#topnav #home {
+
+.topnav #home {
   color: white;
   display: block;
   text-align: center;
   text-decoration: none;
-  padding: 0;
+  padding: 6px 8px;
   font-weight: bold;
   font-size: 24px;
-  position: absolute;
-  left: 44%;
+  position: static;
 }
 
-#topnav #home a {
-  font-family: "Brush Script MT", cursive;
-  font-size: 1.5em;
-  padding: 0;
-}
 
-#topnav #log-out {
-  postion: absolute;
-  right: 0;
-  display: block;
-  text-align: center;
-  padding: 6px 8px;
-  text-decoration: none;
-  color: white;
-  border-radius: 5px;
-  margin: 5px 5px;
-  float: right;
-}
-
-#topnav #log-out:hover {
-  opacity: 0.8;
-  cursor: pointer;
-}
-
-.box {
-  display: flex;
-  height: 100%;
-}
-
-/*---------------------------------------------------------------
-                               TOPNAV END
-----------------------------------------------------------------*/
-
-/*---------------------------------------------------------------
-                               WELCOMENAV
-----------------------------------------------------------------*/
-
-.welcomenav{
-  width: auto;
-  overflow: hidden;
-  padding: 10px 16px;
-  font-size: 18px;
+#container {
+  background: white;
+  color: #3c3d3f;
   font-weight: bold;
-  white-space: nowrap;
-  position: relative;
-}
-
-.welcomenav a{
-  display: block;
-  text-decoration: none;
-  padding: 6px 8px;
-  float: left;
-  margin: 5 0;
-}
-
-.welcomenav a:hover{
-  background: #88b8e8;
-  opacity: 0.8;
-  border-radius: 3px;
-}
-
-/*---------------------------------------------------------------
-                               WELCOMENAV END
-----------------------------------------------------------------*/
-
-/*---------------------------------------------------------------
-                               SIDEBAR
-----------------------------------------------------------------*/
-
-#sidebar-container {
-  position: relative;
+  padding: 16px 0 0 140px;
   height: 100%;
-  width: 100%;
 }
-
-#sidebar-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: block;
-  text-decoration: none;
-  padding: 6px 8px;
-  margin: 5 0;
-  z-index: 1;
-  display: block;
-  text-decoration: none;
-  padding: 6px 8px;
-}
-
-
-
-#sidebar-button:hover {
-  opacity: 0.8;
-  border-radius: 3px;
-  background: #88b8e8;
-}
-
-#sidebar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  overflow: auto;
-  height: 100%;
-  width: 20%;
-  background: #E3E4E6;
-  opacity: 0.8;
-  border-radius: 3px;
-  z-index: 2;
-}
-
-#change-background-container {
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-
-#change-background-button {
-  display: block;
-  height: 40px;
-  position: relative;
-  color: white;
-}
-
-#change-background {
-  height: 100%
-}
-
-.change-color {
-  height: 10%;
-  width: 10%;
-  position: relative;
-}
-
-#default {
-  background: #0079be;
-}
-
-#color1 {
-  background: #801515;
-}
-
-#color2 {
-  background: #116611;
-}
-
-#color3 {
-  background: #142F54;
-}
-
-#color4 {
-  background: #860FB5;
-}
-
-#color5 {
-  background: #FF9741;
-}
-
-#color6 {
-  background: #DC0969;
-}
-
-
-
-/*---------------------------------------------------------------
-                               SIDEBAR END
-----------------------------------------------------------------*/
