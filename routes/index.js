@@ -2,17 +2,20 @@ var express = require('express');
 var router = express.Router();
 
 var User = require('../models/user');
+var Board = require('../models/board');
 
 function requireLogin(req, res, next) {
   if (!req.user) {
     res.redirect('/login');
   } else {
-    res.render('index', {title: 'Boards | Prello', style: "/stylesheets/boards.css", jscript: "/javascripts/boards.js"});
+    next();
   }
 };
 
 router.get('/', requireLogin, function(req, res) {
-  res.render('index', {title: 'Boards | Prello', style: "/stylesheets/boards.css", jscript: "/javascripts/boards.js"});
+  Board.find({author : req.user.name}, function(err, boards) {
+    res.render('index', {title: 'Boards | Prello', userBoards: boards, style: "/stylesheets/index.css", jscript: "/javascripts/index.js"});
+  });
 });
 
 router.get('/login', function(req, res) {

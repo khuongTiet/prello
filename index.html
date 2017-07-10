@@ -1,26 +1,13 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>Board | Prello</title>
+  <title>Boards | Prello</title>
   <link rel="stylesheet" href="public/stylesheets/index.css">
-  <link rel="icon" href="icon.png" type="image/png" sizes="16x16">
+  <link href="https://fonts.googleapis.com/css?family=Damion" rel="stylesheet">
+  <link rel="icon" href="icon.png" type="image/png" sizes="32x32">
 </head>
 
 <body>
-  <div id="modal" style="display: none">
-    <div id="bg">
-    </div>
-    <div id="fg">
-      <div id="card" style="display: none">
-        CARD<br><br>
-        Description<br>
-        Labels<br>
-        Comments<br>
-        <textarea rows="4" cols="30" name="comment"></textarea><br>
-        Users<br>
-      </div>
-    </div>
-  </div>
 
   <div id="topnav">
     <div id="main-menu-container">
@@ -36,39 +23,64 @@
     </div>
   </div>
 
-  <div class="welcomenav">
-    <a href="#">Welcome Board</a>
-    <div id="sidebar-container">
-      <div id="sidebar-button">
-        Show menu
-      </div>
-    </div>
-  </div>
+  <div id="container">
+    Personal Boards
+    <div id="boardList">
+      <ul id="boards">
 
-  <div id="boardContainer" class="main-color">
-    <ul class="lists" data-numberoflists="0">
-    </ul>
+        <li>
+          <a href="./index.html">
+            <div class="board">
+              Welcome
+            </div>
+          </a>
+        </li>
 
-    <div id="sidebar" style="display: none">
-      <div id="change-background-container">
-        <div id="change-background-button">Change background color</div>
-        <div id="change-background">
-          <div class="change-color" id="default" data-color="default"></div>
-          <div class="change-color" id="color1" data-color="red"></div>
-          <div class="change-color" id="color2" data-color="green"></div>
-          <div class="change-color" id="color3" data-color="blue"></div>
-          <div class="change-color" id="color4" data-color="purple"></div>
-          <div class="change-color" id="color5" data-color="orange"></div>
-          <div class="change-color" id="color6" data-color="pink"></div>
-        </div>
-      </div>
+        <li>
+          <a href="./index.html">
+            <div class="board">
+              Board1
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <div class="board" id="board-adder-container">
+            <div id="board-adder-button">
+              Create new board ...
+            </div>
+            <div id="board-adder" style="display: none">
+              <p id="board-adder-title">
+                Create a Board
+                <input type="button" class="cancel-button" value="&#10005;">
+              </p>
+              <hr>
+              <form method="POST" action"/board">
+                <label for="add-board-title">Title</label>
+                <input id="add-board-title" type="text" placeholder="Management" name="title">
+                <input id="add-board-btn" class="add-button" type="submit" value="Create">
+              </form>
+
+            </div>
+          </div>
+
+
+        </li>
+
+      </ul>
+
     </div>
+
+    <a href="#">Create a new team ...</a>
+
+    <br>
+
   </div>
 
   <script src="public/javascripts/jquery-3.2.1.min.js"></script>
-  <script src="public/javascripts/index.js"></script>
-
-
+  <script src="public/javascripts/index.js">
+  </script>
 
 </body>
+
 </html>

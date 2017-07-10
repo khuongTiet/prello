@@ -1,46 +1,51 @@
 <%- include('./header');%>
-  <div class="topnav" id="nav">
-    <div class="navbuttons" id="optionbar">
-      Boards
-      <div id="main-menu" style="display: none">
-      </div>
+  <div id="topnav">
+    <div id="main-menu-container">
+      <div id="main-menu-button">Boards</div>
+      <div id="main-menu" style="display: none"></div>
     </div>
 
-    <div class="navbuttons" id="search">Search</div>
-    <div id="home"><a href="#" id="logolink">Prello</a></div>
+    <input type="search" class="topnav-search" name="searchbar" placeholder="Search...">
+    <div id="home"><a href="boards.html" id="logolink">Prello</a></div>
+
+    <div id="log-out">
+      Log Out
+    </div>
   </div>
 
   <div id="container">
     Personal Boards
     <div id="boardList">
       <ul id="boards">
+        <% for (var i = 0; i < userBoards.length; i++) { %>
+          <li>
+            <a href="/board/<%= userBoards[i]._id %>">
+              <div class="board"><%= userBoards[i].name%></div>
+            </a>
+            <input type="button" class="cancel-button" value="&#10005;">
+          </li>
+        <% } %>
 
         <li>
-          <a href="./board">
-            <div class="board">
-              Welcome
+          <div class="board" id="board-adder-container">
+            <div id="board-adder-button">
+              Create new board ...
             </div>
-          </a>
-        </li>
+            <div id="board-adder" style="display: none">
+              <p id="board-adder-title">
+                Create a Board
+                <input type="button" class="cancel-button" value="&#10005;">
+              </p>
+              <hr>
+              <form method="POST" action="/board">
+                <label for="add-board-title">Title</label>
+                <input id="add-board-title" type="text" placeholder="Management" name="title">
+                <input id="add-board-btn" class="add-button" type="submit" value="Create">
+              </form>
 
-        <li>
-          <a href="./board">
-            <div class="board">
-              Board1
-            </div>
-          </a>
-        </li>
-
-        <li>
-          <div class="board" id="boardAdder">
-            Create new board ...
-            <div id="boardAddMenu" style="display: none">
-              <span>Create Board</span>
-              <span id="line-divider"></span><br>
-              <span>Title</span><br>
-              <input type="text">
             </div>
           </div>
+
 
         </li>
 

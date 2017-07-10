@@ -3,14 +3,6 @@
     <div id="bg">
     </div>
     <div id="fg">
-      <div id="card" style="display: none">
-        CARD<br><br>
-        Description<br>
-        Labels<br>
-        Comments<br>
-        <textarea rows="4" cols="30" name="comment"></textarea><br>
-        Users<br>
-      </div>
     </div>
   </div>
 
@@ -29,7 +21,7 @@
   </div>
 
   <div class="welcomenav">
-    <a href="#">Welcome Board</a>
+    <a href="#"><%= boardPage.name %></a>
     <div id="sidebar-container">
       <div id="sidebar-button">
         Show menu
@@ -38,7 +30,102 @@
   </div>
 
   <div id="boardContainer" class="main-color">
-    <ul class="lists" data-numberoflists="0">
+    <ul class="lists">
+      <!-- dynamically add lists using ejs -->
+      <% for (var i = 0; i < boardPage.lists.length; i++) { %>
+        <li>
+          <div class="indv-list">
+            <%= boardPage.lists[i].title %>
+            <input type="button" class="cancel-button" value="&#10005;" onclick="deleteList(event, <%= `"${boardPage._id}", "${boardPage.lists[i]._id}"` %>)">
+          </div>
+          <ul class="cards">
+            <% for (var j=0; j < boardPage.lists[i].cards.length; j++) { %>
+              <li class="listed-card">
+                <ul class="card-labels" style="display: none"></ul>
+                <%= boardPage.lists[i].cards[j].name %>
+                <input type="button" class="cancel-button" value="&#10005;" onclick="deleteCard(event, <%= `
+                                                                                    "${boardPage._id}",
+                                                                                    "${boardPage.lists[i]._id}",
+                                                                                    "${boardPage.lists[i].cards[j]._id}"` %>)">
+                <div class="card" style="display: none">
+                  <ul class="modal-card">
+                    <div class="card-name"><%= boardPage.lists[i].cards[j].name %></div>
+                    <div class="card-information">
+                      <div class="card-members"></div>
+                      <div class="card-labels"></div>
+                      <div class="card-desc"></div>
+                      <div class="card-comment">
+                        <ul class="card-comments-list">
+                          
+                        </ul>
+                        <form method="POST" action=<%= `${boardPage._id}/list/${boardPage.lists[i]._id}/card/${boardPage.lists[i].cards[j]._id}` %>>
+                          <textarea rows="3" col="50" class="add-card-name" name="content"></textarea>
+                          <input type="submit" value="Add" class="add-button">
+                          <input type="button" class="cancel-button" value="&#10005;">
+                        </form>
+                      </div>
+                      <div class="card-activity"></div>
+                    </div>
+                    <div class="card-operators">
+                      <div class="card-adds">
+                        <li>Add member</li>
+                        <li class="label-adder-container">
+                          Labels
+                          <div class="label-adder-button"></div>
+                          <div class="label-adder" style="display: none">
+                            Labels
+                            <ul class="add-labels">
+                              <li class="blue-label"></li>
+                              <li class="green-label"></li>
+                              <li class="red-label"></li>
+                              <li class="yellow-label"></li>
+                              <li class="purple-label"></li>
+                              <li class="add-label-orange"></li>
+                            </ul>
+                          </div>
+                        </li>
+                        <li>Add checklist</li>
+                        <li>Add due date</li>
+                        <li>Add attachment</li>
+                      </div>
+                      <div class="card-actions">
+                        <li>Move</li>
+                        <li>Copy</li>
+                        <li>Subscribe</li>
+                        <li>Archive</li>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+              </li>
+            <%}%>
+            <div class="card-adder-container">
+              <div class="card-adder-button">Add a card...</div>
+              <div class="card-adder" style="display: none">
+                <form method="POST" action=<%= `${boardPage._id}/list/${boardPage.lists[i]._id}/card` %>>
+                  <textarea rows="3" col="50" class="add-card-name" name="name"></textarea>
+                  <input type="submit" value="Add" class="add-button">
+                  <input type="button" class="cancel-button" value="&#10005;">
+                  <input type="button" class="option-button" value="&hellip;">
+                </form>
+              </div>
+            </div>
+          </ul>
+        </li>
+      <%}%>
+
+      <li id="list-adder-container">
+        <div id="list-adder-button">
+          Add a list...
+        </div>
+        <div id="list-adder" style="display: none">
+          <form method="POST" action=<%= `${boardPage._id}/list`%>>
+            <input type="text" placeholder="Add a list..." class="namer-text" id="new-list-name" name="title">
+            <input type="submit" value="Save" class="add-button">
+            <input type="button" class="cancel-button" value="&#10005;" onclick="closeAddNewList()">
+          </form>
+        </div>
+      </li>
     </ul>
 
     <div id="sidebar" style="display: none">

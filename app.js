@@ -11,9 +11,9 @@ var login = require('./routes/login');
 var board = require('./routes/board');
 var index = require('./routes/index');
 var users = require('./routes/users');
-var list = require('./routes/list');
 
 var User = require('./models/user');
+var Board = require('./models/board');
 
 mongoose.connect('mongodb://localhost/prello');
 var db = mongoose.connection;
@@ -68,12 +68,22 @@ app.use(function(req, res, next) {
   }
 });
 
-app.use('/login', login);
-app.use('/board', board);
-app.use('/', index);
+authorize = function(req, res, next) {
+  if (req.user) {
+    Board.findOne({ permissions: req.session.user.name }, function(err, board) {
+      if (!board) {
+        res.redirect('/');
+      } else {
+        next();
+      }
+    });
+  }
+}
 
+app.use('/login', login);
+app.use('/', index);
+app.use('/board', board);
 app.use('/users', users);
-app.use('/list', list);
 
 
 // catch 404 and forward to error handler

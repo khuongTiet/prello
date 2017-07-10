@@ -1,10 +1,33 @@
 var mongoose = require('mongoose');
 
-var schema = mongoose.Schema({
-  name: String,
-  creator: Array,
-  members: Array,
-  lists: Array
-});
+var commentSchema = mongoose.Schema({
+  author: String,
+  date: Date,
+  content: String
+}, { versionKey: false });
 
-module.exports = mongoose.model('Card', schema);
+var cardSchema = mongoose.Schema({
+  name: String,
+  labels: Array,
+  members: Array,
+  description: String,
+  author: String,
+  comments: [commentSchema]
+}, { versionKey: false });
+
+var listSchema = mongoose.Schema({
+  title: String,
+  cards: [cardSchema]
+}, { versionKey: false });
+
+var boardSchema = mongoose.Schema({
+  name: String,
+  author: String,
+  members: Array,
+  permissions: Array,
+  lists: [listSchema]
+},{ versionKey: false });
+
+
+
+module.exports = mongoose.model('Board', boardSchema);

@@ -187,61 +187,34 @@ function closeAddCard(e) {
   $(e.target).parent()[0].style.display = 'none';
 }
 
-function addNewList() {
-  var new_list_name = $('#new-list-name')[0].value;
-  if (new_list_name.length > 0 ) {
-    // No connection
-    // boardList[$('.lists')[0].dataset.numberoflists] = {"title" : new_list_name, "_id" : 0, "cards" : []};
-    // Connection
-    createList(new_list_name);
-    getBoard();
-    closeAddNewList();
-  }
-}
-
-function addNewCard(listIndex, name) {
-  $.ajax({
-    url: 'http://localhost:3000/list/' + boardList[listIndex]._id + '/card/',
-    type: 'POST',
-    data: {
-      'description' : name,
-    },
-    dataType: 'json'
-  }).done(function() {
-    getBoard();
-  });
-}
-
 function closeAddNewList() {
   $('#new-list-name')[0].value = '';
   $('#list-adder').toggle();
 }
 
-function deleteList(listIndex) {
+function deleteList(e, bid, lid) {
   $.ajax({
-    url: 'http://localhost:3000/list/' + boardList[listIndex]._id,
+    url: `http://localhost:3000/board/${bid}/list/${lid}/`,
     type: 'DELETE',
     dataType: 'json',
   }).done(function() {
-    getBoard();
+    $(e.target).parent().parent().remove();
   });
 }
 
-function deleteCard(listIndex, cardIndex) {
+function deleteCard(e, bid, lid, cid) {
   $.ajax({
-    url: 'http://localhost:3000/list/' + boardList[listIndex]._id
-          + '/card/' + boardList[listIndex].cards[cardIndex]._id,
+    url: `http://localhost:3000/board/${bid}/list/${lid}/card/${cid}/`,
     type: 'DELETE',
-    data: {},
     dataType: 'json',
   }).done(function() {
-    getBoard();
+    $(e.target).parent().remove();
   });
 }
 
 
 $(function() {
-  getBoard();
+  //getBoard();
 
   $('.lists').on('click', '#list-adder-button', function(e) {
     $(e.target).siblings()[0].style.display = 'block';
@@ -254,24 +227,6 @@ $(function() {
   $('.lists').on('click', '.cards .card-adder .cancel-button', function(e) {
     closeAddCard(e);
   });
-
-  // go up one more level
-  $('.lists').on('click', '.cards .card-adder .add-button', function(e) {
-    var listIndex = $(this).parents('.cards')[0].dataset.indexlist;
-    //var cardIndex = $(this).parents('.cards')[0].dataset.numcards;
-    var new_card_name = $(e.target).siblings('.add-card-name')[0].value;
-    //boardList[listIndex].cards.push({"description" : new_card_name, "_id" : cardIndex});
-    addNewCard(listIndex, new_card_name);
-    populateBoard(boardList);
-    closeAddCard(e);
-  })
-
-  $('.lists').on('click', '.cards .listed-card .cancel-button', function(e) {
-    var cardIndex = $(this).siblings('.card')[0].dataset.indexcard;
-    var listIndex = $(this).parents('.cards')[0].dataset.indexlist;
-    deleteCard(listIndex, cardIndex);
-    $(this).parent().remove();
-  })
 
 
   $('.lists').on('click', '.cards .listed-card ', function(e) {
@@ -299,12 +254,6 @@ $(function() {
       }
     }
   });
-
-  $('.lists').on('click', '.indv-list .cancel-button', function(e) {
-    deleteList($(this).parent().siblings('.cards')[0].dataset.indexlist);
-    $(this).parent().parent().remove();
-  })
-
 
   $('.lists').on('click', '.modal-card .label-adder-container .label-adder-button', function(e) {
     console.log($(e.target).siblings('.label-adder').toggle());
