@@ -15,8 +15,14 @@
     <input type="search" class="topnav-search" name="searchbar" placeholder="Search...">
     <div id="home"><a href="/" id="logolink">Prello</a></div>
 
+    <div id="current-user">
+      <%= user.name %>
+    </div>
+
     <div id="log-out">
-      Log Out
+      <form method='POST' action='/logout'>
+        <input type='submit' class='add-button' value='Log Out'>
+      </form>
     </div>
   </div>
 
@@ -34,13 +40,13 @@
       <!-- dynamically add lists using ejs -->
       <% for (var i = 0; i < boardPage.lists.length; i++) { %>
         <li>
-          <div class="indv-list">
+          <div class="indv-list" data-lid="<%= `${boardPage.lists[i]._id}` %>">
             <%= boardPage.lists[i].title %>
             <input type="button" class="cancel-button" value="&#10005;" onclick="deleteList(event, <%= `"${boardPage._id}", "${boardPage.lists[i]._id}"` %>)">
           </div>
           <ul class="cards">
             <% for (var j=0; j < boardPage.lists[i].cards.length; j++) { %>
-              <li class="listed-card">
+              <li class="listed-card" data-cid="<%= `${boardPage.lists[i].cards[j]._id}` %>">
                 <ul class="card-labels">
                   <% for (var h=0; h < boardPage.lists[i].cards[j].labels.length; h++) { %>
                     <li class="<%= boardPage.lists[i].cards[j].labels[h] %>"></li>
@@ -162,11 +168,9 @@
           Add a list...
         </div>
         <div id="list-adder" style="display: none">
-          <form method="POST" action=<%= `${boardPage._id}/list`%>>
-            <input type="text" placeholder="Add a list..." class="namer-text" id="new-list-name" name="title">
-            <input type="submit" value="Save" class="add-button">
-            <input type="button" class="cancel-button" value="&#10005;" onclick="closeAddNewList()">
-          </form>
+          <input type="text" placeholder="Add a list..." class="namer-text" id="new-list-name" name="title">
+          <input type="button" value="Save" class="add-button" onclick="addList(event)">
+          <input type="button" class="cancel-button" value="&#10005;" onclick="closeAddNewList()">
         </div>
       </li>
     </ul>
@@ -175,13 +179,20 @@
       <div id="change-background-container">
         <div id="change-background-button">Change background color</div>
         <ul id="change-background">
-          <li class="change-color" id="default" data-color="default"></li>
-          <li class="change-color" id="color1" data-color="red"></li>
-          <li class="change-color" id="color2" data-color="green"></li>
-          <li class="change-color" id="color3" data-color="blue"></li>
-          <li class="change-color" id="color4" data-color="purple"></li>
-          <li class="change-color" id="color5" data-color="orange"></li>
-          <li class="change-color" id="color6" data-color="pink"></li>
+          <li class="change-color" id="default" data-color="default" onclick="changeColor(event, <%=`
+                                                                            "${boardPage._id}"` %>)"></li>
+          <li class="change-color" id="color1" data-color="red" onclick="changeColor(event, <%=`
+                                                                            "${boardPage._id}"` %>)"></li>
+          <li class="change-color" id="color2" data-color="green" onclick="changeColor(event, <%=`
+                                                                            "${boardPage._id}"` %>)"></li>
+          <li class="change-color" id="color3" data-color="blue" onclick="changeColor(event, <%=`
+                                                                            "${boardPage._id}"` %>)"></li>
+          <li class="change-color" id="color4" data-color="purple" onclick="changeColor(event, <%=`
+                                                                            "${boardPage._id}"` %>)"></li>
+          <li class="change-color" id="color5" data-color="orange" onclick="changeColor(event, <%=`
+                                                                            "${boardPage._id}"` %>)"></li>
+          <li class="change-color" id="color6" data-color="pink" onclick="changeColor(event, <%=`
+                                                                            "${boardPage._id}"` %>)"></li>
         </ul>
       </div>
 
@@ -190,8 +201,8 @@
           Share...
         </div>
         <div id="add-board-member" style="display: none">
-          <form method="POST">
-            <input type="text" class="namer-text" placeholder="John Doe" name="board-member">
+          <form method="POST" action=<%= `${boardPage._id}/member`%>>
+            <input type="text" class="namer-text" placeholder="John Doe" name="member">
             <input type="submit" value="Add member" class="add-button">
           </form>
         </div>
@@ -199,4 +210,5 @@
 
     </div>
   </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js'></script>
 <%- include('./footer'); %>

@@ -70,7 +70,7 @@ router.post('/login', function(req, res) {
 
 router.get('/logout', function(req, res) {
   req.session.reset();
-  res.render('login', {title: 'Login | Prello', style: "/stylesheets/login.css", jscript: "/javascripts/login.js"});
+  res.redirect('/login');
 });
 
 module.exports = router;

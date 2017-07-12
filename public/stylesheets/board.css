@@ -770,22 +770,22 @@ body.pink {
   padding: 0;
 }
 
-#topnav #log-out {
-  postion: absolute;
-  right: 0;
+#topnav #current-user {
+  position: absolute;
+  right: 20%;
   display: block;
-  text-align: center;
-  padding: 6px 8px;
-  text-decoration: none;
+  float: left;
   color: white;
-  border-radius: 5px;
-  margin: 5px 5px;
-  float: right;
 }
 
-#topnav #log-out:hover {
-  opacity: 0.8;
-  cursor: pointer;
+#topnav #log-out input[type=submit]{
+  position: absolute;
+  top: 0;
+  left:auto;
+  right: 0;
+  background: red;
+  height: 10%;
+  width: 5%;
 }
 
 .box {
@@ -878,7 +878,7 @@ body.pink {
   height: 10%;
   width: 100%;
   position: absolute;
-  top: 30%;
+  top: 50%;
 }
 
 #change-background-button {
@@ -909,6 +909,7 @@ body.pink {
   width: 100%;
   position: absolute;
   top: 10%;
+  height: 30%;
 }
 
 #add-board-member-button {
@@ -919,6 +920,15 @@ body.pink {
   color: #393a3a;
   background: white;
   border-radius: 4px;
+}
+
+#add-board-member {
+  position: absolute;
+  top: 50%;
+}
+
+#add-board-member .add-button {
+  top: 120%;
 }
 
 #default {

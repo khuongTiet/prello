@@ -9,6 +9,8 @@ var authorize = require('../libs/authorize')
 
 var router = express.Router();
 
+var io = require('../socketio');
+
 router.get('/', function(req, res, next) {
   Board.find(function(err, boards) {
     res.json(boards); // Pull from db
@@ -21,7 +23,8 @@ router.post('/', function(req, res, next) {
     {
       name: req.body.title,
       author: req.user.name,
-      permissions: [req.user.name]
+      permissions: [req.user.name],
+      color: 'main-color'
     }
   );
 
@@ -37,14 +40,30 @@ router.post('/', function(req, res, next) {
 router.get('/:boardid', authorize, function(req, res, next) {
   Board.findById(req.params.boardid, function(err, boardPage) {
     if (boardPage) {
-      res.render('board', {title: boardPage.name, boardPage, style: "/stylesheets/board.css", jscript: "/javascripts/board.js"});
+      res.render('board', {user: req.user, title: boardPage.name, boardPage, style: "/stylesheets/board.css", jscript: "/javascripts/board.js"});
     }
+    io.getInstance().emit('join', {roomid: req.params.boardid, user: req.user.name});
   });
 });
 
 router.delete('/:boardid', function(req, res, next) {
   Board.findByIdAndRemove(req.params.boardid, function(err) {
     res.json('');
+  });
+});
+
+router.post('/:boardid/member', function(req, res) {
+  Board.findById(req.params.boardid, function(err, board) {
+    if (board) {
+      board.permissions.push(req.body.member);
+      board.save(function(err, updated) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.redirect('back');
+        }
+      });
+    }
   });
 });
 
@@ -83,6 +102,7 @@ router.post('/:boardid/list', function(req, res) {
         } else {
           res.redirect('back');
         }
+        io.getInstance().to(req.params.boardid).emit('newList', {roomid: req.params.boardid, title: req.body.title, author: req.user.name});
       });
     }
   });
@@ -135,6 +155,7 @@ router.post('/:boardid/list/:listid/card', function(req, res) {
         if (err) {
           console.log(err);
         } else {
+          io.getInstance().to(req.params.boardid).emit('newList', {title: req.body.title, author: req.user.name});
           res.redirect('back');
         }
       });
@@ -189,13 +210,19 @@ router.post('/:boardid/list/:listid/card/:cardid/labels', function(req, res) {
         } else {
           res.json('');
         }
+        io.getInstance().to(req.params.boardid).emit('newLabel',
+        {
+          roomid: req.params.boardid,
+          cid: req.params.cardid,
+          author: req.user.name,
+          label: req.body.label
+        });
       });
     }
   });
 });
 
 router.post('/:boardid/list/:listid/card/:cardid/comments', function(req, res) {
-  console.log('adding comment');
   Board.findById(req.params.boardid, function(err, board) {
     if (board) {
       var today = new Date();
