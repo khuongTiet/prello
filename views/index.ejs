@@ -1,4 +1,8 @@
 <%- include('./header');%>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+</script>
   <div id="topnav">
     <div id="main-menu-container">
       <div id="main-menu-button">Boards</div>
@@ -22,7 +26,7 @@
             <a href="/board/<%= userBoards[i]._id %>">
               <div class="board"><%= userBoards[i].name%></div>
             </a>
-            <input type="button" class="cancel-button" value="&#10005;">
+            <input type="button" class="cancel-button" value="&#10005;" onclick="deleteBoard(event, <%=`"${userBoards[i]._id}"`%>)">
           </li>
         <% } %>
 

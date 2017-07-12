@@ -24,6 +24,7 @@ var boardSchema = mongoose.Schema({
   name: String,
   author: String,
   members: Array,
+  color: String,
   permissions: Array,
   lists: [listSchema]
 },{ versionKey: false });

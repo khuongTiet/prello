@@ -195,7 +195,8 @@ button {
 }
 
 #boards li .cancel-button {
-
+  background: #a876f2;
+  color: white;
 }
 
 /*---------------------------------------------------------------

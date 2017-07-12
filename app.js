@@ -68,17 +68,7 @@ app.use(function(req, res, next) {
   }
 });
 
-authorize = function(req, res, next) {
-  if (req.user) {
-    Board.findOne({ permissions: req.session.user.name }, function(err, board) {
-      if (!board) {
-        res.redirect('/');
-      } else {
-        next();
-      }
-    });
-  }
-}
+
 
 app.use('/login', login);
 app.use('/', index);

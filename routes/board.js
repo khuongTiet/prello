@@ -5,6 +5,7 @@ var Board = require('../models/board');
 var List = require('../models/list');
 var Card = require('../models/card');
 
+var authorize = require('../libs/authorize')
 
 var router = express.Router();
 
@@ -19,11 +20,10 @@ router.post('/', function(req, res, next) {
   var newBoard = new Board(
     {
       name: req.body.title,
-      author: req.user.name
+      author: req.user.name,
+      permissions: [req.user.name]
     }
   );
-
-  permissions.push(req.user.name);
 
   newBoard.save(function(err, board) {
     if (err) {
@@ -34,7 +34,7 @@ router.post('/', function(req, res, next) {
   });
 });
 
-router.get('/:boardid', function(req, res, next) {
+router.get('/:boardid', authorize, function(req, res, next) {
   Board.findById(req.params.boardid, function(err, boardPage) {
     if (boardPage) {
       res.render('board', {title: boardPage.name, boardPage, style: "/stylesheets/board.css", jscript: "/javascripts/board.js"});
@@ -44,7 +44,22 @@ router.get('/:boardid', function(req, res, next) {
 
 router.delete('/:boardid', function(req, res, next) {
   Board.findByIdAndRemove(req.params.boardid, function(err) {
-    res.json();
+    res.json('');
+  });
+});
+
+router.patch('/:boardid/color', function(req, res) {
+  Board.findById(req.params.boardid, function(err, board) {
+    if (board) {
+      board.color = req.params.color;
+      board.save(function(err, updated) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.json('');
+        }
+      });
+    }
   });
 });
 
@@ -161,21 +176,44 @@ router.delete('/:boardid/list/:listid/card/:cardid', function(req, res) {
   });
 });
 
-router.post('/:boardid/list/:listid/card/:cardid/comment', function(req, res) {
+router.post('/:boardid/list/:listid/card/:cardid/labels', function(req, res) {
   Board.findById(req.params.boardid, function(err, board) {
     if (board) {
-      var today = new Date();
-      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      var newComment = {
-        content: req.body.content,
-        author: req.user.name,
-        date: date
-      }
+      board.lists
+      .id(req.params.listid)
+      .cards.id(req.params.cardid)
+      .labels.push(req.body.label);
       board.save(function(err, updated) {
         if (err) {
           console.log(err);
         } else {
-          res.json(updated);
+          res.json('');
+        }
+      });
+    }
+  });
+});
+
+router.post('/:boardid/list/:listid/card/:cardid/comments', function(req, res) {
+  console.log('adding comment');
+  Board.findById(req.params.boardid, function(err, board) {
+    if (board) {
+      var today = new Date();
+      var currentDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var newComment = {
+        content: req.body.content,
+        author: req.user.name,
+        date: currentDate
+      }
+      board.lists
+      .id(req.params.listid)
+      .cards.id(req.params.cardid)
+      .comments.push(newComment);
+      board.save(function(err, updated) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.json('');
         }
       });
     }

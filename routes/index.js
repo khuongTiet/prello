@@ -13,7 +13,7 @@ function requireLogin(req, res, next) {
 };
 
 router.get('/', requireLogin, function(req, res) {
-  Board.find({author : req.user.name}, function(err, boards) {
+  Board.find({ $or: [{'author' : req.user.name}, {'permissions': req.user.name}]}, function(err, boards) {
     res.render('index', {title: 'Boards | Prello', userBoards: boards, style: "/stylesheets/index.css", jscript: "/javascripts/index.js"});
   });
 });
@@ -70,7 +70,7 @@ router.post('/login', function(req, res) {
 
 router.get('/logout', function(req, res) {
   req.session.reset();
-  res.redirect('/login');
+  res.render('login', {title: 'Login | Prello', style: "/stylesheets/login.css", jscript: "/javascripts/login.js"});
 });
 
 module.exports = router;

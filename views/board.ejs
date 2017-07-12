@@ -41,7 +41,11 @@
           <ul class="cards">
             <% for (var j=0; j < boardPage.lists[i].cards.length; j++) { %>
               <li class="listed-card">
-                <ul class="card-labels" style="display: none"></ul>
+                <ul class="card-labels">
+                  <% for (var h=0; h < boardPage.lists[i].cards[j].labels.length; h++) { %>
+                    <li class="<%= boardPage.lists[i].cards[j].labels[h] %>"></li>
+                  <% } %>
+                </ul>
                 <%= boardPage.lists[i].cards[j].name %>
                 <input type="button" class="cancel-button" value="&#10005;" onclick="deleteCard(event, <%= `
                                                                                     "${boardPage._id}",
@@ -49,22 +53,43 @@
                                                                                     "${boardPage.lists[i].cards[j]._id}"` %>)">
                 <div class="card" style="display: none">
                   <ul class="modal-card">
-                    <div class="card-name"><%= boardPage.lists[i].cards[j].name %></div>
+                    <div class="card-name">
+                      <h2><%= boardPage.lists[i].cards[j].name %></h2>
+                      <h4>In list <%= boardPage.lists[i].title %></h4>
+                    </div>
                     <div class="card-information">
                       <div class="card-members"></div>
-                      <div class="card-labels"></div>
+                      <div class="card-labels">
+                        <ul class="color-label">
+                          <% for (var g=0; g < boardPage.lists[i].cards[j].labels.length; g++) { %>
+                            <li class="<%= boardPage.lists[i].cards[j].labels[g] %>"></li>
+                          <% } %>
+                        </ul>
+                      </div>
                       <div class="card-desc"></div>
                       <div class="card-comment">
-                        <ul class="card-comments-list">
-                          
-                        </ul>
-                        <form method="POST" action=<%= `${boardPage._id}/list/${boardPage.lists[i]._id}/card/${boardPage.lists[i].cards[j]._id}` %>>
-                          <textarea rows="3" col="50" class="add-card-name" name="content"></textarea>
-                          <input type="submit" value="Add" class="add-button">
-                          <input type="button" class="cancel-button" value="&#10005;">
-                        </form>
+                        Add Comment
+                        <br>
+                        <textarea rows="3" col="50" class="add-card-name" name="content"></textarea>
+                        <input type="button" value="Save" class="add-button" onclick="addComment(event, <%= `
+                                                                                    "${boardPage._id}",
+                                                                                    "${boardPage.lists[i]._id}",
+                                                                                    "${boardPage.lists[i].cards[j]._id}"` %>)">
                       </div>
-                      <div class="card-activity"></div>
+                      <div class="card-activity">
+                        <h2>Activity</h2>
+                        <ul class="card-comments-list">
+                          <% for (var k=0; k < boardPage.lists[i].cards[j].comments.length; k++) { %>
+                            <li class="card-commments">
+                              <%= boardPage.lists[i].cards[j].comments[k].content%>
+                              <br>
+                              by
+                              <br>
+                              <%= boardPage.lists[i].cards[j].comments[k].author%>
+                            </li>
+                          <% } %>
+                        </ul>
+                      </div>
                     </div>
                     <div class="card-operators">
                       <div class="card-adds">
@@ -75,12 +100,30 @@
                           <div class="label-adder" style="display: none">
                             Labels
                             <ul class="add-labels">
-                              <li class="blue-label"></li>
-                              <li class="green-label"></li>
-                              <li class="red-label"></li>
-                              <li class="yellow-label"></li>
-                              <li class="purple-label"></li>
-                              <li class="add-label-orange"></li>
+                              <li class="blue-label" onclick='addLabel(event, <%=`
+                                                              "${boardPage._id}",
+                                                              "${boardPage.lists[i]._id}",
+                                                              "${boardPage.lists[i].cards[j]._id}" `%>)'></li>
+                              <li class="green-label" onclick='addLabel(event, <%=`
+                                                              "${boardPage._id}",
+                                                              "${boardPage.lists[i]._id}",
+                                                              "${boardPage.lists[i].cards[j]._id}" `%>)'></li>
+                              <li class="red-label" onclick='addLabel(event, <%=`
+                                                              "${boardPage._id}",
+                                                              "${boardPage.lists[i]._id}",
+                                                              "${boardPage.lists[i].cards[j]._id}" `%>)'></li>
+                              <li class="yellow-label" onclick='addLabel(event, <%=`
+                                                              "${boardPage._id}",
+                                                              "${boardPage.lists[i]._id}",
+                                                              "${boardPage.lists[i].cards[j]._id}" `%>)'></li>
+                              <li class="purple-label" onclick='addLabel(event, <%=`
+                                                              "${boardPage._id}",
+                                                              "${boardPage.lists[i]._id}",
+                                                              "${boardPage.lists[i].cards[j]._id}" `%>)'></li>
+                              <li class="orange-label" onclick='addLabel(event, <%=`
+                                                              "${boardPage._id}",
+                                                              "${boardPage.lists[i]._id}",
+                                                              "${boardPage.lists[i].cards[j]._id}" `%>)'></li>
                             </ul>
                           </div>
                         </li>
@@ -131,16 +174,29 @@
     <div id="sidebar" style="display: none">
       <div id="change-background-container">
         <div id="change-background-button">Change background color</div>
-        <div id="change-background">
-          <div class="change-color" id="default" data-color="default"></div>
-          <div class="change-color" id="color1" data-color="red"></div>
-          <div class="change-color" id="color2" data-color="green"></div>
-          <div class="change-color" id="color3" data-color="blue"></div>
-          <div class="change-color" id="color4" data-color="purple"></div>
-          <div class="change-color" id="color5" data-color="orange"></div>
-          <div class="change-color" id="color6" data-color="pink"></div>
+        <ul id="change-background">
+          <li class="change-color" id="default" data-color="default"></li>
+          <li class="change-color" id="color1" data-color="red"></li>
+          <li class="change-color" id="color2" data-color="green"></li>
+          <li class="change-color" id="color3" data-color="blue"></li>
+          <li class="change-color" id="color4" data-color="purple"></li>
+          <li class="change-color" id="color5" data-color="orange"></li>
+          <li class="change-color" id="color6" data-color="pink"></li>
+        </ul>
+      </div>
+
+      <div id="add-board-member-container">
+        <div id="add-board-member-button">
+          Share...
+        </div>
+        <div id="add-board-member" style="display: none">
+          <form method="POST">
+            <input type="text" class="namer-text" placeholder="John Doe" name="board-member">
+            <input type="submit" value="Add member" class="add-button">
+          </form>
         </div>
       </div>
+
     </div>
   </div>
 <%- include('./footer'); %>
