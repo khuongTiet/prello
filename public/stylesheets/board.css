@@ -248,6 +248,13 @@ body.pink {
   display: none;
 }
 
+#list-adder .cancel-button {
+  background: #E3E4E6;
+  color: #393a3a;
+  font-weight: bold;
+  left: 38%;
+}
+
 .list {
   float: left;
   border-color: white;
@@ -494,20 +501,18 @@ body.pink {
   top: 56%;
   height: auto;
   min-height: 20%;
+  left: 4%;
 }
 
-.modal-card .card-information .card-comments-list {
-  list-style-type: none;
-  white-space: nowrap;
+.modal-card .card-information .card-activity h2 {
+  color: #393a3a;
 }
 
 .modal-card .card-information .card-comments-list li {
   display: inline-block;
+  width: 50%;
 }
 
-.modal-card .card-information .card-comments {
-  background:
-}
 
 .modal-card .card-operators {
   position: absolute;
