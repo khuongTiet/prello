@@ -14,8 +14,9 @@ a#logolink {
 
 #modal {
   display: none;
-  opacity: 0.7;
-  background: grey;
+  opacity: 0.8;
+  background: black;
+  filter: opacity(80%) brightness(10%);
   height: 100%;
   width: 100%;
   z-index: 2;
@@ -392,10 +393,12 @@ body.pink {
                                INDIVIDUAL CARD
 ----------------------------------------------------------------*/
 
-.card {
-  color: white;
-  height: 72%;
-  width: 44%;
+#modal-card {
+  color: #393a3a;
+  min-height: 600px;
+  min-width: 720px;
+  height: auto;
+  width: auto;
   background: #E3E4E6;
   border-radius: 5px;
   padding: 14px 16px;
@@ -407,34 +410,32 @@ body.pink {
   z-index: 3;
 }
 
-.card:hover {
+#modal-card:hover {
   cursor: default;
 }
 
-.modal-card {
-  background: #E3E4E6;
-}
-
-.modal-card .card-name{
-  display: inline-block;
+#modal-card-name{
+  display: flex;
+  flex-direction: column;
   position: absolute;
   left: 4%;
   width: 100%;
   float: left;
 }
 
-.modal-card .card-name h2 {
+#modal-card-name h2 {
   margin: 0px;
   color: #393a3a;
 }
 
-.modal-card .card-name h4 {
+#modal-card-name h4 {
   margin: 0px;
   color: DarkGrey;
 }
 
 
-.modal-card .card-information {
+#modal-card-information {
+  display: flex;
   position: absolute;
   top: 12%;
   left: 0;
@@ -443,27 +444,22 @@ body.pink {
   width: 76%;
 }
 
-.modal-card .card-information .card-members {
+#modal-card-members {
   display: none;
 }
 
-.modal-card .card-information .card-labels {
+#modal-card-labels {
   position: absolute;
   top: 4%;
   height: 10%;
   width: 100%;
   background: #E3E4E6;
-}
-
-.modal-card .card-information .card-labels .color-label {
-  position: absolute;
-  left: 4%;
   list-style-type: none;
   white-space: nowrap;
   padding: 0;
 }
 
-.modal-card .card-information .card-labels .color-label li {
+#modal-card-labels li {
   display: inline-block;
   width: 10%;
   height: 1.2em;
@@ -471,15 +467,18 @@ body.pink {
   margin-right: 3px;
 }
 
-.modal-card .card-information .card-desc {
+#modal-card-desc {
   position: absolute;
   top: 12%;
 }
 
-.modal-card .card-information .card-comment {
+#modal-card-comment {
+  display: flex;
+  flex-flow: column wrap;
   position: absolute;
   top: 22%;
-  width: 80%;
+  width: 90%;
+  height: 30%;
   left: 4%;
   background: #E3E4E6;
   color: #393a3a;
@@ -487,16 +486,22 @@ body.pink {
   border: none;
 }
 
-.modal-card .card-information .card-comment .add-button {
-  top: 140%;
-  left: 0;
+#modal-card-comment p {
+  color: inherit;
 }
 
-.modal-card .card-information .card-comment .add-card-comment {
+#modal-card-comment .add-button {
+  left: 0;
+  width: 74px;
+  height: 36px;
+  margin: 16px 0px;
+}
+
+#modal-card-comment .add-card-comment {
   color: black;
 }
 
-.modal-card .card-information .card-activity {
+#modal-card-activity {
   position: absolute;
   top: 56%;
   height: auto;
@@ -504,43 +509,41 @@ body.pink {
   left: 4%;
 }
 
-.modal-card .card-information .card-activity h2 {
+#modal-card-activity h2 {
   color: #393a3a;
 }
 
-.modal-card .card-information .card-comments-list li {
+#modal-card-comments-list li {
   display: inline-block;
   width: 50%;
 }
 
 
-.modal-card .card-operators {
+#modal-card-operators {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: absolute;
   top: 12%;
   right: 2%;
   float: right;
-  height: 100%;
+  height: 84%;
   width: 20%;
+  color: #393a3a
 }
 
-.card-operators li {
-  min-height: 1em;
-  height: 1.5em;
-  line-height: 1.5em;
+#modal-card-operators p {
+  display: block;
+  border-radius: 2px;
+  background: white;
+  color: #393a3a;
+  padding: 4px;
+  margin: 8px 0px;
 }
 
-.modal-card .card-operators .card-adds {
-  position: absolute;
-  top: 0;
-  height: 50%;
-  width: 100%;
-}
-
-.modal-card .card-operators .card-actions {
-  position: absolute;
-  top: 50%;
-  height: 50%;
-  width: 100%;
+#modal-card-operators h4 {
+  margin: 10px 0px;
+  color: #393a3a
 }
 
 .listed-card {
@@ -568,53 +571,58 @@ body.pink {
   margin-right: 3px;
 }
 
-.listed-card .blue-label {
+.card-labels .blue-label {
   background: DodgerBlue;
 }
 
-.listed-card .green-label {
+.card-labels .green-label {
   background: LimeGreen;
 }
 
-.listed-card .red-label {
+.card-labels .red-label {
   background: FireBrick;
 }
 
-.listed-card .yellow-label {
+.card-labels .yellow-label {
   background: Gold;
 }
 
-.listed-card .purple-label {
+.card-labels .purple-label {
   background: MediumOrchid;
 }
 
-.listed-card .orange-label {
+.card-labels .orange-label {
   background: DarkOrange;
 }
 
-.label-adder-container {
+#label-adder-container {
+  display: flex;
   position: relative;
+  background: white;
+  border-radius: 2px;
+  color: black;
+  padding: 3px;
 }
 
-.label-adder-button {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+#label-adder-button {
+  display: block;
+  color: #393a3a;
   height: 100%;
+  width: 100%;
 }
 
-.label-adder {
+#label-adder {
   position: absolute;
-  top: 150%;
+  top: 130%;
   left: 0;
   height: 1200%;
-  width: 150%;
+  width: 160%;
   background: white;
   color: black;
   text-align: center;
   border-radius: 4px;
   z-index: 1;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .listed-card .cancel-button {
@@ -628,20 +636,28 @@ body.pink {
   border-radius: 5px;
 }
 
-.add-labels {
+#label-choices {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   padding: 0;
   position: relative;
 }
 
-.add-labels li {
+#label-choices li {
+  text-align: center;
   position: relative;
-  left: -5%;
   width: 70%;
   border-radius: 4px;
   display: block;
-  text-align: left;
   height: 2em;
   z-index: 1;
+  margin: 4px;
+}
+
+#label-choices li:hover {
+  cursor: pointer;
 }
 
 .label-button {
@@ -778,13 +794,12 @@ body.pink {
   color: white;
 }
 
-#topnav #log-out input[type=submit]{
+#log-out-button {
   position: absolute;
   top: 0;
   left:auto;
   right: 0;
-  background: red;
-  height: 10%;
+  height: 5%;
   width: 5%;
 }
 

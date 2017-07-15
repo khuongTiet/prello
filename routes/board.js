@@ -83,8 +83,8 @@ router.patch('/:boardid/color', function(req, res) {
 });
 
 router.get('/:boardid/list', function(req, res, next) {
-  List.find(function(err, lists) {
-    res.json(lists); // Pull from db
+  Board.findById(req.params.boardid, function(err, board) {
+    res.json(board.lists); // Pull from db
   });
 });
 
@@ -100,9 +100,9 @@ router.post('/:boardid/list', function(req, res) {
         if (err) {
           console.log(err);
         } else {
-          res.redirect('back');
+          res.json(board.lists[board.lists.length -1]);
         }
-        io.getInstance().to(req.params.boardid).emit('newList', {roomid: req.params.boardid, title: req.body.title, author: req.user.name});
+        io.getInstance().to(req.params.boardid).emit('newList', board.lists[board.lists.length - 1]);
       });
     }
   });
@@ -145,6 +145,8 @@ router.delete('/:boardid/list/:listid', function(req, res) {
 router.post('/:boardid/list/:listid/card', function(req, res) {
   Board.findById(req.params.boardid, function(err, board) {
     if (board) {
+      console.log("this is the listid");
+      console.log(req.params.listid);
       var toUpdate = board.lists.id(req.params.listid);
       var newCard = {
         name: req.body.name,
@@ -155,8 +157,9 @@ router.post('/:boardid/list/:listid/card', function(req, res) {
         if (err) {
           console.log(err);
         } else {
-          io.getInstance().to(req.params.boardid).emit('newList', {title: req.body.title, author: req.user.name});
-          res.redirect('back');
+          var jsonCard = toUpdate.cards[toUpdate.cards.length - 1]
+          io.getInstance().to(req.params.boardid).emit('newCard', {card: jsonCard, lid: req.params.listid});
+          res.json(jsonCard);
         }
       });
     }

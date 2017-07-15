@@ -21,7 +21,7 @@
 
     <div id="log-out">
       <form method='POST' action='/logout'>
-        <input type='submit' class='add-button' value='Log Out'>
+        <input type='submit' id="log-out-button" class='add-button' value='Log Out'>
       </form>
     </div>
   </div>
@@ -57,106 +57,15 @@
                                                                                     "${boardPage._id}",
                                                                                     "${boardPage.lists[i]._id}",
                                                                                     "${boardPage.lists[i].cards[j]._id}"` %>)">
-                <div class="card" style="display: none">
-                  <ul class="modal-card">
-                    <div class="card-name">
-                      <h2><%= boardPage.lists[i].cards[j].name %></h2>
-                      <h4>In list <%= boardPage.lists[i].title %></h4>
-                    </div>
-                    <div class="card-information">
-                      <div class="card-members"></div>
-                      <div class="card-labels">
-                        <ul class="color-label">
-                          <% for (var g=0; g < boardPage.lists[i].cards[j].labels.length; g++) { %>
-                            <li class="<%= boardPage.lists[i].cards[j].labels[g] %>"></li>
-                          <% } %>
-                        </ul>
-                      </div>
-                      <div class="card-desc"></div>
-                      <div class="card-comment">
-                        Add Comment
-                        <br>
-                        <textarea rows="3" col="50" class="add-card-name" name="content"></textarea>
-                        <input type="button" value="Save" class="add-button" onclick="addComment(event, <%= `
-                                                                                    "${boardPage._id}",
-                                                                                    "${boardPage.lists[i]._id}",
-                                                                                    "${boardPage.lists[i].cards[j]._id}"` %>)">
-                      </div>
-                      <div class="card-activity">
-                        <h2>Activity</h2>
-                        <ul class="card-comments-list">
-                          <% for (var k=0; k < boardPage.lists[i].cards[j].comments.length; k++) { %>
-                            <li class="card-commments">
-                              <%= boardPage.lists[i].cards[j].comments[k].content%>
-                              <br>
-                              by
-                              <br>
-                              <%= boardPage.lists[i].cards[j].comments[k].author%>
-                            </li>
-                          <% } %>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="card-operators">
-                      <div class="card-adds">
-                        <li>Add member</li>
-                        <li class="label-adder-container">
-                          Labels
-                          <div class="label-adder-button"></div>
-                          <div class="label-adder" style="display: none">
-                            Labels
-                            <ul class="add-labels">
-                              <li class="blue-label" onclick='addLabel(event, <%=`
-                                                              "${boardPage._id}",
-                                                              "${boardPage.lists[i]._id}",
-                                                              "${boardPage.lists[i].cards[j]._id}" `%>)'></li>
-                              <li class="green-label" onclick='addLabel(event, <%=`
-                                                              "${boardPage._id}",
-                                                              "${boardPage.lists[i]._id}",
-                                                              "${boardPage.lists[i].cards[j]._id}" `%>)'></li>
-                              <li class="red-label" onclick='addLabel(event, <%=`
-                                                              "${boardPage._id}",
-                                                              "${boardPage.lists[i]._id}",
-                                                              "${boardPage.lists[i].cards[j]._id}" `%>)'></li>
-                              <li class="yellow-label" onclick='addLabel(event, <%=`
-                                                              "${boardPage._id}",
-                                                              "${boardPage.lists[i]._id}",
-                                                              "${boardPage.lists[i].cards[j]._id}" `%>)'></li>
-                              <li class="purple-label" onclick='addLabel(event, <%=`
-                                                              "${boardPage._id}",
-                                                              "${boardPage.lists[i]._id}",
-                                                              "${boardPage.lists[i].cards[j]._id}" `%>)'></li>
-                              <li class="orange-label" onclick='addLabel(event, <%=`
-                                                              "${boardPage._id}",
-                                                              "${boardPage.lists[i]._id}",
-                                                              "${boardPage.lists[i].cards[j]._id}" `%>)'></li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li>Add checklist</li>
-                        <li>Add due date</li>
-                        <li>Add attachment</li>
-                      </div>
-                      <div class="card-actions">
-                        <li>Move</li>
-                        <li>Copy</li>
-                        <li>Subscribe</li>
-                        <li>Archive</li>
-                      </div>
-                    </div>
-                  </ul>
-                </div>
               </li>
             <%}%>
             <div class="card-adder-container">
               <div class="card-adder-button">Add a card...</div>
               <div class="card-adder" style="display: none">
-                <form method="POST" action=<%= `${boardPage._id}/list/${boardPage.lists[i]._id}/card` %>>
-                  <textarea rows="3" col="50" class="add-card-name" name="name"></textarea>
-                  <input type="submit" value="Add" class="add-button">
-                  <input type="button" class="cancel-button" value="&#10005;">
-                  <input type="button" class="option-button" value="&hellip;">
-                </form>
+                <textarea rows="3" col="50" class="add-card-name" name="name"></textarea>
+                <input type="submit" value="Add" class="add-button">
+                <input type="button" class="cancel-button" value="&#10005;">
+                <input type="button" class="option-button" value="&hellip;">
               </div>
             </div>
           </ul>
@@ -169,7 +78,7 @@
         </div>
         <div id="list-adder" style="display: none">
           <input type="text" placeholder="Add a list..." class="namer-text" id="new-list-name" name="title">
-          <input type="button" value="Save" class="add-button" onclick="addList(event)">
+          <input type="button" value="Save" class="add-button">
           <input type="button" class="cancel-button" value="&#10005;" onclick="closeAddNewList()">
         </div>
       </li>
@@ -209,6 +118,61 @@
       </div>
 
     </div>
+
+    <div id="modal-card" style="display: none">
+      <div id="modal-card-name">
+      </div>
+      <div id="modal-card-information">
+        <div id="modal-card-members"></div>
+        <ul id="modal-card-labels" class="card-labels">
+        </ul>
+        <div id="modal-card-desc"></div>
+        <div id="modal-card-comment">
+          <p>Add Comment</p>
+          <textarea rows="3" col="50" class="add-card-comment" name="content"></textarea>
+          <input type="button" value="Save" class="add-button" onclick="addComment(event, bid, lid, cid)">
+        </div>
+        <div id="modal-card-activity">
+          <h2>Activity</h2>
+          <ul id="modal-card-comments-list">
+              <li class="modal-card-commments">
+              </li>
+          </ul>
+        </div>
+      </div>
+      <div id="modal-card-operators">
+        <div id="card-adds">
+          <h4>Add</h4>
+          <p>Add member</p>
+          <div id="label-adder-container">
+            <div id="label-adder-button">Labels</div>
+            <div id="label-adder" style="display: none">
+              Labels
+              <ul id="label-choices" class="card-labels">
+                <li class="blue-label"></li>
+                <li class="green-label"></li>
+                <li class="red-label"></li>
+                <li class="yellow-label"></li>
+                <li class="purple-label"></li>
+                <li class="orange-label"></li>
+              </ul>
+            </div>
+          </div>
+          <p>Add checklist</p>
+          <p>Add due date</p>
+          <p>Add attachment</p>
+        </div>
+        <div id="modal-card-actions">
+          <h4>Actions</h4>
+          <p>Move</p>
+          <p>Copy</p>
+          <p>Subscribe</p>
+          <p>Archive</p>
+        </div>
+      </div>
+    </div>
+
   </div>
+
   <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js'></script>
 <%- include('./footer'); %>
