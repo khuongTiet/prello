@@ -15,13 +15,13 @@
     <input type="search" class="topnav-search" name="searchbar" placeholder="Search...">
     <div id="home"><a href="/" id="logolink">Prello</a></div>
 
-    <div id="current-user">
+    <div id="current-user" data-user=<%= user.name%>>
       <%= user.name %>
     </div>
 
     <div id="log-out">
       <form method='POST' action='/logout'>
-        <input type='submit' id="log-out-button" class='add-button' value='Log Out'>
+        <input type='submit' id="log-out-button" value='Log Out'>
       </form>
     </div>
   </div>
@@ -52,7 +52,7 @@
                     <li class="<%= boardPage.lists[i].cards[j].labels[h] %>"></li>
                   <% } %>
                 </ul>
-                <%= boardPage.lists[i].cards[j].name %>
+                <%=boardPage.lists[i].cards[j].name%>
                 <input type="button" class="cancel-button" value="&#10005;" onclick="deleteCard(event, <%= `
                                                                                     "${boardPage._id}",
                                                                                     "${boardPage.lists[i]._id}",
@@ -129,14 +129,12 @@
         <div id="modal-card-desc"></div>
         <div id="modal-card-comment">
           <p>Add Comment</p>
-          <textarea rows="3" col="50" class="add-card-comment" name="content"></textarea>
-          <input type="button" value="Save" class="add-button" onclick="addComment(event, bid, lid, cid)">
+          <textarea rows="3" col="50" id="card-comment-text" class="add-card-comment" name="content"></textarea>
+          <input type="button" value="Save" id="card-comment-button" class="add-button">
         </div>
         <div id="modal-card-activity">
           <h2>Activity</h2>
           <ul id="modal-card-comments-list">
-              <li class="modal-card-commments">
-              </li>
           </ul>
         </div>
       </div>

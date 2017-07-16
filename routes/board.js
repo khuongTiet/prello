@@ -102,7 +102,7 @@ router.post('/:boardid/list', function(req, res) {
         } else {
           res.json(board.lists[board.lists.length -1]);
         }
-        io.getInstance().to(req.params.boardid).emit('newList', board.lists[board.lists.length - 1]);
+        io.getInstance().to(req.params.boardid).emit('newList', {user: req.user.name, list: board.lists[board.lists.length - 1]});
       });
     }
   });
@@ -243,7 +243,10 @@ router.post('/:boardid/list/:listid/card/:cardid/comments', function(req, res) {
         if (err) {
           console.log(err);
         } else {
-          res.json('');
+          var targetCard = board.lists.id(req.params.listid).cards.id(req.params.cardid);
+          var comment = targetCard.comments[targetCard.comments.length - 1];
+          res.json(comment);
+          io.getInstance().to(req.params.boardid).emit('newComment', comment);
         }
       });
     }

@@ -4,30 +4,12 @@ var bid = window.location.pathname.split('/')[2];
 
 var socket = io();
 
-socket.on('connection', function(server) {
-  server.on('newList', function(data) {
-    server.emit('newList', data);
-  })
-});
+socket.emit('join', {user: $('#current-user').data('user'), roomid: bid});
 
 socket.on('join', function(data) {
   socket.emit('join', data);
 });
 
-socket.on('newList', function(data) {
-  console.log(`${data.author} adding new list`);
-  newList(data);
-});
-
-socket.on('newCard', function(data) {
-  newCard(data.card, data.lid);
-})
-
-socket.on('newLabel', function(data) {
-  console.log(`${data.author} adding label`);
-  drawLabel(data.cid, data.label);
-  socket.emit('newLabel', data);
-})
 
 function closeAddCard(e) {
   $(e.target).siblings('.add-card-name')[0].value = '';
@@ -105,13 +87,12 @@ $(function() {
 
 
   $('.lists').on('click', '.cards .listed-card ', function(e) {
-    var lid = $(e.target).parent().siblings('.indv-list').data('lid');
-    var cid = $(e.target).data('cid');
-    setModalCard(lid, cid);
     // check if the target is a child of the .cards flass
-    if ($(e.target).attr('class') !== 'cancel-button' &&
-        $(e.target).parents('.modal-card')[0] === undefined) {
+    if ($(e.target).attr('class') !== 'cancel-button') {
       var card = $(e.target).children('.card')[0];
+      var lid = $(e.target).parent().siblings('.indv-list').data('lid');
+      var cid = $(e.target).data('cid');
+      setModalCard(lid, cid);
       $('#modal-card').toggle();
       $('#modal').toggle();
     }
@@ -127,10 +108,16 @@ $(function() {
   });
 
   $('#label-adder').on('click', '#label-choices li', function(e) {
-    var $lid = $('#modal-card-name').data('lid');
-    var $cid = $('#modal-card-name').data('cid');
+    var $lid = $('#modal-card-name').attr('data-lid');
+    var $cid = $('#modal-card-name').attr('data-cid');
     addLabel(e, $lid, $cid);
   });
+
+  $('#card-comment-button').on('click', function(e) {
+    var $lid = $('#modal-card-name').attr('data-lid');
+    var $cid = $('#modal-card-name').attr('data-cid');
+    addComment(e, $lid, $cid);
+  })
 
 
 
@@ -152,7 +139,7 @@ $(function() {
       $modalLabels.append($('<li></li>', {class: currentCard.labels[i]}));
     }
     for (var i =0; i < currentCard.comments.length; i++) {
-      $modalComments.append(currentCard.comments[i]);
+      $modalComments.append($('<li></li', {class: 'card-comments', text: currentCard.comments[i].content}));
     }
   }
 
@@ -194,8 +181,13 @@ $(function() {
         'title': title
       },
       dataType: 'json'
-    }).done(newList);
+    });
   }
+
+  socket.on('newList', function(data) {
+    console.log(`${data.user} adding new list`);
+    newList(data.list);
+  });
 
   function addCard(e, lid, name) {
     $.ajax({
@@ -205,78 +197,90 @@ $(function() {
         'name': name
       },
       dataType: 'json'
-    }).done(function(data) {
-      var $card = newCard(data, lid);
-      console.log($card);
-      var $cardAdder = $(e.target).parents('.card-adder-container');
-      console.log($cardAdder);
-      $card.insertBefore($cardAdder);
     });
   }
+  function newCard(card, lid) {
+    board[lid].cards[card._id] =
+      {
+        name: card.name,
+        description: card.description,
+        labels: card.labels,
+        comments: card.comments,
+        author: card.author,
+        members: card.members
+      }
+    var $newCard = $('<li></li', {class: 'listed-card'});
+    $('<ul></ul>', {class: 'card-labels'}).appendTo($newCard);
+    $newCard.append(card.name);
+    $newCard.attr('data-cid', card._id);
+    $('<input/>', {
+      class: 'cancel-button',
+      type: 'button',
+      value: '✕',
+      onclick: `deleteCard(event, "${bid}", "${lid}", "${card._id}")`
+    }).appendTo($newCard);
+    return $newCard;
+  }
+
+  socket.on('newCard', function(data) {
+    var $target = $(`[data-lid="${data.lid}"]`);
+    var $card = newCard(data.card, data.lid);
+    var $cardAdder = $target.siblings().find('.card-adder-container');
+    $card.insertBefore($cardAdder);
+  });
+
+
+  function drawLabel(cid, label) {
+    var $label = $('<li></li>', {class: label});
+    var $target = $(`[data-cid="${cid}"]`);
+    var $modal = $('#modal-card-labels');
+    var $list = $target.children('.card-labels');
+    $label.clone().appendTo($modal);
+    $label.clone().appendTo($list);
+  }
+
+  function addLabel(e, lid, cid) {
+    var newLabel = $(e.target).attr('class');
+    $.ajax({
+      url: `http://localhost:3000/board/${bid}/list/${lid}/card/${cid}/labels`,
+      method: 'POST',
+      data: {
+        'label': newLabel
+      },
+      dataType: 'json'
+    });
+  }
+
+
+  socket.on('newLabel', function(data) {
+    console.log(`${data.author} adding label`);
+    drawLabel(data.cid, data.label);
+  });
+
+  function addComment(e, lid, cid) {
+    var $content = $('#card-comment-text')[0].value;
+    $.ajax({
+      url: `http://localhost:3000/board/${bid}/list/${lid}/card/${cid}/comments`,
+      method: 'POST',
+      data: {
+        'content': $content,
+      },
+      dataType: 'json'
+    });
+  }
+
+  function drawComment(content) {
+    console.log(content);
+    var $newComment = $('<li></li>', {class: 'card-comments', text: content});
+    $('#modal-card-comments-list').append($newComment);
+  }
+
+  socket.on('newComment', function(data) {
+    console.log(`${data.author} adding new comment`);
+    console.log(data);
+    drawComment(data.content);
+  })
 });
-
-function newCard(card, lid) {
-  board[lid].cards[card._id] =
-    {
-      name: card.name,
-      description: card.description,
-      labels: card.labels,
-      comments: card.comments,
-      author: card.author,
-      members: card.members
-    }
-  var $newCard = $('<li></li', {class: 'listed-card', text: card.name});
-  $newCard.data('cid', card._id);
-  $('<ul></ul>', {class: 'card-labels'}).appendTo($newCard);
-  $('<input/>', {
-    class: 'cancel-button',
-    type: 'button',
-    value: '✕',
-    onclick: `deleteCard(event, "${bid}", "${lid}", "${card._id}")`
-  }).appendTo($newCard);
-  return $newCard;
-}
-
-
-function drawLabel(cid, label) {
-  var $label = $('<li></li>', {class: label});
-  var $target = $(`[data-cid="${cid}"]`);
-  var $modal = $('#modal-card-labels');
-  var $list = $target.children('.card-labels');
-  $label.clone().appendTo($modal);
-  $label.clone().appendTo($list);
-}
-
-function addLabel(e, lid, cid) {
-  var newLabel = $(e.target).attr('class');
-  $.ajax({
-    url: `http://localhost:3000/board/${bid}/list/${lid}/card/${cid}/labels`,
-    method: 'POST',
-    data: {
-      'label': newLabel
-    },
-    dataType: 'json'
-  }).done(function(){
-    drawLabel(cid, newLabel);
-  });
-}
-
-function addComment(e, bid, lid, cid) {
-  var $content = $(e.target).siblings('.add-card-name')[0].value;
-  var $commentList = $(e.target).parent().siblings('.card-activity').children('.card-comments-list')[0];
-  $.ajax({
-    url: `http://localhost:3000/board/${bid}/list/${lid}/card/${cid}/comments`,
-    method: 'POST',
-    data: {
-      'content': $content,
-    },
-    dataType: 'json'
-  }).done(function(){
-    var $newComment = $('<li></li>', {class: 'card-comments', text: $content});
-    $('.cards.comment-list').append($newComment);
-    socket.broadcast.emit('newComment');
-  });
-}
 
 function changeColor(e, bid) {
   var $color = $(e.target).attr('data-color');
