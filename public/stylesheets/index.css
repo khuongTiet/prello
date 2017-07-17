@@ -83,10 +83,6 @@ button {
   position: relative;
 }
 
-.board:hover {
-  opacity: 0.8;
-}
-
 #board-adder-button {
   height: 100%;
   width: 100%;
