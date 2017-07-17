@@ -38,7 +38,8 @@ router.get('/password', function(req, res) {
 router.post('/reset-request', function(req, res) {
   User.findOne({email: req.body.email}, function(err, user) {
     if (!user) {
-      console.log('Show Error Message');
+      req.session.notification = 'Email not found!';
+      res.redirect('/login');
     } else {
       var token = crypto.randomBytes(10).toString('hex');
       var passwordToken = passwordHash.hex(token);

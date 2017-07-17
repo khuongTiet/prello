@@ -3,6 +3,7 @@
 }
 
 #error-container {
+  font-size: 2em;
   height: 2em;
   width: 100%;
   text-align: center;
