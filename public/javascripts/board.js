@@ -139,7 +139,10 @@ $(function() {
       $modalLabels.append($('<li></li>', {class: currentCard.labels[i]}));
     }
     for (var i =0; i < currentCard.comments.length; i++) {
-      $modalComments.append($('<li></li', {class: 'card-comments', text: currentCard.comments[i].content}));
+      $modalComments.append($('<li></li',
+      {
+        class: 'card-comments',
+        text: `${currentCard.comments[i].content} by ${currentCard.comments[i].author}`}));
     }
   }
 

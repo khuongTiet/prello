@@ -2,6 +2,14 @@
   font-family: "Arial";
 }
 
+#error-container {
+  height: 2em;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-family: Helvetica;
+}
+
 #landing-container {
   background-color: #007AC3;
   color: white;
@@ -35,4 +43,19 @@ input[type=submit]:hover {
 
 #login-information{
   border-top-style: solid;
+}
+
+#reset-password {
+  margin: 6px;
+}
+
+#reset-button {
+  background:none!important;
+  color:inherit;
+  border:none;
+  padding:0!important;
+  font: inherit;
+  /*border is optional*/
+  border-bottom:1px solid #444;
+  cursor: pointer;
 }

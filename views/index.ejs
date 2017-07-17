@@ -1,8 +1,4 @@
 <%- include('./header');%>
-<script src="/socket.io/socket.io.js"></script>
-<script>
-  var socket = io();
-</script>
   <div id="topnav">
     <div id="main-menu-container">
       <div id="main-menu-button">Boards</div>
@@ -10,10 +6,12 @@
     </div>
 
     <input type="search" class="topnav-search" name="searchbar" placeholder="Search...">
-    <div id="home"><a href="boards.html" id="logolink">Prello</a></div>
+    <div id="home"><a href="/" id="logolink">Prello</a></div>
 
     <div id="log-out">
-      Log Out
+      <form method='GET' action='/logout'>
+        <input type='submit' id="log-out-button" value='Log Out'>
+      </form>
     </div>
   </div>
 

@@ -6,8 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('client-sessions');
+var Hashes = require('jshashes');
 
-var login = require('./routes/login');
 var board = require('./routes/board');
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -69,8 +69,6 @@ app.use(function(req, res, next) {
 });
 
 
-
-app.use('/login', login);
 app.use('/', index);
 app.use('/board', board);
 app.use('/users', users);

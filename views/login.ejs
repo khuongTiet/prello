@@ -1,5 +1,6 @@
 <%- include('./header'); %>
 <div id="landing-container">
+  <div id="error-container"><%= error %></div>
   <div id="registration-container">
     <form id="register-form" method="POST" action="/signup">
       <div id="registration-information">
@@ -29,6 +30,9 @@
         <br>
         <input type="checkbox" name="remember" value="rememberme"> Remember Me <br>
       </div>
+    </form>
+    <form id="reset-password" method="GET" action="/password">
+      <input type="submit" id="reset-button" value="Reset password">
     </form>
   </div>
 </div>

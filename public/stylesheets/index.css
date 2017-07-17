@@ -291,20 +291,16 @@ button {
   padding: 0;
 }
 
-#topnav #log-out {
-  postion: absolute;
+#log-out-button {
+  position: absolute;
+  top: 0;
+  left:auto;
   right: 0;
-  display: block;
-  text-align: center;
-  padding: 6px 8px;
-  text-decoration: none;
-  color: white;
-  border-radius: 5px;
-  margin: 5px 5px;
-  float: right;
+  height: 5%;
+  width: 5%;
 }
 
-#topnav #log-out:hover {
+#log-out-button:hover {
   opacity: 0.8;
   cursor: pointer;
 }

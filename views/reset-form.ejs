@@ -1,0 +1,11 @@
+<%- include('./header'); %>
+
+<div class="password-page-container">
+  <form method='GET' action=<%=`/reset/${pwToken}`%>>
+    <p class='form-text'>Click on the link to reset your password</p>
+    <input type='submit' value='Reset my Password' id='reset-link'>
+    <p class='form-text'>You will have 10 minutes before this link expires</p>
+  </form>
+</div>
+
+<%- include('./footer'); %>
