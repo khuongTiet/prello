@@ -2,8 +2,6 @@ var express = require('express');
 var mongoose = require('mongoose');
 
 var Board = require('../models/board');
-var List = require('../models/list');
-var Card = require('../models/card');
 
 var authorize = require('../libs/authorize')
 
@@ -18,7 +16,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
   var newBoard = new Board(
     {
       name: req.body.title,
@@ -145,8 +142,6 @@ router.delete('/:boardid/list/:listid', function(req, res) {
 router.post('/:boardid/list/:listid/card', function(req, res) {
   Board.findById(req.params.boardid, function(err, board) {
     if (board) {
-      console.log("this is the listid");
-      console.log(req.params.listid);
       var toUpdate = board.lists.id(req.params.listid);
       var newCard = {
         name: req.body.name,

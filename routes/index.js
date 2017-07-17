@@ -10,6 +10,7 @@ var passwordHash = new Hashes.MD5();
 
 function requireLogin(req, res, next) {
   if (!req.user) {
+    req.session.notification = '   ';
     res.redirect('/login');
   } else {
     next();
@@ -27,7 +28,7 @@ router.get('/login', function(req, res) {
     res.redirect('/');
   } else {
     res.render('login', {title: 'Login', style: "/stylesheets/login.css", jscript: "/javascripts/login.js", error: req.session.notification});
-    req.session.notification = '';
+    req.session.notification = '   ';
   }
 });
 
@@ -75,7 +76,6 @@ router.get('/reset/:resetToken', function(req, res) {
           style: "/stylesheets/password.css",
           jscript: "/javascripts/password.js",
           pwToken: req.params.resetToken,
-          notification: ''
         });
       } else {
         user.resetToken = '';
