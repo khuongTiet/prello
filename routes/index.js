@@ -7,17 +7,17 @@ var User = require('../models/user');
 var Board = require('../models/board');
 
 var passwordHash = new Hashes.MD5();
+// 
+// function requireLogin(req, res, next) {
+//   if (!req.user) {
+//     req.session.notification = '   ';
+//     res.redirect('/login');
+//   } else {
+//     next();
+//   }
+// };
 
-function requireLogin(req, res, next) {
-  if (!req.user) {
-    req.session.notification = '   ';
-    res.redirect('/login');
-  } else {
-    next();
-  }
-};
-
-router.get('/', requireLogin, function(req, res) {
+router.get('/', function(req, res) {
   Board.find({ $or: [{'author' : req.user.name}, {'permissions': req.user.name}]}, function(err, boards) {
     res.render('index', {title: 'Boards', userBoards: boards, style: "/stylesheets/index.css", jscript: "/javascripts/index.js"});
   });
