@@ -10,6 +10,7 @@ var passwordHash = new Hashes.MD5();
 
 function requireLogin(req, res, next) {
   if (!req.user) {
+    req.session.notification = '   ';
     res.redirect('/login');
   } else {
     next();
